@@ -19,7 +19,7 @@ class RelatorioController extends Controller
             array(
                 'class' => '',
                 'id' => '',
-                'link' => BASE_URL,
+                'link' => BASE_URL . 'produto',
                 'text' => 'Voltar à Listagem'
             ),
             array(

@@ -9,9 +9,9 @@
     <input type="text" name="name" required /><br /><br />
 
     Categoria:<br />
-    <select name="category">
+    <select name="category" id="category">
         <?php foreach($list as $item): ?>
-            <option><?= $item['name'] ?></option>
+            <option><?= strtoupper($item['name']); ?></option>
         <?php endforeach; ?>
     </select>
     <br /><br />

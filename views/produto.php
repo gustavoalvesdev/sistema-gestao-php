@@ -22,7 +22,7 @@
 
         <tr>
             <td><?= $item['cod'] ?></td>
-            <td><?= $item['name'] ?></td>
+            <td><?= strtoupper($item['name']) ?></td>
             <td>R$ <?= number_format($item['price'], 2, ',', '.') ?></td>
             <td><?= $item['quantity'] ?></td>
             <td>

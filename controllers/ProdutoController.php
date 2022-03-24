@@ -102,8 +102,8 @@ class ProdutoController extends Controller {
             array(
                 'class' => '',
                 'id' => '',
-                'link' => BASE_URL.'categoria',
-                'text' => 'Usuários'
+                'link' => BASE_URL.'relatorio',
+                'text' => 'Relatório de Estoque Baixo'
             )
         );
 

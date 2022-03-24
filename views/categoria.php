@@ -19,7 +19,7 @@
     <?php foreach($list as $item): ?>
         <tr>
             <td><?= $item['id'] ?></td>
-            <td><?= $item['name'] ?></td>
+            <td><?= strtoupper($item['name']); ?></td>
             <td>
                 <a class="btn btn-edit" href="<?= BASE_URL ?>categoria/edit/<?= $item['id'] ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
                 
