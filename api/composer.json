@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Api\\": "Api"
+        },
+        "files": [
+            "config.php"
+        ]
+    },
+    "require": {
+        
+    }
+}
