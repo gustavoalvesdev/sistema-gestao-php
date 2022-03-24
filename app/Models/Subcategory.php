@@ -1,6 +1,10 @@
 <?php 
 
-class Subcategory extends Model 
+namespace App\Models;
+
+use App\Core\Model;
+
+class Subcategory extends Model
 {
     public function addSubcategory($name, $categoryId)
     {

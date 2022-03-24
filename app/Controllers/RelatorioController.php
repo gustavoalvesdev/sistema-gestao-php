@@ -1,5 +1,11 @@
 <?php 
 
+namespace App\Controllers;
+
+use App\Core\Controller;
+use App\Models\Product;
+use App\Models\User;
+
 class RelatorioController extends Controller
 {
     public function __construct()

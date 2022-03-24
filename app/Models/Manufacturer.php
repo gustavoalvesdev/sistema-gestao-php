@@ -1,26 +1,28 @@
 <?php 
 
-class City extends Model 
+namespace App\Models;
+
+use App\Core\Model;
+
+class Manufacturer extends Model
 {
 
-    public function getCities($s = '')
+    public function getManufacturers($s = '') 
     {
-
         $array = array();
 
         if (! empty($s)) {
 
-            $sql = 'SELECT * FROM cities WHERE name LIKE :name';
+            $sql = 'SELECT * FROM manufacturers WHERE name LIKE :s OR url LIKE :s';
             $sql = $this->db->prepare($sql);
-            $sql->bindValue(':name', '%'.$s.'%');
+            $sql->bindValue(':s', '%'.$s.'%');
 
             $sql->execute();
 
         } else {
-            $sql = 'SELECT * FROM cities';
+            $sql = 'SELECT * FROM manufacturers';
             $sql = $this->db->query($sql);
         }
-
 
         if ($sql->rowCount() > 0) {
             $array = $sql->fetchAll();
@@ -28,21 +30,20 @@ class City extends Model
 
         return $array;
 
+
     }
 
-    public function addCity($name, $state)
+    public function addManufacturer($name, $url)
     {
-        $sql = 'INSERT INTO cities (name, state) VALUES(:name, :state)';
+        $sql = 'INSERT INTO manufacturers (name, url) VALUES (:name, :url)';
 
         $sql = $this->db->prepare($sql);
-
         $sql->bindValue(':name', $name);
-        $sql->bindvalue(':state', $state);
+        $sql->bindValue(':url', $url);
 
         $sql->execute();
 
         return true;
 
     }
-
 }

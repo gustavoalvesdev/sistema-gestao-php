@@ -1,6 +1,14 @@
 <?php
 
-class HomeController extends Controller {
+namespace App\Controllers;
+
+use App\Core\Controller;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\User;
+
+
+class ProdutoController extends Controller {
 
     private $user;
 
@@ -33,8 +41,8 @@ class HomeController extends Controller {
             array(
                 'class' => '',
                 'id' => '',
-                'link' => BASE_URL.'categoria',
-                'text' => 'Usuários'
+                'link' => BASE_URL.'relatorio',
+                'text' => 'Relatório de Estoque Baixo'
             )
         );
 
@@ -57,7 +65,7 @@ class HomeController extends Controller {
 
         $data['list'] = $p->getProducts($s);
 
-        $this->loadView('home', $data);
+        $this->loadView('produto', $data);
     }
 
     public function add()
@@ -65,6 +73,12 @@ class HomeController extends Controller {
         $data = array();
 
         $p = new Product();
+
+        $c = new Category();
+
+        $s = '';
+
+        $data['list'] = $c->getCategories($s);
 
         if (! empty($_POST['cod'])) {
 
@@ -76,11 +90,11 @@ class HomeController extends Controller {
 
             $p->addProduct($cod, $name, $price, $quantity, $minQuantity);
 
-            header('Location: '.BASE_URL);
+            header('Location: '.BASE_URL.'produto');
             exit;
         }
 
-        $this->loadView('add', $data);
+        $this->loadView('produto-add', $data);
     }
 
     public function edit($id)
@@ -98,12 +112,12 @@ class HomeController extends Controller {
             $minQuantity = $_POST['min_quantity'];
 
             $p->editProduct($cod, $name, $price, $quantity, $minQuantity, $id);
-            header('Location: '.BASE_URL);
+            header('Location: '.BASE_URL.'produto');
         }
 
         $data['info'] = $p->getProduct($id);
 
-        $this->loadView('edit', $data);
+        $this->loadView('produto-edit', $data);
     }
 
     public function __destruct()

@@ -1,5 +1,7 @@
 <?php 
 
+namespace App\Core;
+
 class Core {
     public function run() {
         
@@ -15,7 +17,7 @@ class Core {
             $url = explode('/', $url);
             array_shift($url);
 
-            $currentController = ucfirst($url[0]).'Controller';
+            $currentController =  ucfirst($url[0]).'Controller';
             array_shift($url);
 
             if (isset($url[0]) && !empty($url[0])) {
@@ -35,7 +37,9 @@ class Core {
         }
         
         if (!file_exists('controllers/'.$currentController.'.php')) {
-            $currentController = 'NotFoundController';
+            $currentController = 'App\\Controllers\\NotFoundController';
+        } else {
+            $currentController = 'App\\Controllers\\' . $currentController;
         }
 
         $c = new $currentController();

@@ -1,8 +1,13 @@
 <?php 
 
-class SubcategoriaController extends Controller 
-{
+namespace App\Controllers;
 
+use App\Core\Controller;
+use App\Models\Manufacturer;
+use App\Models\User;
+
+class FabricanteController extends Controller
+{
     public function __construct()
     {
         parent::__construct();
@@ -15,7 +20,7 @@ class SubcategoriaController extends Controller
         }
         
         $data = array();
-        
+
         $data['menu'] = array(
             array(
                 'class' => 'link-home',
@@ -40,29 +45,58 @@ class SubcategoriaController extends Controller
         $this->loadView('template_parts/header', $data);
     }
 
-    public function add($categoryId)
+    public function index()
     {
         $data = array();
 
-        $c = new Category();
-        $category = $c->getCategoryName($categoryId);
+        $m = new Manufacturer();
 
-        $s = new Subcategory();
+        $s = '';
 
-        $data['categoryName'] = $category;
+        if (! empty($_GET['busca'])) {
+
+            $s = addslashes(trim($_GET['busca']));
+
+        }
+
+        $data['list'] = $m->getManufacturers($s);
+
+        $this->loadView('fabricante', $data);
+    }
+
+    public function add()
+    {
+        $data = array();
+
+        $m = new Manufacturer();
+
+        $s = '';
+
+        if (! empty($_GET['busca'])) {
+
+            $s = addslashes(trim($_GET['busca']));
+
+        }
 
         if (! empty($_POST['name'])) {
             $name = addslashes($_POST['name']);
+            $url  = addslashes($_POST['url']);
 
-            $s->addSubcategory($name, $categoryId);
+            $m->addManufacturer($name, $url);
 
-            header('Location: '.BASE_URL.'categoria');
+            header('Location: '.BASE_URL.'fabricante');
 
             exit;
+
         }
 
-        $this->loadView('subcategoria-add', $data);
+        $data['list'] = $m->getManufacturers($s);
 
+        $this->loadView('fabricante-add', $data);
     }
 
+    public function __destruct()
+    {
+        $this->loadView('template_parts/footer');
+    }
 }

@@ -1,7 +1,15 @@
 <?php 
 
-class FabricanteController extends Controller 
+namespace App\Controllers;
+
+use App\Core\Controller;
+use App\Models\Category;
+use App\Models\Subcategory;
+use App\Models\User;
+
+class SubcategoriaController extends Controller
 {
+
     public function __construct()
     {
         parent::__construct();
@@ -14,7 +22,7 @@ class FabricanteController extends Controller
         }
         
         $data = array();
-
+        
         $data['menu'] = array(
             array(
                 'class' => 'link-home',
@@ -39,58 +47,29 @@ class FabricanteController extends Controller
         $this->loadView('template_parts/header', $data);
     }
 
-    public function index()
+    public function add($categoryId)
     {
         $data = array();
 
-        $m = new Manufacturer();
+        $c = new Category();
+        $category = $c->getCategoryName($categoryId);
 
-        $s = '';
+        $s = new Subcategory();
 
-        if (! empty($_GET['busca'])) {
-
-            $s = addslashes(trim($_GET['busca']));
-
-        }
-
-        $data['list'] = $m->getManufacturers($s);
-
-        $this->loadView('fabricante', $data);
-    }
-
-    public function add()
-    {
-        $data = array();
-
-        $m = new Manufacturer();
-
-        $s = '';
-
-        if (! empty($_GET['busca'])) {
-
-            $s = addslashes(trim($_GET['busca']));
-
-        }
+        $data['categoryName'] = $category;
 
         if (! empty($_POST['name'])) {
             $name = addslashes($_POST['name']);
-            $url  = addslashes($_POST['url']);
 
-            $m->addManufacturer($name, $url);
+            $s->addSubcategory($name, $categoryId);
 
-            header('Location: '.BASE_URL.'fabricante');
+            header('Location: '.BASE_URL.'categoria');
 
             exit;
-
         }
 
-        $data['list'] = $m->getManufacturers($s);
+        $this->loadView('subcategoria-add', $data);
 
-        $this->loadView('fabricante-add', $data);
     }
 
-    public function __destruct()
-    {
-        $this->loadView('template_parts/footer');
-    }
 }

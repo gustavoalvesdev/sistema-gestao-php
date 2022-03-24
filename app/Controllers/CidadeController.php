@@ -1,5 +1,12 @@
 <?php 
 
+namespace App\Controllers;
+
+use App\Core\Controller;
+use App\Models\City;
+use App\Models\State;
+use App\Models\User;
+
 class CidadeController extends Controller 
 {
     public function __construct()
