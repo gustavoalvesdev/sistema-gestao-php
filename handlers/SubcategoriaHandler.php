@@ -1,7 +1,9 @@
 <?php 
 
 require '../config.php';
-require '../autoload.php';
+require '../vendor/autoload.php';
+
+use Models\Subcategory;
 
 $objSubcategories = new Subcategory();
 

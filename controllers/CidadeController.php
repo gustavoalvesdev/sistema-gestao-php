@@ -3,6 +3,9 @@
 namespace Controllers;
 
 use Core\Controller;
+use Models\User;
+use Models\City;
+use Models\State;
 
 class CidadeController extends Controller 
 {

@@ -2,6 +2,8 @@
 
 namespace Controllers;
 use Core\Controller;
+use Models\User;
+use Models\Manufacturer;
 
 class FabricanteController extends Controller 
 {

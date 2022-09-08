@@ -2,6 +2,7 @@
 
 namespace Controllers;
 use Core\Controller;
+use Models\User;
 
 class LoginController extends Controller 
 {

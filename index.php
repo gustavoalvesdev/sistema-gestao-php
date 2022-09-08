@@ -4,7 +4,7 @@ session_start();
 
 require_once 'config.php';
 
-require  'autoload.php';
+require  'vendor/autoload.php';
 
 use Core\Core;
 

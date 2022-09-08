@@ -2,6 +2,9 @@
 
 namespace Controllers;
 use Core\Controller;
+use Models\User;
+use Models\Category;
+use Models\Subcategory;
 
 class SubcategoriaController extends Controller 
 {

@@ -10,7 +10,7 @@ class Core {
         if (isset($_GET['url'])) {
             $url .= $_GET['url'];
         }
-
+        
         $params = array();
 
         if (!empty($url) && $url != '/') {
@@ -18,6 +18,7 @@ class Core {
             array_shift($url);
 
             $currentController =  'Controllers\\' .  ucfirst($url[0]).'Controller';
+
             array_shift($url);
 
             if (isset($url[0]) && !empty($url[0])) {
@@ -35,9 +36,11 @@ class Core {
             $currentController = 'Controllers\HomeController';
             $currentAction = 'index';
         }
-        
-        if (!file_exists('controllers/'.$currentController.'.php')) {
-            $currentController = 'NotFoundController';
+
+        $fileName = explode('\\', $currentController);
+
+        if (!file_exists('controllers/'.$fileName[1].'.php')) {
+            $currentController = 'Controllers\NotFoundController';
         }
 
         $c = new $currentController();
