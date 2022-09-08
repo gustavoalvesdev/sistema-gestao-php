@@ -1,5 +1,8 @@
 <?php 
 
+namespace Models;
+use Core\Model;
+
 class State extends Model 
 {
 

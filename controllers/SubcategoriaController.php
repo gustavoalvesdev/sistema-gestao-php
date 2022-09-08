@@ -1,5 +1,8 @@
 <?php 
 
+namespace Controllers;
+use Core\Controller;
+
 class SubcategoriaController extends Controller 
 {
 

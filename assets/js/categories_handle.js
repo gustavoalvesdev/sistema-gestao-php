@@ -2,7 +2,7 @@
     'use strict';
 
     doc.querySelector('#category').addEventListener('change', async(e) => {
-        let req = await fetch(baseUrl + '/controllers/SubcategoriaHandler.php', {
+        let req = await fetch(baseUrl + '/handlers/SubcategoriaHandler.php', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

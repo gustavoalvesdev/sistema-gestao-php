@@ -1,5 +1,9 @@
 <?php 
 
+namespace Controllers;
+
+use Core\Controller;
+
 class CategoriaController extends Controller 
 {
     public function __construct()

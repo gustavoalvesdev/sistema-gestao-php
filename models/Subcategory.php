@@ -1,5 +1,8 @@
 <?php 
 
+namespace Models;
+use Core\Model;
+
 class Subcategory extends Model 
 {
     public function addSubcategory($name, $categoryId)

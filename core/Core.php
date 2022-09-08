@@ -1,5 +1,7 @@
 <?php 
 
+namespace Core;
+
 class Core {
     public function run() {
         
@@ -15,7 +17,7 @@ class Core {
             $url = explode('/', $url);
             array_shift($url);
 
-            $currentController = ucfirst($url[0]).'Controller';
+            $currentController =  'Controllers\\' .  ucfirst($url[0]).'Controller';
             array_shift($url);
 
             if (isset($url[0]) && !empty($url[0])) {
@@ -30,7 +32,7 @@ class Core {
             }
 
         } else {
-            $currentController = 'HomeController';
+            $currentController = 'Controllers\HomeController';
             $currentAction = 'index';
         }
         

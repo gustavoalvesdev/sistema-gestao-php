@@ -1,5 +1,8 @@
 <?php 
 
+namespace Controllers;
+use Core\Controller;
+
 class FabricanteController extends Controller 
 {
     public function __construct()

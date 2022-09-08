@@ -1,6 +1,10 @@
 <?php
 
-class ProdutoController extends Controller {
+namespace Controllers;
+use Core\Controller;
+
+class ProdutoController extends Controller 
+{
 
     private $user;
 
@@ -10,81 +14,13 @@ class ProdutoController extends Controller {
 
         $this->user = new User();
 
-        if (! $this->user->checkLogin()) {
+        if (! $this->user->checkLogin()) 
+        {
             header('Location: '.BASE_URL.'login');
             exit;
         }
         
         $data = array();
-
-        /*$data['menu'] = array(
-            array(
-                'class' => 'link-home',
-                'id' => '',
-                'link' => BASE_URL,
-                'text' => 'Início'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'produto',
-                'text' => 'Produtos'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'categoria',
-                'text' => 'Categorias'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'cidade',
-                'text' => 'Cidades'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'fabricante',
-                'text' => 'Fabricantes'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'fabricante',
-                'text' => 'Pessoas'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'fabricante',
-                'text' => 'Vendas'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'fabricante',
-                'text' => 'Contas'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'relatorio',
-                'text' => 'Relatórios'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'relatorio',
-                'text' => 'Dashboards'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'login/sair',
-                'text' => 'Sair'
-            )
-        ); */
 
         $data['menu'] = array(
             array(
@@ -110,7 +46,8 @@ class ProdutoController extends Controller {
         $this->loadView('template_parts/header', $data);
     }
 
-    public function index() {
+    public function index() 
+    {
 
         $data = array();
 
@@ -151,7 +88,15 @@ class ProdutoController extends Controller {
             $categoryId    = $_POST['category_id'   ];
             $subcategoryId = $_POST['subcategory_id'];
 
-            $p->addProduct($cod, $name, $price, $quantity, $minQuantity, $categoryId, $subcategoryId);
+            $p->addProduct(
+                $cod, 
+                $name, 
+                $price, 
+                $quantity, 
+                $minQuantity, 
+                $categoryId, 
+                $subcategoryId
+            );
 
             header('Location: '.BASE_URL.'produto');
             exit;
@@ -168,13 +113,21 @@ class ProdutoController extends Controller {
 
         if (! empty($_POST['cod'])) {
 
-            $cod         = $_POST['cod'];
-            $name        = $_POST['name'];
-            $price       = $_POST['price'];
-            $quantity    = $_POST['quantity'];
+            $cod         = $_POST['cod'         ];
+            $name        = $_POST['name'        ];
+            $price       = $_POST['price'       ];
+            $quantity    = $_POST['quantity'    ];
             $minQuantity = $_POST['min_quantity'];
 
-            $p->editProduct($cod, $name, $price, $quantity, $minQuantity, $id);
+            $p->editProduct(
+                $cod, 
+                $name, 
+                $price, 
+                $quantity, 
+                $minQuantity, 
+                $id
+            );
+
             header('Location: '.BASE_URL.'produto');
         }
 

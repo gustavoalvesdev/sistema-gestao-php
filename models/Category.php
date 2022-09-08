@@ -1,5 +1,9 @@
 <?php 
 
+namespace Models;
+
+use Core\Model;
+
 class Category extends Model 
 {   
     public function getCategories($s = '') 
