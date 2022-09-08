@@ -22,37 +22,12 @@ class ProdutoController extends Controller
             header('Location: '.BASE_URL.'login');
             exit;
         }
-        
-        $data = array();
 
-        $data['menu'] = array(
-            array(
-                'class' => 'link-home',
-                'id' => '',
-                'link' => BASE_URL,
-                'text' => 'Início'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'produto',
-                'text' => 'Configurações'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'categoria',
-                'text' => 'Usuários'
-            )
-        );
-
-        $this->loadView('template_parts/header', $data);
+        $this->loadView('template_parts/header', $this->data);
     }
 
     public function index() 
     {
-
-        $data = array();
 
         $p = new Product();
 
@@ -64,14 +39,13 @@ class ProdutoController extends Controller
 
         }
 
-        $data['list'] = $p->getProducts($s);
+        $this->data['list'] = $p->getProducts($s);
 
-        $this->loadView('produto', $data);
+        $this->loadView('produto', $this->data);
     }
 
     public function add()
     {
-        $data = array();
 
         $p = new Product();
 
@@ -79,7 +53,7 @@ class ProdutoController extends Controller
 
         $s = '';
 
-        $data['list'] = $c->getCategories($s);
+        $this->data['list'] = $c->getCategories($s);
 
         if (! empty($_POST['cod'])) {
 
@@ -105,12 +79,12 @@ class ProdutoController extends Controller
             exit;
         }
 
-        $this->loadView('produto-add', $data);
+        $this->loadView('produto-add', $this->data);
     }
 
     public function edit($id)
     {
-        $data = array('info' => '');
+        $this->data = array('info' => '');
 
         $p = new Product();
 
@@ -134,9 +108,9 @@ class ProdutoController extends Controller
             header('Location: '.BASE_URL.'produto');
         }
 
-        $data['info'] = $p->getProduct($id);
+        $this->data['info'] = $p->getProduct($id);
 
-        $this->loadView('produto-edit', $data);
+        $this->loadView('produto-edit', $this->data);
     }
 
     public function __destruct()

@@ -30,10 +30,12 @@
         <!-- card -->
     </a>
 
-    <div class="card">
-        <p><strong><i class="fas fa-users"></i><br /> Pessoas</strong></p>
-    </div>
-    <!-- card -->
+    <a href="<?= BASE_URL ?>cliente">
+        <div class="card">
+            <p><strong><i class="fas fa-users"></i><br /> Clientes</strong></p>
+        </div>
+        <!-- card -->
+    </a>
 
     <div class="card">
         <p><strong><i class="fas fa-cash-register"></i><br /> Vendas</strong></p>

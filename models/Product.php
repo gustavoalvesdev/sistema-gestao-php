@@ -38,6 +38,9 @@ class Product extends Model
 
         $sql = $this->db->prepare($sql);
 
+        $price = str_replace('.', '', $price);
+        $price = str_replace(',', '.', $price);
+
         $sql->bindValue(':cod',          $cod);
         $sql->bindValue(':name',         $name);
         $sql->bindValue(':price',        $price);

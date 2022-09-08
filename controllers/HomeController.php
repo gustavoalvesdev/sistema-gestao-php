@@ -21,7 +21,7 @@ class HomeController extends Controller
             exit;
         }
         
-        $data = array();
+        /*$data = array();
 
         $data['menu'] = array(
             array(
@@ -41,16 +41,22 @@ class HomeController extends Controller
                 'id' => '',
                 'link' => BASE_URL.'categoria',
                 'text' => 'Usuários'
+            ),
+            array(
+                'class' => '',
+                'id' => '',
+                'link' => BASE_URL . 'login/sair',
+                'text' => 'Sair'
             )
-        );
+        );*/
 
-        $this->loadView('template_parts/header', $data);
+        $this->loadView('template_parts/header', $this->data);
     }
 
     public function index() 
     {
 
-        $data = array();
+
 
         $p = new Product();
 
@@ -62,14 +68,13 @@ class HomeController extends Controller
 
         }
 
-        $data['list'] = $p->getProducts($s);
+        $this->data['list'] = $p->getProducts($s);
 
-        $this->loadView('home', $data);
+        $this->loadView('home', $this->data);
     }
 
     public function add()
     {
-        $data = array();
 
         $p = new Product();
 
@@ -87,12 +92,12 @@ class HomeController extends Controller
             exit;
         }
 
-        $this->loadView('add', $data);
+        $this->loadView('add', $this->data);
     }
 
     public function edit($id)
     {
-        $data = array('info' => '');
+        $this->data = array('info' => '');
 
         $p = new Product();
 
@@ -110,7 +115,7 @@ class HomeController extends Controller
 
         $data['info'] = $p->getProduct($id);
 
-        $this->loadView('edit', $data);
+        $this->loadView('edit', $this->data);
     }
 
     public function __destruct()
