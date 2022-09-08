@@ -9,18 +9,17 @@
     <input type="text" name="name" required /><br /><br />
 
     Categoria:<br />
-    <select name="category">
+    <select name="category_id" id="category">
+        <option>SELECIONE A CATEGORIA</option>
         <?php foreach($list as $item): ?>
-            <option><?= $item['name'] ?></option>
+            <option value="<?= $item['id'] ?>"><?= $item['name'] ?></option>
         <?php endforeach; ?>
     </select>
     <br /><br />
 
     Subcategoria:<br />
-    <select name="category">
-        <option>LÁPIS</option>
-        <option>APONTADOR</option>
-        <option>TESOURA</option>
+    <select name="subcategory_id" id="subcategories" disabled>
+        <option value="0">SELECIONE A SUBCATEGORIA...</option>
     </select>
     <br /><br />
 
@@ -37,3 +36,8 @@
  
 </form>
 <!-- form -->
+
+<script>
+    let baseUrl = '<?= BASE_URL ?>';
+</script>
+<script src="<?= BASE_URL ?>assets/js/categories_handle.js"></script>

@@ -2,7 +2,7 @@
 
 class Model {
 
-    protected $dv;
+    protected $db;
 
     public function __construct() {
         global $db;

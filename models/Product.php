@@ -29,9 +29,9 @@ class Product extends Model
         return $array;
     }
 
-    public function addProduct($cod, $name, $price, $quantity, $minQuantity)
+    public function addProduct($cod, $name, $price, $quantity, $minQuantity, $categoryId, $subcategoryId)
     {
-        $sql = 'INSERT INTO products (cod, name, price, quantity, min_quantity) VALUES (:cod, :name, :price, :quantity, :min_quantity)';
+        $sql = 'INSERT INTO products (cod, name, price, quantity, min_quantity, category_id, subcategory_id) VALUES (:cod, :name, :price, :quantity, :min_quantity, :category_id, :subcategory_id)';
 
         $sql = $this->db->prepare($sql);
 
@@ -40,6 +40,8 @@ class Product extends Model
         $sql->bindValue(':price',        $price);
         $sql->bindValue(':quantity',     $quantity);
         $sql->bindValue(':min_quantity', $minQuantity);
+        $sql->bindValue(':category_id', $categoryId);
+        $sql->bindValue(':subcategory_id', $subcategoryId);
 
         $sql->execute();
 

@@ -8,11 +8,21 @@ class Subcategory extends Model
 
         $sql = $this->db->prepare($sql);
 
-        $sql->bindValue(':name', $name);
+        $sql->bindValue(':name', strtoupper($name));
         $sql->bindValue(':category_id', $categoryId);
 
         $sql->execute();
 
         return true;
+    }
+
+    public function getSubcategories($categoryId) {
+
+        $subcategories = $this->db->prepare("SELECT * FROM subcategories WHERE category_id = :category_id");
+        $subcategories->bindValue(':category_id', $categoryId);
+        $subcategories->execute();
+
+        return $fSubcategories = $subcategories->fetchAll(PDO::FETCH_ASSOC);
+
     }
 }

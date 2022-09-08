@@ -143,13 +143,15 @@ class ProdutoController extends Controller {
 
         if (! empty($_POST['cod'])) {
 
-            $cod         = $_POST['cod'];
-            $name        = $_POST['name'];
-            $price       = $_POST['price'];
-            $quantity    = $_POST['quantity'];
-            $minQuantity = $_POST['min_quantity'];
+            $cod           = $_POST['cod'           ];
+            $name          = $_POST['name'          ];
+            $price         = $_POST['price'         ];
+            $quantity      = $_POST['quantity'      ];
+            $minQuantity   = $_POST['min_quantity'  ];
+            $categoryId    = $_POST['category_id'   ];
+            $subcategoryId = $_POST['subcategory_id'];
 
-            $p->addProduct($cod, $name, $price, $quantity, $minQuantity);
+            $p->addProduct($cod, $name, $price, $quantity, $minQuantity, $categoryId, $subcategoryId);
 
             header('Location: '.BASE_URL.'produto');
             exit;
