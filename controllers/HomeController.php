@@ -5,7 +5,8 @@ use Core\Controller;
 use Models\User;
 use Models\Product;
 
-class HomeController extends Controller {
+class HomeController extends Controller 
+{
 
     private $user;
 
@@ -46,7 +47,8 @@ class HomeController extends Controller {
         $this->loadView('template_parts/header', $data);
     }
 
-    public function index() {
+    public function index() 
+    {
 
         $data = array();
 
