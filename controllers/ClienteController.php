@@ -17,31 +17,8 @@ class ClienteController extends Controller
             header('Location: '.BASE_URL.'login');
             exit;
         }
-        
-        $data = array();
-        
-        $data['menu'] = array(
-            array(
-                'class' => 'link-home',
-                'id' => '',
-                'link' => BASE_URL,
-                'text' => 'Início'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'produto',
-                'text' => 'Configurações'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'categoria',
-                'text' => 'Usuários'
-            )
-        );
 
-        $this->loadView('template_parts/header', $data);
+        $this->loadView('template_parts/header', $this->data);
     }
 
     public function index()
