@@ -15,24 +15,22 @@
     <input type="text" name="cellphone" id="cellphone" required /><br /><br />
 
     CEP:<br />
-    <input type="text" name="cep" id="cep" onblur="pesquisacep(this.value);" required /><br /><br />
+    <input type="text" name="zipcode" id="cep" onblur="pesquisacep(this.value);" required /><br /><br />
 
     Rua:<br />
-    <input type="text" name="rua" id="rua" required disabled /><br /><br />
+    <input type="text" name="street" id="rua" required  /><br /><br />
 
     Número:<br />
     <input type="text" name="number" id="number" required /><br /><br />
 
     Bairro:<br />
-    <input type="text" name="bairro" id="bairro" required /><br /><br />
+    <input type="text" name="district" id="bairro" required /><br /><br />
 
     Cidade:<br />
-    <input type="text" name="cidade" id="cidade" required disabled /><br /><br />
+    <input type="text" name="city" id="cidade" required  /><br /><br />
 
     Estado:<br />
-    <input type="text" name="uf" id="uf" required disabled /><br /><br />
-
-    
+    <input type="text" name="state" id="uf" required  /><br /><br />
 
     <button type="submit" class="btn btn-add btn-lg"><i class="fas fa-plus"></i> Adicionar Cliente</button>
  
