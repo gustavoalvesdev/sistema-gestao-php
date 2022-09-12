@@ -38,8 +38,9 @@ class Manufacturer extends Model
         $sql = 'INSERT INTO manufacturers (name, url) VALUES (:name, :url)';
 
         $sql = $this->db->prepare($sql);
+        
         $sql->bindValue(':name', $name);
-        $sql->bindValue(':url', $url);
+        $sql->bindValue(':url' , $url );
 
         $sql->execute();
 

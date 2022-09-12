@@ -14,8 +14,9 @@ class LoginController extends Controller
         );
 
         if (!empty($_POST['user_email'])) {
+            
             $email = $_POST['user_email'];
-            $upass = $_POST['password'];
+            $upass = $_POST['password'  ];
 
             $user = new User();
 

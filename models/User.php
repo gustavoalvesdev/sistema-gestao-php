@@ -12,8 +12,8 @@ class User extends Model
     {
         $sql = 'SELECT * FROM users WHERE user_email = :email AND user_pass = :upass';
         $sql = $this->db->prepare($sql);
-        $sql->bindValue(':email', $email);
-        $sql->bindValue(':upass', md5($pass));
+        $sql->bindValue(':email',     $email  );
+        $sql->bindValue(':upass', md5($pass  ));
         $sql->execute();
 
         return $sql->rowCount() > 0;

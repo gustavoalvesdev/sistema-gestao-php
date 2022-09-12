@@ -49,16 +49,6 @@ class CategoriaController extends Controller
     {
         $data = array();
 
-        /*$s = '';
-
-        if (! empty($_GET['busca'])) {
-
-            $s = trim($_GET['busca']);
-
-        } */
-
-        //$data['list'] = $p->getProducts($s);
-
         $c = new Category();
 
         $s = '';

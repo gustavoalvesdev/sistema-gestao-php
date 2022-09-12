@@ -13,8 +13,10 @@ class Product extends Model
         if (! empty($s)) {
 
             $sql = 'SELECT * FROM products WHERE cod = :cod OR name LIKE :name';
+
             $sql = $this->db->prepare($sql);
-            $sql->bindValue(':cod',  $s);
+
+            $sql->bindValue(':cod' ,     $s    );
             $sql->bindValue(':name', '%'.$s.'%');
 
             $sql->execute();
@@ -32,21 +34,29 @@ class Product extends Model
         return $array;
     }
 
-    public function addProduct($cod, $name, $price, $quantity, $minQuantity, $categoryId, $subcategoryId)
+    public function addProduct(
+        $cod, 
+        $name, 
+        $price, 
+        $quantity, 
+        $minQuantity, 
+        $categoryId, 
+        $subcategoryId
+    )
     {
         $sql = 'INSERT INTO products (cod, name, price, quantity, min_quantity, category_id, subcategory_id) VALUES (:cod, :name, :price, :quantity, :min_quantity, :category_id, :subcategory_id)';
 
         $sql = $this->db->prepare($sql);
 
-        $price = str_replace('.', '', $price);
+        $price = str_replace('.', '' , $price);
         $price = str_replace(',', '.', $price);
 
-        $sql->bindValue(':cod',          $cod);
-        $sql->bindValue(':name',         $name);
-        $sql->bindValue(':price',        $price);
-        $sql->bindValue(':quantity',     $quantity);
-        $sql->bindValue(':min_quantity', $minQuantity);
-        $sql->bindValue(':category_id', $categoryId);
+        $sql->bindValue(':cod'           , $cod          );
+        $sql->bindValue(':name'          , $name         );
+        $sql->bindValue(':price'         , $price        );
+        $sql->bindValue(':quantity'      , $quantity     );
+        $sql->bindValue(':min_quantity'  , $minQuantity  );
+        $sql->bindValue(':category_id'   , $categoryId   );
         $sql->bindValue(':subcategory_id', $subcategoryId);
 
         $sql->execute();
@@ -70,18 +80,25 @@ class Product extends Model
         return $array;
     }
 
-    public function editProduct($cod, $name, $price, $quantity, $minQuantity, $id)
+    public function editProduct(
+        $cod, 
+        $name, 
+        $price, 
+        $quantity, 
+        $minQuantity, 
+        $id
+    )
     {
         $sql = 'UPDATE products SET cod = :cod, name = :name, price = :price, quantity = :quantity, min_quantity = :min_quantity WHERE id = :id';
 
         $sql = $this->db->prepare($sql);
 
-        $sql->bindValue(':cod',          $cod);
-        $sql->bindValue(':name',         $name);
-        $sql->bindValue(':price',        $price);
-        $sql->bindValue(':quantity',     $quantity);
+        $sql->bindValue(':cod'         , $cod        );
+        $sql->bindValue(':name'        , $name       );
+        $sql->bindValue(':price'       , $price      );
+        $sql->bindValue(':quantity'    , $quantity   );
         $sql->bindValue(':min_quantity', $minQuantity);
-        $sql->bindValue(':id',           $id);
+        $sql->bindValue(':id'          , $id         );
 
         $sql->execute();
     }

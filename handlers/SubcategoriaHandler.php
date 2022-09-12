@@ -7,4 +7,8 @@ use Models\Subcategory;
 
 $objSubcategories = new Subcategory();
 
-echo json_encode($objSubcategories->getSubcategories($_POST['category']));
+echo json_encode(
+    $objSubcategories->getSubcategories(
+        $_POST['category']
+    )
+);

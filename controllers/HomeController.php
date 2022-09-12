@@ -20,44 +20,12 @@ class HomeController extends Controller
             header('Location: '.BASE_URL.'login');
             exit;
         }
-        
-        /*$data = array();
-
-        $data['menu'] = array(
-            array(
-                'class' => 'link-home',
-                'id' => '',
-                'link' => BASE_URL,
-                'text' => 'Início'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'produto',
-                'text' => 'Configurações'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'categoria',
-                'text' => 'Usuários'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL . 'login/sair',
-                'text' => 'Sair'
-            )
-        );*/
 
         $this->loadView('template_parts/header', $this->data);
     }
 
     public function index() 
     {
-
-
-
         $p = new Product();
 
         $s = '';
@@ -80,13 +48,19 @@ class HomeController extends Controller
 
         if (! empty($_POST['cod'])) {
 
-            $cod         = $_POST['cod'];
-            $name        = $_POST['name'];
-            $price       = $_POST['price'];
-            $quantity    = $_POST['quantity'];
+            $cod         = $_POST['cod'         ];
+            $name        = $_POST['name'        ];
+            $price       = $_POST['price'       ];
+            $quantity    = $_POST['quantity'    ];
             $minQuantity = $_POST['min_quantity'];
 
-            $p->addProduct($cod, $name, $price, $quantity, $minQuantity);
+            $p->addProduct(
+                $cod, 
+                $name, 
+                $price, 
+                $quantity, 
+                $minQuantity
+            );
 
             header('Location: '.BASE_URL);
             exit;
@@ -103,10 +77,10 @@ class HomeController extends Controller
 
         if (! empty($_POST['cod'])) {
 
-            $cod         = $_POST['cod'];
-            $name        = $_POST['name'];
-            $price       = $_POST['price'];
-            $quantity    = $_POST['quantity'];
+            $cod         = $_POST['cod'         ];
+            $name        = $_POST['name'        ];
+            $price       = $_POST['price'       ];
+            $quantity    = $_POST['quantity'    ];
             $minQuantity = $_POST['min_quantity'];
 
             $p->editProduct($cod, $name, $price, $quantity, $minQuantity, $id);

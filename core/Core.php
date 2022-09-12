@@ -3,7 +3,8 @@
 namespace Core;
 
 class Core {
-    public function run() {
+    public function run() 
+    {
         
         $url = '/';
 
@@ -39,17 +40,23 @@ class Core {
 
         $fileName = explode('\\', $currentController);
 
-        if (!file_exists('controllers/'.$fileName[1].'.php')) {
+        if (! file_exists('controllers/'.$fileName[1].'.php')) {
             $currentController = 'Controllers\NotFoundController';
         }
 
         $c = new $currentController();
 
-        if (!method_exists($c, $currentAction)) {
+        if (! method_exists($c, $currentAction)) {
             $currentAction = 'actionNotFound';
         }
 
-        call_user_func_array(array($c, $currentAction), $params);
+        call_user_func_array(
+            array(
+                $c, 
+                $currentAction
+            ), 
+            $params
+        );
         
 
         

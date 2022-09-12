@@ -32,7 +32,18 @@ class Customer extends Model
         return $array;
     }
 
-    public function addCustomer($name, $cpf, $phone, $cellphone, $zipcode, $street, $number, $district, $city, $state)
+    public function addCustomer(
+        $name, 
+        $cpf, 
+        $phone, 
+        $cellphone, 
+        $zipcode, 
+        $street, 
+        $number, 
+        $district, 
+        $city, 
+        $state
+    )
     {
         $sql = 'INSERT INTO customers (name, cpf, phone, cellphone, zipcode, street, number, district, city, state) VALUES (:name, :cpf, :phone, :cellphone, :zipcode, :street, :number, :district, :city, :state)';
 
@@ -70,18 +81,25 @@ class Customer extends Model
         return $array;
     }
 
-    public function editProduct($cod, $name, $price, $quantity, $minQuantity, $id)
+    public function editProduct(
+        $cod, 
+        $name, 
+        $price, 
+        $quantity, 
+        $minQuantity, 
+        $id
+    )
     {
         $sql = 'UPDATE products SET cod = :cod, name = :name, price = :price, quantity = :quantity, min_quantity = :min_quantity WHERE id = :id';
 
         $sql = $this->db->prepare($sql);
 
-        $sql->bindValue(':cod',          $cod);
-        $sql->bindValue(':name',         $name);
-        $sql->bindValue(':price',        $price);
-        $sql->bindValue(':quantity',     $quantity);
+        $sql->bindValue(':cod'         , $cod        );
+        $sql->bindValue(':name'        , $name       );
+        $sql->bindValue(':price'       , $price      );
+        $sql->bindValue(':quantity'    , $quantity   );
         $sql->bindValue(':min_quantity', $minQuantity);
-        $sql->bindValue(':id',           $id);
+        $sql->bindValue(':id'          , $id         );
 
         $sql->execute();
     }
