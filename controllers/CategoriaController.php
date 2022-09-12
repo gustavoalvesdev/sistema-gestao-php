@@ -71,12 +71,24 @@ class CategoriaController extends Controller
         if (! empty($_POST['name'])) {
             $name = addslashes($_POST['name']);
             $c->addCategory($name);
-            header('Location: '.BASE_URL.'categoria');
-            exit;
         }
 
         $this->loadView('categoria-add', $data);
 
+    }
+
+    public function delete($id)
+    {
+        $c = new Category();
+
+        if (! empty($id)) {
+
+            $name = addslashes($id);
+            $c->deleteCategory($id);
+        }
+
+        header('Location: '.BASE_URL.'categoria');
+        exit;
     }
 
     public function __destruct()

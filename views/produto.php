@@ -1,5 +1,6 @@
 <style>
     body {
+        height: 100vh;
         background-image: url('<?= BASE_URL ?>assets/images/products_bg.jpg');
         background-size: cover;
         background-position: center;
@@ -37,6 +38,8 @@
             <td><?= $item['quantity'] ?></td>
             <td>
                 <a class="btn btn-edit" href="<?= BASE_URL ?>produto/edit/<?= $item['id'] ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
+
+                <a class="btn btn-delete" href="<?= BASE_URL ?>produto/delete/<?= $item['id'] ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
             </td>
         </tr>
 

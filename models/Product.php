@@ -12,7 +12,7 @@ class Product extends Model
 
         if (! empty($s)) {
 
-            $sql = 'SELECT * FROM products WHERE cod = :cod OR name LIKE :name';
+            $sql = 'SELECT * FROM products WHERE cod = :cod OR name LIKE :name AND soft_delete = 0';
 
             $sql = $this->db->prepare($sql);
 
@@ -22,7 +22,7 @@ class Product extends Model
             $sql->execute();
 
         } else {
-            $sql = 'SELECT * FROM products';
+            $sql = 'SELECT * FROM products WHERE soft_delete = 0';
             $sql = $this->db->query($sql);
         }
 
@@ -115,6 +115,17 @@ class Product extends Model
         }
 
         return $array;
+    }
+
+    public function deleteProduct($id)
+    {
+        if (isset($id) && !empty($id)) {
+            $sql = 'UPDATE products SET soft_delete = 1 WHERE id = :id';
+        }
+
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(':id', $id);
+        return $sql->execute();
     }
 
 }

@@ -113,6 +113,22 @@ class ProdutoController extends Controller
         $this->loadView('produto-edit', $this->data);
     }
 
+    public function delete($id)
+    {
+        
+        $p = new Product();
+
+        if (! empty($id)) {
+
+            $name = addslashes($id);
+            $p->deleteProduct($id);
+        }
+
+        header('Location: '.BASE_URL.'produto');
+        exit;
+        
+    }
+
     public function __destruct()
     {
         $this->loadView('template_parts/footer');

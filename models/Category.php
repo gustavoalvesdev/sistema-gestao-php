@@ -96,4 +96,13 @@ class Category extends Model
 
         return true;
     }
+
+    public function deleteCategory($id)
+    {
+        $sql = 'DELETE FROM categories WHERE id = :id';
+
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(':id', $id);
+        return $sql->execute();
+    }
 }
