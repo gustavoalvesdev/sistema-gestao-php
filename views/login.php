@@ -9,8 +9,8 @@
     <body>
         <div class="loginarea">
             <form method="POST">
-                Seu número:<br />
-                <input type="text" name="number" /><br /><br />
+                Seu e-mail:<br />
+                <input type="email" name="user_email" /><br /><br />
             
                 Sua senha:<br />
                 <input type="password" name="password" /><br /><br />

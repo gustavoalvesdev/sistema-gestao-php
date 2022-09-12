@@ -13,15 +13,15 @@ class LoginController extends Controller
             'msg'=> ''
         );
 
-        if (!empty($_POST['number'])) {
-            $unumber = $_POST['number'];
+        if (!empty($_POST['user_email'])) {
+            $email = $_POST['user_email'];
             $upass = $_POST['password'];
 
             $user = new User();
 
-            if ($user->verifyUser($unumber, $upass)) {
+            if ($user->verifyUser($email, $upass)) {
 
-                $token = $user->createToken($unumber);
+                $token = $user->createToken($email);
                 $_SESSION['token'] = $token;
 
                 header('Location: '.BASE_URL);
@@ -29,7 +29,7 @@ class LoginController extends Controller
 
             } else {
 
-                $data['msg'] = 'Número e/ou senha errados!';
+                $data['msg'] = 'E-mail e/ou senha errados!';
                 
             }
 

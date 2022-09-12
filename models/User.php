@@ -8,30 +8,26 @@ class User extends Model
 
     private $info;
 
-    public function verifyUser($number, $pass)
+    public function verifyUser($email, $pass)
     {
-        $sql = 'SELECT * FROM users WHERE user_number = :unumber AND user_pass = :upass';
+        $sql = 'SELECT * FROM users WHERE user_email = :email AND user_pass = :upass';
         $sql = $this->db->prepare($sql);
-        $sql->bindValue(':unumber', $number);
+        $sql->bindValue(':email', $email);
         $sql->bindValue(':upass', md5($pass));
         $sql->execute();
 
-        if ($sql->rowCount() > 0) {
-            return true;
-        }
-
-        return false;
+        return $sql->rowCount() > 0;
     }
 
-    public function createToken($unumber)
+    public function createToken($email)
     {
         $token = md5(time().rand(0,9999).time().rand(0,9999));
 
-        $sql = 'UPDATE users SET user_token = :token WHERE user_number = :unumber';
+        $sql = 'UPDATE users SET user_token = :token WHERE user_email = :email';
         $sql = $this->db->prepare($sql);
 
         $sql->bindValue(':token', $token);
-        $sql->bindValue(':unumber', $unumber);
+        $sql->bindValue(':email', $email);
 
         $sql->execute();
 
