@@ -1,59 +1,68 @@
-<h1>MicroKosmus - 1.0</h1>
+<style>
+    body {
+        background-image: url('<?= BASE_URL ?>assets/images/home_bg.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+</style>
+
+<h1 style="color: white">Studio Color - Sitema de Gestão Interno</h1>
 
 <div class="cards-container">
 
     <a href="<?= BASE_URL ?>produto">
-        <div class="card">
+        <div class="card" style="background-color: #A028A9">
             <p><strong><i class="fas fa-box"></i><br /> Produtos</strong></p>
         </div>
         <!-- card -->
     </a>
 
     <a href="<?php BASE_URL ?>categoria">
-        <div class="card">
+        <div class="card" style="background-color: #4052AE">
             <p><strong><i class="fas fa-list"></i><br /> Categorias</strong></p>
         </div>
         <!-- card -->
     </a>
 
-    <a href="<?php BASE_URL ?>cidade">
-        <div class="card">
-            <p><strong><i class="fas fa-city"></i><br /> Cidades</strong></p>
+    <a href="<?php BASE_URL ?>deliveryCounter">
+        <div class="card" style="background-color: #009588">
+            <p><strong><i class="fas fa-truck"></i><br /> Balcões de Retirada</strong></p>
         </div>
         <!-- card -->   
     </a>
 
-    <a href="<?= BASE_URL ?>fabricante">
-        <div class="card">
-            <p><strong><i class="fas fa-industry"></i><br /> Fabricantes</strong></p>
+    <a href="<?= BASE_URL ?>provider">
+        <div class="card" style="background-color: #FF9632">
+            <p><strong><i class="fas fa-industry"></i><br /> Fornecedores</strong></p>
         </div>
         <!-- card -->
     </a>
 
     <a href="<?= BASE_URL ?>cliente">
-        <div class="card">
+        <div class="card" style="background-color: #5D7C89">
             <p><strong><i class="fas fa-users"></i><br /> Clientes</strong></p>
         </div>
         <!-- card -->
     </a>
 
-    <div class="card">
+    <div class="card" style="background-color: #7A5449">
         <p><strong><i class="fas fa-cash-register"></i><br /> Vendas</strong></p>
     </div>
     <!-- card -->
-    <div class="card">
+    <div class="card" style="background-color: #F93F3B">
         <p><strong><i class="fas fa-wallet"></i><br /> Contas</strong></p>
     </div>
     <!-- card -->
 
     <a href="<?= BASE_URL ?>relatorio">
-        <div class="card">
+        <div class="card" style="background-color: #84C25B">
             <p><strong><i class="fas fa-copy"></i><br /> Relatórios</strong></p>
         </div>
         <!-- card -->
     </a>
 
-    <div class="card">
+    <div class="card" style="background-color: #00BCD0">
         <p><strong><i class="fas fa-chart-pie"></i><br /> Dashboards</strong></p>
     </div>
     <!-- card -->

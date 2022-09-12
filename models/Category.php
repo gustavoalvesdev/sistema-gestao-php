@@ -6,6 +6,44 @@ use Core\Model;
 
 class Category extends Model 
 {   
+
+    private $id;
+    private $name;
+    private $companyId;
+
+    /* GETTERS AND SETTERS */
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function getCompanyId()
+    {
+        return $this->companyId;
+    }
+
+    public function setCompanyId($companyId)
+    {
+        $this->companyId = $companyId;
+    }
+
+    /* DB METHODS */
     public function getCategories($s = '') 
     {
         $array = [];

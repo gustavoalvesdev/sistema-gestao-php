@@ -3,9 +3,9 @@
 namespace Controllers;
 use Core\Controller;
 use Models\User;
-use Models\Manufacturer;
+use Models\Provider;
 
-class FabricanteController extends Controller 
+class ProviderController extends Controller 
 {
     public function __construct()
     {
@@ -48,7 +48,7 @@ class FabricanteController extends Controller
     {
         $data = array();
 
-        $m = new Manufacturer();
+        $m = new Provider();
 
         $s = '';
 
@@ -58,16 +58,16 @@ class FabricanteController extends Controller
 
         }
 
-        $data['list'] = $m->getManufacturers($s);
+        $data['list'] = $m->getProviders($s);
 
-        $this->loadView('fabricante', $data);
+        $this->loadView('provider-list', $data);
     }
 
     public function add()
     {
         $data = array();
 
-        $m = new Manufacturer();
+        $m = new Provider();
 
         $s = '';
 
@@ -81,17 +81,17 @@ class FabricanteController extends Controller
             $name = addslashes($_POST['name']);
             $url  = addslashes($_POST['url']);
 
-            $m->addManufacturer($name, $url);
+            $m->addProvider($name, $url);
 
-            header('Location: '.BASE_URL.'fabricante');
+            header('Location: '.BASE_URL.'provider');
 
             exit;
 
         }
 
-        $data['list'] = $m->getManufacturers($s);
+        $data['list'] = $m->getProviders($s);
 
-        $this->loadView('fabricante-add', $data);
+        $this->loadView('provider-add', $data);
     }
 
     public function __destruct()

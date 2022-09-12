@@ -5,7 +5,142 @@ use Core\Model;
 
 class Customer extends Model
 {
+    private $id;
+    private $name;
+    private $cpf;
+    private $phone;
+    private $cellphone;
+    private $zipCode;
+    private $street;
+    private $number;
+    private $district;
+    private $city;
+    private $state;
+    private $companyId;
 
+    /* GETTERS AND SETTERS */
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function getCpf()
+    {
+        return $this->cpf;
+    }
+
+    public function setCpf($cpf)
+    {
+        $this->cpf = $cpf;
+    }
+
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    public function getCellphone()
+    {
+        return $this->cellphone;
+    }
+
+    public function setCellphone($cellphone)
+    {
+        $this->cellphone = $cellphone;
+    }
+
+    public function getZipCode()
+    {
+        return $this->zipcode;
+    }
+
+    public function setZipCode($zipCode)
+    {
+        $this->zipCode = $zipCode;
+    }
+
+    public function getStreet()
+    {
+        return $this->street;
+    }
+
+    public function setStreet($street)
+    {
+        $this->street = $street;
+    }
+
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    public function setNumber($number)
+    {
+        $this->number = $number;
+    }
+
+    public function getDistrict()
+    {
+        return $this->district;
+    }
+
+    public function setDistrict($district)
+    {
+        $this->district = $district;
+    }
+
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
+
+    public function getCompanyId()
+    {
+        return $this->companyId;
+    }
+
+    public function setCompanyId($companyId)
+    {
+        $this->companyId = $companyId;
+    }
+
+    /* GETTERS AND SETTERS */
     public function getCustomers($s = '')
     {
         $array = array();

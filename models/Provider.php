@@ -4,23 +4,23 @@ namespace Models;
 
 use Core\Model;
 
-class Manufacturer extends Model
+class Provider extends Model
 {
 
-    public function getManufacturers($s = '') 
+    public function getProviders($s = '') 
     {
         $array = array();
 
         if (! empty($s)) {
 
-            $sql = 'SELECT * FROM manufacturers WHERE name LIKE :s OR url LIKE :s';
+            $sql = 'SELECT * FROM providers WHERE name LIKE :s OR url LIKE :s';
             $sql = $this->db->prepare($sql);
             $sql->bindValue(':s', '%'.$s.'%');
 
             $sql->execute();
 
         } else {
-            $sql = 'SELECT * FROM manufacturers';
+            $sql = 'SELECT * FROM providers';
             $sql = $this->db->query($sql);
         }
 
@@ -33,9 +33,9 @@ class Manufacturer extends Model
 
     }
 
-    public function addManufacturer($name, $url)
+    public function addProvider($name, $url)
     {
-        $sql = 'INSERT INTO manufacturers (name, url) VALUES (:name, :url)';
+        $sql = 'INSERT INTO providers (name, url) VALUES (:name, :url)';
 
         $sql = $this->db->prepare($sql);
         

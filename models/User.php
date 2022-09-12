@@ -6,8 +6,77 @@ use Core\Model;
 class User extends Model
 {
 
+    private $id;
+    private $userNumber;
+    private $userEmail;
+    private $userPass;
+    private $userToken;
+    private $companyId;
     private $info;
 
+    /* GETTERS AND SETTERS */
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getUserNumber()
+    {
+        return $this->userNumber;
+    }
+
+    public function setUserNumber($userNumber)
+    {
+        $this->userNumber = $userNumber;
+    }
+
+    public function getUserEmail()
+    {
+        return $this->userEmail;
+    }
+
+    public function setUserEmail($userEmail)
+    {
+        $this->userEmail = $userEmail;
+    }
+
+    public function getUserPass()
+    {
+        return $this->userPass;
+    }
+
+    public function setUserPass($userPass)
+    {
+        $this->userPass = $userPass;
+    }
+
+    public function getUserToken()
+    {
+        return $this->userToken;
+    }
+
+    public function setUserToken($userToken)
+    {
+        $this->userToken = $userToken;
+    }
+
+    public function getCompanyId()
+    {
+        return $this->companyId;
+    }
+
+    public function setCompanyId($companyId)
+    {
+        $this->companyId = $companyId;
+    }
+
+    /* DB METHODS */
     public function verifyUser($email, $pass)
     {
         $sql = 'SELECT * FROM users WHERE user_email = :email AND user_pass = :upass';
