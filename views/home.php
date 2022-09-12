@@ -7,7 +7,7 @@
     }
 </style>
 
-<h1 style="color: white">Studio Color - Sitema de Gestão Interno</h1>
+<h1 style="color: white">Studio Color - Sistema de Gestão Interno</h1>
 
 <div class="cards-container">
 
