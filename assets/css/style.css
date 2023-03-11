@@ -155,6 +155,11 @@ table a {
     color: white!important;
 }
 
+.btn-primary {
+    background-color: #36a104!important;
+    color: white!important;
+}
+
 .btn-lg {
     font-size: 20px!important;
     padding: 6px 10px!important;

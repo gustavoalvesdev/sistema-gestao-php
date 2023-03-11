@@ -1,13 +1,13 @@
 <style>
-    body {
-        background-image: url('<?= BASE_URL ?>assets/images/home_bg.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
+body {
+    background-image: url('<?= BASE_URL ?>assets/images/home_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 </style>
 
-<h1 style="color: white">Studio Color - Sistema de Gestão Interno</h1>
+<h1 style="color: white">SGI - Sistema de Gestão Interno</h1>
 
 <div class="cards-container">
 
@@ -23,13 +23,6 @@
             <p><strong><i class="fas fa-list"></i><br /> Categorias</strong></p>
         </div>
         <!-- card -->
-    </a>
-
-    <a href="<?php BASE_URL ?>deliveryCounter">
-        <div class="card" style="background-color: #009588">
-            <p><strong><i class="fas fa-truck"></i><br /> Balcões de Retirada</strong></p>
-        </div>
-        <!-- card -->   
     </a>
 
     <a href="<?= BASE_URL ?>provider">
@@ -66,6 +59,6 @@
         <p><strong><i class="fas fa-chart-pie"></i><br /> Dashboards</strong></p>
     </div>
     <!-- card -->
-    
+
 </div>
 <!-- cards-container -->

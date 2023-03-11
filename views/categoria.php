@@ -35,6 +35,8 @@
                 <a class="btn btn-delete" href="<?= BASE_URL ?>categoria/delete/<?= $item['id'] ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
 
                 <a class="btn btn-add" href="<?= BASE_URL ?>subcategoria/add/<?= $item['id'] ?>"><i class="fas fa-plus"></i>Subcategoria</a>
+
+                <a class="btn btn-primary" href="<?= BASE_URL ?>subcategoria/add/<?= $item['id'] ?>"><i class="fas fa-eye"></i>Subcategorias</a>
             </td>
         </tr>
     <?php endforeach; ?>

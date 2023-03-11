@@ -40,6 +40,8 @@
             <td><?= $item['cellphone'] ?></td>
             <td>
                 <a class="btn btn-edit" href="<?= BASE_URL ?>cliente/edit/<?= $item['id'] ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
+
+                <a class="btn btn-delete" href="<?= BASE_URL ?>cliente/delete/<?= $item['id'] ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
             </td>
         </tr>
 

@@ -155,7 +155,7 @@ class Customer extends Model
             $sql->execute();
 
         } else {
-            $sql = 'SELECT * FROM customers';
+            $sql = 'SELECT * FROM customers WHERE soft_delete = 0';
             $sql = $this->db->query($sql);
         }
 
@@ -251,6 +251,17 @@ class Customer extends Model
         }
 
         return $array;
+    }
+
+    public function deleteCustomer($id)
+    {
+        if (isset($id) && !empty($id)) {
+            $sql = 'UPDATE customers SET soft_delete = 1 WHERE id = :id';
+        }
+
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(':id', $id);
+        return $sql->execute();
     }
 
 }

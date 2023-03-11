@@ -105,4 +105,15 @@ class Category extends Model
         $sql->bindValue(':id', $id);
         return $sql->execute();
     }
+
+    public function categoryHasProducts($categoryId) 
+    {
+        $sql = 'SELECT * FROM products WHERE category_id = :category_id';
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(':category_id', $categoryId);
+        
+        $sql->execute();
+        
+        return $sql->rowCount() > 0;
+    }
 }

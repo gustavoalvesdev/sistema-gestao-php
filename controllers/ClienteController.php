@@ -78,6 +78,20 @@ class ClienteController extends Controller
         $this->loadView('cliente-add', $this->data);
     }
 
+    public function delete($id)
+    {
+        $c = new Customer();
+
+        if (! empty($id)) {
+
+            $id = addslashes($id);
+            $c->deleteCustomer($id);
+        }
+
+        header('Location: '.BASE_URL.'cliente');
+        exit;
+    }
+
     public function __destruct()
     {
         $this->loadView('template_parts/footer');
