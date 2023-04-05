@@ -5,5 +5,8 @@
             "Controllers\\": "controllers/",
             "Models\\": "models/"
         }
+    },
+    "require": {
+        "symfony/dotenv": "^6.2"
     }
 }

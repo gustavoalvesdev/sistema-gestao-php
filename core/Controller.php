@@ -13,13 +13,13 @@ class Controller
             array(
                 'class' => 'link-home',
                 'id' => '',
-                'link' => BASE_URL,
+                'link' => $_SERVER['BASE_URL'],
                 'text' => 'Início'
             ),
             array(
                 'class' => '',
                 'id' => '',
-                'link' => BASE_URL.'produto',
+                'link' => $_SERVER['BASE_URL'] .'/produto',
                 'text' => 'Configurações'
             ),
             array(
@@ -31,7 +31,7 @@ class Controller
             array(
                 'class' => '',
                 'id' => '',
-                'link' => BASE_URL . 'login/sair',
+                'link' => $_SERVER['BASE_URL'] . '/login/sair',
                 'text' => 'Sair'
             )
         );
