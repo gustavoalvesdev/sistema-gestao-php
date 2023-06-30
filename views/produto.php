@@ -33,7 +33,7 @@
 
         <tr style="background-color: white; border: 1px solid #4052AE;">
             <td><?= $item['cod'] ?></td>
-            <td><?= $item['name'] ?></td>
+            <td><?= mb_strtoupper($item['name']); ?></td>
             <td>R$ <?= number_format($item['price'], 2, ',', '.') ?></td>
             <td><?= $item['quantity'] ?></td>
             <td>

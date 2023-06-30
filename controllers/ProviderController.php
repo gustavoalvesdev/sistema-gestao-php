@@ -78,8 +78,8 @@ class ProviderController extends Controller
         }
 
         if (! empty($_POST['name'])) {
-            $name = addslashes($_POST['name']);
-            $url  = addslashes($_POST['url']);
+            $name = mb_strtoupper(addslashes($_POST['name']));
+            $url  = mb_strtoupper(addslashes($_POST['url']));
 
             $m->addProvider($name, $url);
 

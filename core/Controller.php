@@ -4,8 +4,8 @@ namespace Core;
 
 class Controller 
 {
-
     protected $data;
+    protected $user;
 
     public function __construct()
     {

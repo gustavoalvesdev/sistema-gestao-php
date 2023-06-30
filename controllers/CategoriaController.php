@@ -8,6 +8,7 @@ use Models\Category;
 
 class CategoriaController extends Controller 
 {
+
     public function __construct()
     {
         parent::__construct();
@@ -69,7 +70,7 @@ class CategoriaController extends Controller
         $c = new Category();
 
         if (! empty($_POST['name'])) {
-            $name = addslashes($_POST['name']);
+            $name = mb_strtoupper(addslashes($_POST['name']));
             $c->addCategory($name);
         }
 

@@ -58,7 +58,7 @@ class SubcategoriaController extends Controller
         $data['categoryName'] = $category;
 
         if (! empty($_POST['name'])) {
-            $name = addslashes($_POST['name']);
+            $name = mb_strtoupper(addslashes($_POST['name']));
 
             $s->addSubcategory($name, $categoryId);
 
@@ -69,6 +69,28 @@ class SubcategoriaController extends Controller
 
         $this->loadView('subcategoria-add', $data);
 
+    }
+
+    public function view($categoryId)
+    {
+        $data = array();
+
+        $sub = new Subcategory();
+
+        $categoryId = addslashes($categoryId);
+
+        if (empty($categoryId)) {
+            header('Location: ' . BASE_URL . 'categoria');
+            exit;
+        }
+
+        $c = new Category();
+        $category = $c->getCategoryName($categoryId);
+
+        $data['list'] = $sub->getSubcategories($categoryId);
+        $data['name'] = $category;
+
+        $this->loadView('subcategoria-view', $data);
     }
 
 }

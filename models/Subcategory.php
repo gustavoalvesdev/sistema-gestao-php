@@ -26,7 +26,7 @@ class Subcategory extends Model
         $subcategories->bindValue(':category_id', $categoryId);
         $subcategories->execute();
 
-        return $fSubcategories = $subcategories->fetchAll(\PDO::FETCH_ASSOC);
+        return $subcategories->fetchAll(\PDO::FETCH_ASSOC);
 
     }
 }

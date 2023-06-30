@@ -8,7 +8,10 @@
 </style>
 
 <br /><br />
-<a class="btn btn-add btn-lg" href="<?= BASE_URL ?>categoria/add"><i class="fas fa-plus"></i> Adicionar Categoria</a>
+
+<h1>Subcategorias da Categoria <?= $name ?></h1>
+
+<a class="btn btn-add btn-lg" href="<?= BASE_URL ?>subcategoria/add"><i class="fas fa-plus"></i> Adicionar Subcategoria</a>
 
 <form method="GET" class="form-busca">
     <br /><br />
@@ -30,13 +33,9 @@
             <td><?= $item['id'] ?></td>
             <td><?= mb_strtoupper($item['name']); ?></td>
             <td>
-                <a class="btn btn-edit" href="<?= BASE_URL ?>categoria/edit/<?= $item['id'] ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
+                <a class="btn btn-edit" href="<?= BASE_URL ?>subcategoria/edit/<?= $item['id'] ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
                 
-                <a class="btn btn-delete" href="<?= BASE_URL ?>categoria/delete/<?= $item['id'] ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
-
-                <a class="btn btn-add" href="<?= BASE_URL ?>subcategoria/add/<?= $item['id'] ?>"><i class="fas fa-plus"></i>Subcategoria</a>
-
-                <a class="btn btn-primary" href="<?= BASE_URL ?>subcategoria/view/<?= $item['id'] ?>"><i class="fas fa-eye"></i>Subcategorias</a>
+                <a class="btn btn-delete" href="<?= BASE_URL ?>subcategoria/delete/<?= $item['id'] ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
             </td>
         </tr>
     <?php endforeach; ?>

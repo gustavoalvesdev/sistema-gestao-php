@@ -9,8 +9,6 @@ use Models\Category;
 class ProdutoController extends Controller 
 {
 
-    private $user;
-
     public function __construct()
     {
         parent::__construct();

@@ -8,8 +8,6 @@ use Models\Product;
 class HomeController extends Controller 
 {
 
-    private $user;
-
     public function __construct()
     {
         parent::__construct();

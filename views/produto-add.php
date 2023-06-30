@@ -12,7 +12,7 @@
     <select name="category_id" id="category">
         <option>SELECIONE A CATEGORIA</option>
         <?php foreach($list as $item): ?>
-            <option value="<?= $item['id'] ?>"><?= $item['name'] ?></option>
+            <option value="<?= $item['id'] ?>"><?= mb_strtoupper($item['name']) ?></option>
         <?php endforeach; ?>
     </select>
     <br /><br />
