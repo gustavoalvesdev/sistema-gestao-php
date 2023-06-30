@@ -8,6 +8,20 @@
     Nome do Produto:<br />
     <input type="text" name="name" required value="<?= $info['name'] ?>" /><br /><br />
 
+    Categoria:<br />
+    <select name="category_id" id="category">
+        <option value="<?= $info['category_id'] ?>"><?= mb_strtoupper($category_name) ?></option>
+    </select>
+    <br /><br />
+
+    Subcategoria:<br />
+    <select name="subcategory_id" id="subcategories">
+        <?php foreach($subcategories as $item): ?>
+            <option value="<?= $item['id'] ?>" <?= ($item['id'] == $info['subcategory_id']) ? 'selected' : '' ?>><?= mb_strtoupper($item['name']) ?></option>
+        <?php endforeach; ?>
+    </select>
+    <br /><br />
+
     Preço do Produto:<br />
     <input type="text" name="price" required value="<?= number_format($info['price'], 2, ',', '.') ?>" /><br /><br />
 

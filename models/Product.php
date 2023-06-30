@@ -86,19 +86,30 @@ class Product extends Model
         $price, 
         $quantity, 
         $minQuantity, 
+        $categoryId,
+        $subcategoryId,
         $id
     )
     {
-        $sql = 'UPDATE products SET cod = :cod, name = :name, price = :price, quantity = :quantity, min_quantity = :min_quantity WHERE id = :id';
+        $sql = 'UPDATE products SET cod = :cod, name = :name, price = :price, quantity = :quantity, min_quantity = :min_quantity, category_id = :category_id, subcategory_id = :subcategory_id WHERE id = :id';
 
         $sql = $this->db->prepare($sql);
 
-        $sql->bindValue(':cod'         , $cod        );
-        $sql->bindValue(':name'        , $name       );
-        $sql->bindValue(':price'       , $price      );
-        $sql->bindValue(':quantity'    , $quantity   );
-        $sql->bindValue(':min_quantity', $minQuantity);
-        $sql->bindValue(':id'          , $id         );
+        $price = str_replace('.', '' , $price);
+        $price = str_replace(',', '.', $price);
+        $quantity = str_replace('.', '' , $quantity);
+        $quantity = str_replace(',', '.', $quantity);
+        $minQuantity = str_replace('.', '' , $minQuantity);
+        $minQuantity = str_replace(',', '.', $minQuantity);
+
+        $sql->bindValue(':cod'           , $cod          );
+        $sql->bindValue(':name'          , $name         );
+        $sql->bindValue(':price'         , $price        );
+        $sql->bindValue(':quantity'      , $quantity     );
+        $sql->bindValue(':min_quantity'  , $minQuantity  );
+        $sql->bindValue(':category_id'   , $categoryId   );
+        $sql->bindValue(':subcategory_id', $subcategoryId);
+        $sql->bindValue(':id'            , $id           );
 
         $sql->execute();
     }

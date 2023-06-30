@@ -5,6 +5,7 @@ use Core\Controller;
 use Models\User;
 use Models\Product;
 use Models\Category;
+use Models\Subcategory;
 
 class ProdutoController extends Controller 
 {
@@ -88,11 +89,13 @@ class ProdutoController extends Controller
 
         if (! empty($_POST['cod'])) {
 
-            $cod         = $_POST['cod'         ];
-            $name        = $_POST['name'        ];
-            $price       = $_POST['price'       ];
-            $quantity    = $_POST['quantity'    ];
-            $minQuantity = $_POST['min_quantity'];
+            $cod         = addslashes($_POST['cod'           ]);
+            $name        = addslashes($_POST['name'          ]);
+            $price       = addslashes($_POST['price'         ]);
+            $quantity    = addslashes($_POST['quantity'      ]);
+            $minQuantity = addslashes($_POST['min_quantity'  ]);
+            $category    = addslashes($_POST['category_id'   ]);
+            $subcategory = addslashes($_POST['subcategory_id']);
 
             $p->editProduct(
                 $cod, 
@@ -100,6 +103,8 @@ class ProdutoController extends Controller
                 $price, 
                 $quantity, 
                 $minQuantity, 
+                $category,
+                $subcategory,
                 $id
             );
 
@@ -107,7 +112,19 @@ class ProdutoController extends Controller
         }
 
         $this->data['info'] = $p->getProduct($id);
+        
+        $categoryId = $this->data['info']['category_id'];
 
+        $c = new Category();
+        $category = $c->getCategoryName($categoryId);
+
+        $this->data['category_name'] = $category;
+
+        $sub = new Subcategory();
+        $subcategories = $sub->getSubcategories($categoryId);
+
+        $this->data['subcategories'] = $subcategories;
+        
         $this->loadView('produto-edit', $this->data);
     }
 
