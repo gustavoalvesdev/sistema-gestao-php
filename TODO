@@ -1,0 +1,1 @@
+- Excluir todas as subcategorias de um produto quando excluir uma categoria. Exibir primeiro um alerta ao usuário, caso a categoria possua subcategorias, informando que existem subcategorias relacionadas à categoria em questão e perguntando se ele realmente quer excluí-la. 
