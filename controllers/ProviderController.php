@@ -94,6 +94,42 @@ class ProviderController extends Controller
         $this->loadView('provider-add', $data);
     }
 
+    public function edit($providerId)
+    {
+        $data = array();
+
+        $provider = new Provider();
+
+        $id = addslashes($providerId);
+
+        if (isset($_POST['action'])) {
+
+            $name = addslashes($_POST['name']);
+            $url = addslashes($_POST['url']);
+
+            if (empty($name)) {
+                header('Location: ' . BASE_URL . 'provider/');
+                exit;
+            }
+
+            $provider->editProvider($name, $url, $providerId);
+
+            header('Location: ' . BASE_URL . 'provider/');
+
+        }
+
+        if (empty($id)) {
+            header('Location: ' . BASE_URL . 'provider/');
+            exit;
+        }
+
+        $provInfo = $provider->getProvider($id);
+
+        $data['info'] = $provInfo;
+
+        $this->loadView('provider-edit', $data);
+    }
+
     public function __destruct()
     {
         $this->loadView('template_parts/footer');

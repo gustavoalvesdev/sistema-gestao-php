@@ -47,4 +47,37 @@ class Provider extends Model
         return true;
 
     }
+
+    public function editProvider($name, $url, $provider_id)
+    {
+        $sql = "UPDATE providers SET name = :name, url = :url WHERE id = :provider_id";
+
+        $sql = $this->db->prepare($sql);
+
+        $sql->bindValue(':name', $name);
+        $sql->bindValue(':url', $url);
+        $sql->bindValue(':provider_id', $provider_id);
+
+        return $sql->execute();
+    }
+
+    public function getProvider($id)
+    {
+        $data = array();
+
+        $sql = "SELECT * FROM providers WHERE id = :id";
+
+        $sql = $this->db->prepare($sql);
+
+        $sql->bindValue(':id', $id);
+
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            $data = $sql->fetch();
+        }
+
+
+        return $data;
+    }
 }
