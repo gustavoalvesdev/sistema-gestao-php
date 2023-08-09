@@ -23,6 +23,9 @@
                 <h2><?= $msg ?></h2>
             
             <?php endif; ?>
+
+            <p>Usuário: gustavoalvesdasilva@outlook.com</p>
+            <p>Senha: 1234</p>
         </div>
         <!-- loginarea -->
     </body>

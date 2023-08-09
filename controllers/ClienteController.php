@@ -43,31 +43,37 @@ class ClienteController extends Controller
     public function add()
     {
 
-        $p = new Customer();
+        $c = new Customer();
 
         if (! empty($_POST['name'])) {
 
-            $name      = $_POST['name'     ];
-            $cpf       = $_POST['cpf'      ];
-            $phone     = $_POST['phone'    ];
-            $cellphone = $_POST['cellphone'];
-            $zipcode   = $_POST['zipcode'  ];
-            $street    = $_POST['street'   ];
-            $number    = $_POST['number'   ];
-            $district  = $_POST['district' ];
-            $city      = $_POST['city'     ];
-            $state     = $_POST['state'    ];
+            $name       = $_POST['name'      ];
+            $rg         = $_POST['rg'        ];
+            $cpf        = $_POST['cpf'       ];
+            $email      = $_POST['email'     ];
+            $cellphone  = $_POST['cellphone' ];
+            $phone      = $_POST['phone'     ];
+            $zipcode    = $_POST['zipcode'   ];
+            $street     = $_POST['street'    ];
+            $number     = $_POST['number'    ];
+            $district   = $_POST['district'  ];
+            $city       = $_POST['city'      ];
+            $complement = $_POST['complement'];
+            $state      = $_POST['state'     ];
 
-            $p->addCustomer(
+            $c->addCustomer(
                 $name,
+                $rg,
                 $cpf,
-                $phone,
+                $email,
                 $cellphone,
+                $phone,
                 $zipcode,
                 $street,
                 $number,
                 $district,
                 $city,
+                $complement,
                 $state
             );
 
@@ -76,6 +82,52 @@ class ClienteController extends Controller
         }
 
         $this->loadView('cliente-add', $this->data);
+    }
+
+    public function edit($id)
+    {
+        $this->data = array('info' => '');
+
+        $c = new Customer();
+
+        if (! empty($_POST['name'])) {
+
+            $name       = addslashes($_POST['name'      ]);
+            $rg         = addslashes($_POST['rg'        ]);
+            $cpf        = addslashes($_POST['cpf'       ]);
+            $email      = addslashes($_POST['email'     ]);
+            $cellphone  = addslashes($_POST['cellphone' ]);
+            $phone      = addslashes($_POST['phone'     ]);
+            $zipcode    = addslashes($_POST['zipcode'   ]);
+            $street     = addslashes($_POST['street'    ]);
+            $number     = addslashes($_POST['number'    ]);
+            $district   = addslashes($_POST['district'  ]);
+            $city       = addslashes($_POST['city'      ]);
+            $complement = addslashes($_POST['complement']);
+            $state      = addslashes($_POST['state'     ]);
+
+            $c->editCostumer(
+                $name,
+                $rg,
+                $cpf,
+                $email,
+                $cellphone,
+                $phone,
+                $zipcode,
+                $street,
+                $number,
+                $district,
+                $city,
+                $complement,
+                $state
+            );
+
+            header('Location: '.BASE_URL.'cliente');
+        }
+
+        $this->data['info'] = $c->getCostumer($id);
+        
+        $this->loadView('cliente-edit', $this->data);
     }
 
     public function delete($id)

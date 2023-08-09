@@ -192,3 +192,118 @@ table a:hover {
     font-weight: bold;
     border: 0;
 }
+
+.form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-row {
+    width: 100%;
+    padding-left: 2%;
+    padding-right: 2%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-field {
+    padding: 10px 0;
+}
+
+.form .w50 {
+    width: 49%;
+}
+
+.form .w30 {
+    width: 29%;
+}
+
+.form .w33 {
+    width: 32%;
+}
+
+.form .w70 {
+    width: 69%;
+}
+
+.form .w25 {
+    width: 24%;
+}
+
+.form .w20 {
+    width: 19%;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .form-row {
+        flex-wrap: wrap;
+    }
+
+    .form .w50 {
+        width: 99%;
+    }
+    
+    .form .w30 {
+        width: 99%;
+    }
+    
+    .form .w33 {
+        width: 99%;
+    }
+    
+    .form .w70 {
+        width: 99%;
+    }
+    
+    .form .w25 {
+        width: 99%;
+    }
+    
+    .form .w20 {
+        width: 99%;
+    }
+
+    #row-cpf,
+    #row-phone,
+    #row-number {
+        width: 99%;
+    }
+    
+}
+
+@media screen and (min-width: 768px) and (max-width: 960px) {
+    .form-row {
+        flex-wrap: wrap;
+    }
+
+    .form .w50 {
+        width: 49%;
+    }
+    
+    .form .w30 {
+        width: 49%;
+    }
+    
+    .form .w33 {
+        width: 49%;
+    }
+    
+    .form .w70 {
+        width: 49%;
+    }
+    
+    .form .w25 {
+        width: 49%;
+    }
+    
+    .form .w20 {
+        width: 49%;
+    }
+
+    #row-cpf,
+    #row-phone,
+    #row-number {
+        width: 99%;
+    }
+    
+}

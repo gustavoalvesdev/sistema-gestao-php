@@ -168,36 +168,41 @@ class Customer extends Model
     }
 
     public function addCustomer(
-        $name, 
-        $cpf, 
-        $phone, 
-        $cellphone, 
-        $zipcode, 
-        $street, 
-        $number, 
-        $district, 
-        $city, 
+        $name,
+        $rg,
+        $cpf,
+        $email,
+        $cellphone,
+        $phone,
+        $zipcode,
+        $street,
+        $number,
+        $district,
+        $city,
+        $complement,
         $state
     )
     {
-        $sql = 'INSERT INTO customers (name, cpf, phone, cellphone, zipcode, street, number, district, city, state) VALUES (:name, :cpf, :phone, :cellphone, :zipcode, :street, :number, :district, :city, :state)';
+        $sql = 'INSERT INTO customers (name, rg, cpf, email, cellphone, phone, zipcode, street, number, district, city, complement, state) VALUES (:name, :rg, :cpf, :email, :cellphone, :phone, :zipcode, :street, :number, :district, :city, :complement, :state)';
 
         $sql = $this->db->prepare($sql);
 
-        $sql->bindValue(':name'      , $name     );
-        $sql->bindValue(':cpf'       , $cpf      );
-        $sql->bindValue(':phone'     , $phone    );
-        $sql->bindValue(':cellphone' , $cellphone);
-        $sql->bindValue(':zipcode'   , $zipcode  );
-        $sql->bindValue(':street'    , $street   );
-        $sql->bindValue(':number'    , $number   );
-        $sql->bindValue(':district'  , $district );
-        $sql->bindValue(':city'      , $city     );
-        $sql->bindValue(':state'     , $state    );
+        $sql->bindValue(':name'      , $name       );
+        $sql->bindValue(':rg'        , $rg         );
+        $sql->bindValue(':cpf'       , $cpf        );
+        $sql->bindValue(':email'     , $email      );
+        $sql->bindValue(':cellphone' , $cellphone  );
+        $sql->bindValue(':phone'     , $phone      );
+        $sql->bindValue(':zipcode'   , $zipcode    );
+        $sql->bindValue(':street'    , $street     );
+        $sql->bindValue(':number'    , $number     );
+        $sql->bindValue(':district'  , $district   );
+        $sql->bindValue(':city'      , $city       );
+        $sql->bindValue(':complement', $complement );
+        $sql->bindValue(':state'     , $state      );
 
-        $sql->execute();
+        return $sql->execute();
 
-        return true;
     }
 
     public function getProduct($id)
@@ -262,6 +267,22 @@ class Customer extends Model
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':id', $id);
         return $sql->execute();
+    }
+
+    public function getCostumer($id)
+    {
+        $array = array();
+        $sql = 'SELECT * FROM customers WHERE id = :id';
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(':id', $id);
+
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            $array = $sql->fetch();
+        }
+
+        return $array;
     }
 
 }

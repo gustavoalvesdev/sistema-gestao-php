@@ -1,31 +1,5 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Tempo de geração: 20-Jan-2023 às 05:13
--- Versão do servidor: 10.4.27-MariaDB
--- versão do PHP: 8.1.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Banco de dados: `estoque`
---
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `categories`
---
+CREATE DATABASE estoque;
+USE estoque;
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
@@ -33,9 +7,6 @@ CREATE TABLE `categories` (
   `compeny_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Extraindo dados da tabela `categories`
---
 
 INSERT INTO `categories` (`id`, `name`, `compeny_id`) VALUES
 (1, 'PAPELARIA', 1),
@@ -44,21 +15,11 @@ INSERT INTO `categories` (`id`, `name`, `compeny_id`) VALUES
 (4, 'BEBIDAS', 1),
 (5, 'TESTE', 1);
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `cities`
---
-
 CREATE TABLE `cities` (
   `id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
   `state` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Extraindo dados da tabela `cities`
---
 
 INSERT INTO `cities` (`id`, `name`, `state`) VALUES
 (1, 'MOGI DAS CRUZES', 25),
@@ -67,30 +28,15 @@ INSERT INTO `cities` (`id`, `name`, `state`) VALUES
 (4, 'CAMPO GRANDE', 19),
 (5, 'FERRAZ DE VASCONCELOS', 25);
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `companies`
---
-
 CREATE TABLE `companies` (
   `id` int(11) UNSIGNED NOT NULL,
   `name` varchar(100) NOT NULL DEFAULT '',
   `nfe_number` int(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Extraindo dados da tabela `companies`
---
-
 INSERT INTO `companies` (`id`, `name`, `nfe_number`) VALUES
 (1, 'Studio Color', 12);
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `customers`
---
 
 CREATE TABLE `customers` (
   `id` int(11) NOT NULL,
@@ -107,18 +53,8 @@ CREATE TABLE `customers` (
   `company_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Extraindo dados da tabela `customers`
---
-
 INSERT INTO `customers` (`id`, `name`, `cpf`, `phone`, `cellphone`, `zipcode`, `street`, `number`, `district`, `city`, `state`, `company_id`) VALUES
 (1, 'Gustavo Alves da Silva', '404.310.328-07', '(11) 4679-7017', '(11) 99653-1308', '08544-100', 'Rua dos Goivos', '19', 'Vila Santa Margarida', 'Ferraz de Vasconcelos', 'SP', 1);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `products`
---
 
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
@@ -132,10 +68,6 @@ CREATE TABLE `products` (
   `company_id` int(11) NOT NULL,
   `soft_delete` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Extraindo dados da tabela `products`
---
 
 INSERT INTO `products` (`id`, `cod`, `name`, `price`, `quantity`, `min_quantity`, `category_id`, `subcategory_id`, `company_id`, `soft_delete`) VALUES
 (10, '7891360615194', 'Lápis de cor faber castell 12 cores', 2, 7, 3, 1, 1, 1, 1),
@@ -152,22 +84,12 @@ INSERT INTO `products` (`id`, `cod`, `name`, `price`, `quantity`, `min_quantity`
 (21, '234532', 'CASA DOS MIL', 1325.58, 12, 12, 3, 8, 1, 1),
 (22, '2920481821019', 'Cartela de Meticais', 25, 18, 15, 2, 6, 0, 0);
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `providers`
---
-
 CREATE TABLE `providers` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `url` varchar(200) NOT NULL,
   `company_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Extraindo dados da tabela `providers`
---
 
 INSERT INTO `providers` (`id`, `name`, `url`, `company_id`) VALUES
 (1, 'KINGSTON', 'WWW.KINGSTON.COM', 1),
@@ -177,21 +99,11 @@ INSERT INTO `providers` (`id`, `name`, `url`, `company_id`) VALUES
 (5, 'FUTURAIM', 'https://futuraim.com.br', 1),
 (6, 'Atual Card', 'https://www.atualcard.com.br/', 0);
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `states`
---
-
 CREATE TABLE `states` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `fu` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Extraindo dados da tabela `states`
---
 
 INSERT INTO `states` (`id`, `name`, `fu`) VALUES
 (1, 'ACRE', 'AC'),
@@ -222,22 +134,12 @@ INSERT INTO `states` (`id`, `name`, `fu`) VALUES
 (26, 'SERGIPE', 'SE'),
 (27, 'TOCANTINS', 'T0');
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `subcategories`
---
-
 CREATE TABLE `subcategories` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `category_id` int(11) NOT NULL,
   `company_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Extraindo dados da tabela `subcategories`
---
 
 INSERT INTO `subcategories` (`id`, `name`, `category_id`, `company_id`) VALUES
 (1, 'LÁPIS', 1, 1),
@@ -251,12 +153,6 @@ INSERT INTO `subcategories` (`id`, `name`, `category_id`, `company_id`) VALUES
 (11, 'SUBTESTE', 5, 1),
 (12, 'TESTANDO PROVANDO', 5, 0);
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `users`
---
-
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `user_number` int(10) NOT NULL,
@@ -266,130 +162,60 @@ CREATE TABLE `users` (
   `company_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Extraindo dados da tabela `users`
---
-
 INSERT INTO `users` (`id`, `user_number`, `user_email`, `user_pass`, `user_token`, `company_id`) VALUES
 (1, 123, 'gustavoalvesdasilva@outlook.com', '1b1c4c43759472a6ecd6036d349c542a', '3901cdab12cfcacc0b60eefa25fe6375', 1);
 
---
--- Índices para tabelas despejadas
---
-
---
--- Índices para tabela `categories`
---
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
---
--- Índices para tabela `cities`
---
 ALTER TABLE `cities`
   ADD PRIMARY KEY (`id`);
 
---
--- Índices para tabela `companies`
---
 ALTER TABLE `companies`
   ADD PRIMARY KEY (`id`);
 
---
--- Índices para tabela `customers`
---
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
---
--- Índices para tabela `products`
---
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
---
--- Índices para tabela `providers`
---
 ALTER TABLE `providers`
   ADD PRIMARY KEY (`id`);
 
---
--- Índices para tabela `states`
---
 ALTER TABLE `states`
   ADD PRIMARY KEY (`id`);
 
---
--- Índices para tabela `subcategories`
---
 ALTER TABLE `subcategories`
   ADD PRIMARY KEY (`id`);
 
---
--- Índices para tabela `users`
---
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT de tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `categories`
---
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
---
--- AUTO_INCREMENT de tabela `cities`
---
 ALTER TABLE `cities`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
---
--- AUTO_INCREMENT de tabela `companies`
---
 ALTER TABLE `companies`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT de tabela `customers`
---
 ALTER TABLE `customers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT de tabela `products`
---
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
---
--- AUTO_INCREMENT de tabela `providers`
---
 ALTER TABLE `providers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
---
--- AUTO_INCREMENT de tabela `states`
---
 ALTER TABLE `states`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
---
--- AUTO_INCREMENT de tabela `subcategories`
---
 ALTER TABLE `subcategories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
---
--- AUTO_INCREMENT de tabela `users`
---
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
