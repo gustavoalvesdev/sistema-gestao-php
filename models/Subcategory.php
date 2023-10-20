@@ -2,9 +2,18 @@
 
 namespace Models;
 use Core\Model;
+use Database\Database;
 
 class Subcategory extends Model 
 {
+
+    private \PDO $db;
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
+
     public function addSubcategory($name, $categoryId)
     {
         $sql = 'INSERT INTO subcategories (name, category_id) VALUES (:name, :category_id)';

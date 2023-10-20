@@ -3,13 +3,20 @@
 namespace Models;
 
 use Core\Model;
+use Database\Database;
 
 class Category extends Model 
 {   
+    private \PDO $db;
 
     private $id;
     private $name;
     private $companyId;
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
 
     /* GETTERS AND SETTERS */
 

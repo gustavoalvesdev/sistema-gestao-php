@@ -234,6 +234,10 @@ table a:hover {
     width: 19%;
 }
 
+.form .w100 {
+    width: 100%
+}
+
 @media screen and (min-width: 320px) and (max-width: 767px) {
     .form-row {
         flex-wrap: wrap;

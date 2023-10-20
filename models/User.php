@@ -2,9 +2,12 @@
 
 namespace Models;
 use Core\Model;
+use Database\Database;
 
 class User extends Model
 {
+
+    private \PDO $db;
 
     private $id;
     private $userNumber;
@@ -13,6 +16,11 @@ class User extends Model
     private $userToken;
     private $companyId;
     private $info;
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
 
     /* GETTERS AND SETTERS */
 

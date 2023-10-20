@@ -3,9 +3,17 @@
 namespace Models;
 
 use Core\Model;
+use Database\Database;
 
 class Provider extends Model
 {
+
+    private \PDO $db;
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
 
     public function getProviders($s = '') 
     {

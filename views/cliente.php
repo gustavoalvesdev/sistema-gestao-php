@@ -5,6 +5,7 @@
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+		background-attachment: fixed;
     }
 </style>
 
@@ -23,21 +24,21 @@
 </form>
 <!-- form-busca -->
 
-<table style="border: 1px solid #4052AE; background-color: #4052AE;" width="100%">
+<table style="border: 1px solid #4052AE; background-color: #4052AE; overflow: auto" width="100%">
     <tr>
-        <th>ID</th>
         <th>Nome</th>
-        <th>CPF</th>
+        <th>Categoria</th>
         <th>Celular</th>
+        <th>Telefone</th>
         <th>Ações</th>
     </tr>
     <?php foreach($list as $item): ?>
 
         <tr style="background-color: white; border: 1px solid #4052AE;">
-            <td><?= $item['id'] ?></td>
-            <td><?= $item['name'] ?></td>
-            <td><?= $item['cpf'] ?></td>
+            <td><?= mb_strtoupper($item['name'], "utf8") ?></td>
+            <td><?= mb_strtoupper($item['category'], "utf8") ?></td>
             <td><?= $item['cellphone'] ?></td>
+            <td><?= $item['phone'] ?></td>
             <td>
                 <a class="btn btn-edit" href="<?= BASE_URL ?>cliente/edit/<?= $item['id'] ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
 

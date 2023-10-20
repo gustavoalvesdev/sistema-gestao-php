@@ -60,6 +60,7 @@ class ClienteController extends Controller
             $city       = $_POST['city'      ];
             $complement = $_POST['complement'];
             $state      = $_POST['state'     ];
+            $category   = $_POST['category'  ];
 
             $c->addCustomer(
                 $name,
@@ -74,7 +75,8 @@ class ClienteController extends Controller
                 $district,
                 $city,
                 $complement,
-                $state
+                $state,
+                $category
             );
 
             header('Location: '.BASE_URL.'cliente');
@@ -105,8 +107,10 @@ class ClienteController extends Controller
             $city       = addslashes($_POST['city'      ]);
             $complement = addslashes($_POST['complement']);
             $state      = addslashes($_POST['state'     ]);
+            $category   = addslashes($_POST['category'  ]);
+            $id         = addslashes($id                 );
 
-            $c->editCostumer(
+            if ($c->editCostumer(
                 $name,
                 $rg,
                 $cpf,
@@ -119,10 +123,13 @@ class ClienteController extends Controller
                 $district,
                 $city,
                 $complement,
-                $state
-            );
+                $state,
+                $category,
+                $id
+            )) {
+                header('Location: '.BASE_URL.'cliente');
+            }
 
-            header('Location: '.BASE_URL.'cliente');
         }
 
         $this->data['info'] = $c->getCostumer($id);

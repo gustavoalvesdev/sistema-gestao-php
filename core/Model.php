@@ -2,17 +2,15 @@
 
 namespace Core;
 
-use \PDO;
+use Database\Database;
 
 class Model 
 {
 
-    protected $db;
 
     public function __construct() 
     {
-        global $db;
-        $this->db = $db;
+        //$this->db = Database::getInstance();
     }
 
 }

@@ -2,9 +2,17 @@
 
 namespace Models;
 use Core\Model;
+use Database\Database;
 
 class Product extends Model
 {
+
+    private \PDO $db;
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
 
     public function getProducts($s = '')
     {

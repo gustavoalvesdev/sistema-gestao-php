@@ -24,12 +24,12 @@
     <div class="form-row">
         <div class="form-field w50">
             <label for="email">E-mail:</label>
-            <input type="email" name="email" required />
+            <input type="email" name="email"  />
         </div>
         <!-- form-field -->
         <div class="form-field w25">
             <label for="cellphone">Celular:</label>
-            <input type="text" name="cellphone" required />
+            <input type="text" name="cellphone" />
         </div>
         <!-- form-field -->
         <div class="form-field w25" id="row-phone">
@@ -43,17 +43,17 @@
     <div class="form-row">
         <div class="form-field w30">
             <label for="zipcode">CEP:</label>
-            <input type="text" name="zipcode" id="cep" onblur="pesquisacep(this.value);" required />
+            <input type="text" name="zipcode" id="cep" onblur="pesquisacep(this.value);"  />
         </div>
         <!-- form-field -->
         <div class="form-field w50">
             <label for="address">Endereço:</label>
-            <input type="text" name="street" id="rua" required  />
+            <input type="text" name="street" id="rua"   />
         </div>
         <!-- form-field -->
         <div class="form-field w20" id="row-number">
             <label for="address_number">Número:</label>
-            <input type="text" name="number" id="number" required  />
+            <input type="text" name="number" id="number"   />
         </div>
         <!-- form-field -->
     </div>
@@ -67,24 +67,36 @@
         <!-- form-field -->
         <div class="form-field w25">
             <label for="cidade">Cidade:</label>
-            <input type="text" name="city" id="cidade" required  />
+            <input type="text" name="city" id="cidade"   />
         </div>
         <!-- form-field -->
         <div class="form-field w25">
             <label for="complement">Complemento:</label>
-            <input type="text" name="complement" id="complement" required  />
+            <input type="text" name="complement" id="complement"   />
         </div>
         <!-- form-field -->
 
         <div class="form-field w25">
             <label for="uf">Estado:</label>
-            <input type="text" name="state" id="uf" required  />
+            <input type="text" name="state" id="uf"   />
         </div>
         <!-- form-field -->
     </div>
     <!-- form-row -->
 
-    <button type="submit" class="btn btn-add btn-lg"><i class="fas fa-plus"></i> Adicionar Cliente</button>
+    <div class="form-row">
+        <div class="form-field w50">
+            <label for="category">Categoria:</label>
+            <input type="text" name="category" id="category"   />
+        </div>
+        <!-- form-field -->
+    </div>
+    <!-- form-row -->
+    <br>
+    <div class="form-row">
+        <button type="submit" class="btn btn-add btn-lg"><i class="fas fa-plus"></i> Adicionar Cliente</button>
+    </div>
+    <!-- form-row -->
  
 </form>
 <!-- form -->

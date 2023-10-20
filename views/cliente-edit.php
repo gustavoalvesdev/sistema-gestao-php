@@ -24,12 +24,12 @@
     <div class="form-row">
         <div class="form-field w50">
             <label for="email">E-mail:</label>
-            <input type="email" name="email" value="<?= $info['email'] ?>" required />
+            <input type="email" name="email" value="<?= $info['email'] ?>"  />
         </div>
         <!-- form-field -->
         <div class="form-field w25">
             <label for="cellphone">Celular:</label>
-            <input type="text" name="cellphone" value="<?= $info['cellphone'] ?>" required />
+            <input type="text" name="cellphone" value="<?= $info['cellphone'] ?>"  />
         </div>
         <!-- form-field -->
         <div class="form-field w25" id="row-phone">
@@ -43,17 +43,17 @@
     <div class="form-row">
         <div class="form-field w30">
             <label for="zipcode">CEP:</label>
-            <input type="text" name="zipcode" id="cep" onblur="pesquisacep(this.value);" value="<?= $info['zipcode'] ?>" required />
+            <input type="text" name="zipcode" id="cep" onblur="pesquisacep(this.value);" value="<?= $info['zipcode'] ?>"  />
         </div>
         <!-- form-field -->
         <div class="form-field w50">
             <label for="rua">Endereço:</label>
-            <input type="text" name="street" id="rua" value="<?= $info['street'] ?>" required  />
+            <input type="text" name="street" id="rua" value="<?= $info['street'] ?>"   />
         </div>
         <!-- form-field -->
         <div class="form-field w20" id="row-number">
             <label for="number">Número:</label>
-            <input type="text" name="number" id="number" value="<?= $info['number'] ?>" required  />
+            <input type="text" name="number" id="number" value="<?= $info['number'] ?>"   />
         </div>
         <!-- form-field -->
     </div>
@@ -67,24 +67,37 @@
         <!-- form-field -->
         <div class="form-field w25">
             <label for="cidade">Cidade:</label>
-            <input type="text" name="city" id="cidade" value="<?= $info['city'] ?>" required  />
+            <input type="text" name="city" id="cidade" value="<?= $info['city'] ?>"   />
         </div>
         <!-- form-field -->
         <div class="form-field w25">
             <label for="complement">Complemento:</label>
-            <input type="text" name="complement" id="complement" value="<?= $info['complement'] ?>"required  />
+            <input type="text" name="complement" id="complement" value="<?= $info['complement'] ?>"  />
         </div>
         <!-- form-field -->
 
         <div class="form-field w25">
             <label for="uf">Estado:</label>
-            <input type="text" name="state" id="uf" value="<?= $info['state'] ?>" required  />
+            <input type="text" name="state" id="uf" value="<?= $info['state'] ?>"   />
         </div>
         <!-- form-field -->
     </div>
     <!-- form-row -->
 
-    <button type="submit" class="btn btn-edit btn-lg"><i class="fas fa-plus"></i> Editar Cliente</button>
+    <div class="form-row">
+        <div class="form-field w50">
+            <label for="category">Categoria:</label>
+            <input type="text" name="category" id="category" value="<?= $info['category'] ?>"   />
+        </div>
+        <!-- form-field -->
+    </div>
+
+    <br />
+
+    <div class="form-row">
+        <button type="submit" class="btn btn-edit btn-lg"><i class="fas fa-plus"></i> Editar Cliente</button>
+    </div>
+
  
 </form>
 <!-- form -->

@@ -2,9 +2,13 @@
 
 namespace Models;
 use Core\Model;
+use Database\Database;
 
 class Customer extends Model
 {
+
+    private \PDO $db;
+
     private $id;
     private $name;
     private $cpf;
@@ -16,7 +20,13 @@ class Customer extends Model
     private $district;
     private $city;
     private $state;
+    private $category;
     private $companyId;
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
 
     /* GETTERS AND SETTERS */
 
@@ -72,7 +82,7 @@ class Customer extends Model
 
     public function getZipCode()
     {
-        return $this->zipcode;
+        return $this->zipCode;
     }
 
     public function setZipCode($zipCode)
@@ -140,6 +150,16 @@ class Customer extends Model
         $this->companyId = $companyId;
     }
 
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function setCategory($category) 
+    {
+        $this->category = $category;
+    }
+
     /* GETTERS AND SETTERS */
     public function getCustomers($s = '')
     {
@@ -147,7 +167,7 @@ class Customer extends Model
 
         if (! empty($s)) {
 
-            $sql = 'SELECT * FROM customers WHERE cpf LIKE :cpf OR name LIKE :name';
+            $sql = 'SELECT * FROM customers WHERE cpf LIKE :cpf OR name LIKE :name AND soft_delete = 0';
             $sql = $this->db->prepare($sql);
             $sql->bindValue(':cpf',  "%" .$s . "%");
             $sql->bindValue(':name', '%'.$s.'%');
@@ -180,10 +200,11 @@ class Customer extends Model
         $district,
         $city,
         $complement,
-        $state
+        $state,
+        $category
     )
     {
-        $sql = 'INSERT INTO customers (name, rg, cpf, email, cellphone, phone, zipcode, street, number, district, city, complement, state) VALUES (:name, :rg, :cpf, :email, :cellphone, :phone, :zipcode, :street, :number, :district, :city, :complement, :state)';
+        $sql = 'INSERT INTO customers (name, rg, cpf, email, cellphone, phone, zipcode, street, number, district, city, complement, state, category) VALUES (:name, :rg, :cpf, :email, :cellphone, :phone, :zipcode, :street, :number, :district, :city, :complement, :state, :category)';
 
         $sql = $this->db->prepare($sql);
 
@@ -200,62 +221,10 @@ class Customer extends Model
         $sql->bindValue(':city'      , $city       );
         $sql->bindValue(':complement', $complement );
         $sql->bindValue(':state'     , $state      );
+        $sql->bindValue(':category'  , $category   );
 
         return $sql->execute();
 
-    }
-
-    public function getProduct($id)
-    {
-        $array = array();
-        $sql = 'SELECT * FROM products WHERE id = :id';
-        $sql = $this->db->prepare($sql);
-        $sql->bindValue(':id', $id);
-
-        $sql->execute();
-
-        if ($sql->rowCount() > 0) {
-            $array = $sql->fetch();
-        }
-
-        return $array;
-    }
-
-    public function editProduct(
-        $cod, 
-        $name, 
-        $price, 
-        $quantity, 
-        $minQuantity, 
-        $id
-    )
-    {
-        $sql = 'UPDATE products SET cod = :cod, name = :name, price = :price, quantity = :quantity, min_quantity = :min_quantity WHERE id = :id';
-
-        $sql = $this->db->prepare($sql);
-
-        $sql->bindValue(':cod'         , $cod        );
-        $sql->bindValue(':name'        , $name       );
-        $sql->bindValue(':price'       , $price      );
-        $sql->bindValue(':quantity'    , $quantity   );
-        $sql->bindValue(':min_quantity', $minQuantity);
-        $sql->bindValue(':id'          , $id         );
-
-        $sql->execute();
-    }
-
-    public function getLowQuantityProducts()
-    {
-        $array = array();
-
-        $sql = 'SELECT * FROM products WHERE quantity < min_quantity';
-        $sql = $this->db->query($sql);
-
-        if ($sql->rowCount() > 0) {
-            $array = $sql->fetchAll();
-        }
-
-        return $array;
     }
 
     public function deleteCustomer($id)
@@ -283,6 +252,47 @@ class Customer extends Model
         }
 
         return $array;
+    }
+
+    public function editCostumer(
+        $name,
+        $rg,
+        $cpf,
+        $email,
+        $cellphone,
+        $phone,
+        $zipcode,
+        $street,
+        $number,
+        $district,
+        $city,
+        $complement,
+        $state,
+        $category,
+        $id
+    )
+    {
+        $sql = 'UPDATE customers SET name = :name, name = :name, rg = :rg, cpf = :cpf, email = :email, cellphone = :cellphone, phone = :phone, zipcode = :zipcode, street = :street, number = :number, district = :district, city = :city, complement = :complement, state = :state, category = :category WHERE id = :id';
+
+        $sql = $this->db->prepare($sql);
+
+        $sql->bindValue(':name'      , $name      );
+        $sql->bindValue(':rg'        , $rg        );
+        $sql->bindValue(':cpf'       , $cpf       );
+        $sql->bindValue(':email'     , $email     );
+        $sql->bindValue(':cellphone' , $cellphone );
+        $sql->bindValue(':phone'     , $phone     );
+        $sql->bindValue(':zipcode'   , $zipcode   );
+        $sql->bindValue(':street'    , $street    );
+        $sql->bindValue(':number'    , $number    );
+        $sql->bindValue(':district'  , $district  );
+        $sql->bindValue(':city'      , $city      );
+        $sql->bindValue(':complement', $complement);
+        $sql->bindValue(':state'     , $state     );
+        $sql->bindValue(':category'  , $category  );
+        $sql->bindValue(':id'        , $id        );
+
+        return $sql->execute();
     }
 
 }

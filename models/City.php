@@ -2,9 +2,17 @@
 
 namespace Models;
 use Core\Model;
+use Database\Database;
 
 class City extends Model 
 {
+
+    private \PDO $db;
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
 
     public function getCities($s = '')
     {
