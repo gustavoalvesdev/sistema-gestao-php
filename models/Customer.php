@@ -4,7 +4,7 @@ namespace Models;
 use Core\Model;
 use Database\Database;
 
-class Customer extends Model
+class Customer
 {
 
     private \PDO $db;

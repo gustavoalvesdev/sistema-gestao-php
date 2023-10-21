@@ -5,7 +5,7 @@ namespace Models;
 use Core\Model;
 use Database\Database;
 
-class Provider extends Model
+class Provider
 {
 
     private \PDO $db;

@@ -4,7 +4,7 @@ namespace Models;
 use Core\Model;
 use Database\Database;
 
-class Product extends Model
+class Product
 {
 
     private \PDO $db;

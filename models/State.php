@@ -4,7 +4,7 @@ namespace Models;
 use Core\Model;
 use Database\Database;
 
-class State extends Model 
+class State
 {
 
     private \PDO $db;

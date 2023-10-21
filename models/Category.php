@@ -5,7 +5,7 @@ namespace Models;
 use Core\Model;
 use Database\Database;
 
-class Category extends Model 
+class Category
 {   
     private \PDO $db;
 
