@@ -8,14 +8,3 @@ $dotenv = new Dotenv();
 $dotenv->load(__DIR__ . '/.env');
 
 define('BASE_URL', 'http://localhost/sistema-gestao-php/');
-
-global $db;
-
-try {
-
-    $db = new PDO('mysql:host='. $_SERVER['DB_HOST'] .';dbname='. $_SERVER['DB_NAME'] , $_SERVER['DB_USER'], $_SERVER['DB_PASS']); 
-
-} catch(PDOException $e) {
-    echo 'ERRO: ' . $e->getMessage();
-    exit;
-}
