@@ -7,6 +7,11 @@
             "Database\\": "database/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "require": {
         "symfony/dotenv": "^6.2"
     },
