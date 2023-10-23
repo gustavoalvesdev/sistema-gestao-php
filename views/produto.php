@@ -12,6 +12,8 @@
 <br /><br />
 <a class="btn btn-add btn-lg" href="<?= BASE_URL.'produto/add' ?>"><i class="fas fa-plus"></i> Adicionar Produto</a>
 
+<p style="color:white"><a href="<?= BASE_URL ?>" style="color:white">Home</a> / Produtos</p>
+
 <form method="GET" class="form-busca">
     <br /><br />
     <fieldset style="background-color: white">

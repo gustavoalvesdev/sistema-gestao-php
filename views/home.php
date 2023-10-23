@@ -9,6 +9,8 @@ body {
 
 <h1 style="color: white">SGI - Sistema de Gestão Interno</h1>
 
+<p style="color:white">Home</p>
+
 <div class="cards-container">
 
     <a href="<?= BASE_URL ?>produto">

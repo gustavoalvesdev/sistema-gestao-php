@@ -1,5 +1,7 @@
 <h1>Adicionar Produto</h1>
 
+<p style="color:black"><a href="<?= BASE_URL ?>" style="color:black">Home</a> / <a href="<?= BASE_URL ?>produto" style="color:black">Produtos</a> / Adicionar Produto</p>
+
 <form method="POST" class="form">
 
     Código de Barras:<br />
