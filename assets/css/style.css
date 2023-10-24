@@ -173,6 +173,8 @@ table a:hover {
 .form input[type=url],
 .form input[type=phone],
 .form input[type=number],
+.form input[type=password],
+.form input[type=date],
 .form input[type=email],
 .form select,
 .form textarea {
