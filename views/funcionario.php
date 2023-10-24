@@ -9,16 +9,16 @@
     }
 </style>
 
-<br /><br />
+<h1 style="color: white">Lista de Funcionários</h1>
 
-<h1 style="color: white">Lista de Clientes</h1>
+<p style="margin: 30px 0;"><a class="btn btn-add btn-lg" href="<?= BASE_URL.'funcionario/add' ?>"><i class="fas fa-plus"></i> Adicionar Funcionário</a></p>
 
-<a class="btn btn-add btn-lg" href="<?= BASE_URL.'cliente/add' ?>"><i class="fas fa-plus"></i> Adicionar Cliente</a>
+<p style="color:white"><a href="<?= BASE_URL ?>" style="color:white">Home</a> / Funcionários</p>
 
 <form method="GET" class="form-busca">
     <br /><br />
     <fieldset style="background-color: white">
-        <input type="text" id="busca" name="busca" value="<?= ($_GET['busca']) ?? ''; ?>" placeholder="Digite o CPF ou o nome do cliente" style="width:100%; height:40px; font-size: 18px" />
+        <input type="text" id="busca" name="busca" value="<?= ($_GET['busca']) ?? ''; ?>" placeholder="Digite o CPF ou o nome do funcionário" style="width:100%; height:40px; font-size: 18px" />
         <!-- busca -->
     </fieldset>
 </form>
@@ -29,6 +29,7 @@
         <th>Nome</th>
         <th>Celular</th>
         <th>Telefone</th>
+        <th>Nível</th>
         <th>Ações</th>
     </tr>
     <?php foreach($list as $item): ?>
@@ -37,6 +38,7 @@
             <td><?= mb_strtoupper($item['name'], "utf8") ?></td>
             <td><?= $item['cellphone'] ?></td>
             <td><?= $item['phone'] ?></td>
+            <td><?= $item['access_level'] ?></td>
             <td>
                 <a class="btn btn-edit" href="<?= BASE_URL ?>cliente/edit/<?= $item['id'] ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
 

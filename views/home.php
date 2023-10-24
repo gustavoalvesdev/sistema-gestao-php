@@ -41,6 +41,13 @@ body {
         <!-- card -->
     </a>
 
+    <a href="<?= BASE_URL ?>funcionario">
+        <div class="card" style="background-color: #5D7C89">
+            <p><strong><i class="fas fa-users"></i><br /> Funcionários</strong></p>
+        </div>
+        <!-- card -->
+    </a>
+
     <div class="card" style="background-color: #7A5449">
         <p><strong><i class="fas fa-cash-register"></i><br /> Vendas</strong></p>
     </div>

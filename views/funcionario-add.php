@@ -1,5 +1,7 @@
 <h1>Adicionar Funcionário</h1>
 
+<p style="color:black"><a href="<?= BASE_URL ?>" style="color:black">Home</a> / <a href="<?= BASE_URL ?>funcionario" style="color:black">Funcionários</a> / Adicionar Funcionário</p>
+
 <form method="POST" class="form">
 
     <div class="form-row">

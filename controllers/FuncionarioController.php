@@ -24,7 +24,19 @@ class FuncionarioController extends Controller
 
     public function index()
     {
+        $s = '';
 
+        if (! empty($_GET['busca'])) {
+
+            $s = trim($_GET['busca']);
+
+        }
+
+        //$f = new Funcionario();
+
+        $this->data['list'] = [];
+
+        $this->loadView('funcionario', $this->data);
     }
 
     public function add()
