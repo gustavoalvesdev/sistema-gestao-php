@@ -101,7 +101,7 @@ class Funcionario
 
     public function setSenha(string $senha): void
     {
-        $this->senha = $senha;
+        $this->senha = md5($senha);
     }
 
     public function getCargo(): string
