@@ -4,7 +4,8 @@
             "Core\\": "core/",
             "Controllers\\": "controllers/",
             "Models\\": "models/",
-            "Database\\": "database/"
+            "Database\\": "database/",
+            "DAO\\": "dao"
         }
     },
     "autoload-dev": {
