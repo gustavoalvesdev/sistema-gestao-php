@@ -110,7 +110,7 @@
     <!-- form-row -->
     <br>
     <div class="form-row">
-        <button type="submit" class="btn btn-add btn-lg"><i class="fas fa-plus"></i> Adicionar Cliente</button>
+        <button type="submit" class="btn btn-add btn-lg"><i class="fas fa-plus"></i> Adicionar Funcionário</button>
     </div>
     <!-- form-row -->
  
