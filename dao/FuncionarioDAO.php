@@ -10,14 +10,14 @@ class FuncionarioDAO
 
     private \PDO $db;
 
-    public function __construct()
+    public function __construct(\PDO $connection)
     {
-        $this->db = Database::getInstance();
+        $this->db = $connection;
     }
 
     public function add(Funcionario $f): bool
     {
-        $sql = 'INSERT INTO workers (nome, rg, cpf, email, senha, cargo, nivel_acesso celular, telefone, cep, endereco, numero, bairro, cidade, complemento, estado) VALUES (:nome, :rg, :cpf, :email, :senha, :cargo, :nivel_acesso. :celular, :telefone, :cep, :endereco, :numero, :bairro, :cidade, :complemento, :estado)';
+        $sql = 'INSERT INTO workers (nome, rg, cpf, email, senha, cargo, nivel_acesso, celular, telefone, cep, endereco, numero, bairro, cidade, complemento, estado) VALUES (:nome, :rg, :cpf, :email, :senha, :cargo, :nivel_acesso, :celular, :telefone, :cep, :endereco, :numero, :bairro, :cidade, :complemento, :estado)';
 
         $sql = $this->db->prepare($sql);
 
