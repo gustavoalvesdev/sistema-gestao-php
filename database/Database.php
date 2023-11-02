@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Database;
 
-use Database\Interfaces\DatabaseInterface;
-
-final class Database implements DatabaseInterface
+class Database 
 {
 
     private static ?\PDO $instance = null;
