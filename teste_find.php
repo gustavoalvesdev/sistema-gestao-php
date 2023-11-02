@@ -1,7 +1,7 @@
 <?php
 
 use DAO\ProductDAO;
-use Database\Database;
+use Database\MySQLDatabase;
 use Models\Product;
 
 require 'config.php';
@@ -18,10 +18,10 @@ $product->categoryId    = 1;
 $product->subCategoryId = 1;
 $product->companyId     = 1;
 $product->softDelete    = 0;
-$product->id = 87;
+$product->id = 18;
 
 $dao = new ProductDAO;
 
-$dao->getConnection(Database::getInstance());
+$dao->getConnection(new MySQLDatabase());
 
 print($dao->save($product));

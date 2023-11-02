@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace DAO;
 
+use Database\Database;
+use Database\Interfaces\DatabaseInterface;
 use Models\Product;
 use PDO;
 
 class ProductDAO
 {
 
-    private static $conn;
+    private static PDO $conn;
 
-    public static function getConnection(PDO $conn): void
+    public static function getConnection(DatabaseInterface $db): void
     {
-        self::$conn = $conn;
+        self::$conn = $db::getInstance();
     }
 
     public function find(int $id): Product
