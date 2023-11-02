@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DAO;
 
-use Database\Database;
 use Database\Interfaces\DatabaseInterface;
 use Models\Product;
 use PDO;
