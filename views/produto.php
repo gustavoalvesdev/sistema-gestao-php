@@ -29,17 +29,17 @@
         <th>Qtd.</th>
         <th>Ações</th>
     </tr>
-    <?php foreach($list as $item): ?>
+    <?php foreach($list as $product): ?>
 
         <tr style="background-color: white; border: 1px solid #4052AE;">
-            <td><?= $item['cod'] ?></td>
-            <td><?= mb_strtoupper($item['name']); ?></td>
-            <td>R$ <?= number_format($item['price'], 2, ',', '.') ?></td>
-            <td><?= $item['quantity'] ?></td>
+            <td><?= $product->cod ?></td>
+            <td><?= mb_strtoupper($product->name); ?></td>
+            <td>R$ <?= number_format($product->price, 2, ',', '.') ?></td>
+            <td><?= $product->quantity ?></td>
             <td>
-                <a class="btn btn-edit" href="<?= BASE_URL ?>produto/edit/<?= $item['id'] ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
+                <a class="btn btn-edit" href="<?= BASE_URL ?>produto/edit/<?= $product->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
 
-                <a class="btn btn-delete" href="<?= BASE_URL ?>produto/delete/<?= $item['id'] ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
+                <a class="btn btn-delete" href="<?= BASE_URL ?>produto/delete/<?= $product->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
             </td>
         </tr>
 

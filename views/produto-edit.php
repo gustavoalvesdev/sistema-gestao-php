@@ -3,10 +3,10 @@
 <form method="POST" class="form">
 
     Código de Barras:<br />
-    <input type="text" name="cod" required value="<?= $info['cod'] ?>" /><br /><br />
+    <input type="text" name="cod" required value="<?= $product->cod ?>" /><br /><br />
 
     Nome do Produto:<br />
-    <input type="text" name="name" required value="<?= $info['name'] ?>" /><br /><br />
+    <input type="text" name="name" required value="<?= $product->name ?>" /><br /><br />
 
     Categoria:<br />
     <select name="category_id" id="category">
