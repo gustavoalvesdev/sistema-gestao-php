@@ -2,8 +2,11 @@
 
 namespace Controllers;
 use Core\Controller;
+use DAO\CategoryDAO;
 use DAO\ProductDAO;
+use DAO\SubcategoryDAO;
 use Database\Database;
+use Database\MySQLDatabase;
 use Models\User;
 use Models\Product;
 use Models\Category;
@@ -37,16 +40,16 @@ class ProdutoController extends Controller
 
         $p = new ProductDAO();
 
-        $p->getConnection(Database::getInstance());
+        $p->getConnection(new MySQLDatabase);
 
         $s = '';
 
         if (! empty($_GET['busca'])) {
 
             $s = trim($_GET['busca']);
-            $this->data['list'] = $p->all("name LIKE '%$s%' OR cod LIKE '%$s%'");
+            $this->data['list'] = $p->all("soft_delete = 0 AND name LIKE '%$s%' OR cod LIKE '%$s%'");
         } else {
-            $this->data['list'] = $p->all();
+            $this->data['list'] = $p->all("soft_delete = 0");
         }
 
         
@@ -59,11 +62,10 @@ class ProdutoController extends Controller
 
         $product = new Product();
 
-        $c = new Category();
+        $categoryDao = new CategoryDAO();
+        $categoryDao->getConnection(new MySQLDatabase);
 
-        $s = '';
-
-        $this->data['list'] = $c->getCategories($s);
+        $this->data['list'] = $categoryDao->all();
 
         if (! empty($_POST['cod'])) {
 
@@ -72,15 +74,18 @@ class ProdutoController extends Controller
             $price = str_replace('.', '' , $_POST['price']);
             $price = str_replace(',', '.', $price);
             $product->price         = floatval($price);
-            $product->quantity      = intval($_POST['quantity']);
-            $product->minQuantity   = intval($_POST['min_quantity']);
-            $product->categoryId    = intval($_POST['category_id'   ]);
-            $product->subCategoryId = intval($_POST['subcategory_id']);
-            $product->companyId = 1;
-            $product->softDelete = 1;
+            $quantity = str_replace('.', '', $_POST['quantity']);
+            $quantity = str_replace(',', '.', $quantity);
+            $product->quantity      = floatval($quantity);
+            $min_quantity   = str_replace('.', '', $_POST['min_quantity']);
+            $min_quantity = str_replace(',', '.', $min_quantity);
+            $product->min_quantity = floatval($min_quantity);
+            $product->category_id    = intval($_POST['category_id'   ]);
+            $product->subcategory_id = intval($_POST['subcategory_id']);
+            $product->company_id = 1;
 
             $dao = new ProductDAO;
-            $dao->getConnection($this->conn);
+            $dao->getConnection(new MySQLDatabase);
 
             $dao->save($product);
 
@@ -92,46 +97,62 @@ class ProdutoController extends Controller
     }
 
     public function edit($id)
-    {
-        $this->data = array('info' => '');
+    {    
+        $productDao = new ProductDAO();
 
-        $product = new Product();
+        $productDao->getConnection(new MySQLDatabase);
 
-        $dao = new ProductDAO;
-        $dao->getConnection($this->conn);
+        $product = $productDao->find($id);
 
-        if (! empty($_POST['cod'])) {
+        $categoryDao = new CategoryDAO();
 
-            $product = new Product;
+        $categoryDao->getConnection(new MySQLDatabase);
 
-            $product->cod         = addslashes($_POST['cod'           ]);
-            $product->name        = addslashes($_POST['name'          ]);
+        $categories = $categoryDao->all();
+
+        $subcategories = new SubcategoryDAO();
+        $subcategories->getConnection(new MySQLDatabase);
+
+        $subcategories = $subcategories->all();
+
+        $this->data['product'] = $product;
+        $this->data['categories'] = $categories;
+        $this->data['subcategories'] = $subcategories;
+
+        if (isset($_POST['cod'])) {
+
+            $productToEdit = new Product();
+            $productToEdit->cod = addslashes($_POST['cod']);
+            $productToEdit->name = addslashes($_POST['name']);
             $price = str_replace('.', '' , $_POST['price']);
             $price = str_replace(',', '.', $price);
-            $product->price         = floatval($price);
-            $product->quantity    = intval(addslashes($_POST['quantity'      ]));
-            $product->minQuantity = intval(addslashes($_POST['min_quantity'  ]));
-            $product->categoryId    = intval(addslashes($_POST['category_id'   ]));
-            $product->subCategoryId = intval(addslashes($_POST['subcategory_id']));
-            $product->id = $id;
-
+            $productToEdit->price = floatval($price);
+            $quantity = str_replace('.', '', $_POST['quantity']);
+            $quantity = str_replace(',', '.', $quantity);
+            $productToEdit->quantity      = floatval($quantity);
+            $min_quantity   = str_replace('.', '', $_POST['min_quantity']);
+            $min_quantity = str_replace(',', '.', $min_quantity);
+            $productToEdit->min_quantity = floatval($min_quantity);
             
+            $productToEdit->company_id = $product->company_id;
+            
+            if (!isset($_POST['subcategory_id']) || $_POST['subcategory_id'] === '0') {
+                $productToEdit->category_id = $product->category_id;
+                $productToEdit->subcategory_id = $product->subcategory_id;
+            } else {
+                $productToEdit->category_id = addslashes($_POST['category_id']);
+                $productToEdit->subcategory_id = addslashes($_POST['subcategory_id']);
+            }
 
-            $dao->save($product);
+            $productToEdit->id = $id;
 
-            header('Location: '.BASE_URL.'produto');
+            $productDao->save($productToEdit);
+
+            header('Location: ' . BASE_URL . 'produto');
+            exit;
+
         }
 
-        $product = $dao->all("id = $id")[0];
-
-        $c = new Category();
-        $category = $c->getCategoryName($product->categoryId);
-
-        $sub = new Subcategory();
-        $subcategories = $sub->getSubcategories($product->categoryId);
-
-        $this->data['subcategories'] = $subcategories;
-        $this->data['product'] = $product;
         
         $this->loadView('produto-edit', $this->data);
     }
@@ -139,12 +160,12 @@ class ProdutoController extends Controller
     public function delete($id)
     {
         
-        $p = new Product();
+        $productDao = new ProductDAO();
+        $productDao->getConnection(new MySQLDatabase);
 
         if (! empty($id)) {
 
-            $name = addslashes($id);
-            $p->deleteProduct($id);
+            $productDao->delete($id);
         }
 
         header('Location: '.BASE_URL.'produto');

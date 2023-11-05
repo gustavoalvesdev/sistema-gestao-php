@@ -8,7 +8,9 @@
 </style>
 
 <br /><br />
-<a class="btn btn-add btn-lg" href="<?= BASE_URL ?>categoria/add"><i class="fas fa-plus"></i> Adicionar Categoria</a>
+<p style="margin: 30px 0;"><a class="btn btn-add btn-lg" href="<?= BASE_URL.'categoria/add' ?>"><i class="fas fa-plus"></i> Adicionar Categoria</a></p>
+
+<p style="color:#333"><a href="<?= BASE_URL ?>" style="color:#333">Home</a> / Categorias</p>
 
 <form method="GET" class="form-busca">
     <br /><br />
@@ -25,18 +27,18 @@
         <th>Nome</th>
         <th>Ações</th>
     </tr>
-    <?php foreach($list as $item): ?>
+    <?php foreach($categories as $category): ?>
         <tr style="background-color: white; border: 1px solid #4052AE;">
-            <td><?= $item['id'] ?></td>
-            <td><?= mb_strtoupper($item['name']); ?></td>
+            <td><?= $category->id ?></td>
+            <td><?= mb_strtoupper($category->name); ?></td>
             <td>
-                <a class="btn btn-edit" href="<?= BASE_URL ?>categoria/edit/<?= $item['id'] ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
+                <a class="btn btn-edit" href="<?= BASE_URL ?>categoria/edit/<?= $category->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
                 
-                <a class="btn btn-delete" href="<?= BASE_URL ?>categoria/delete/<?= $item['id'] ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
+                <a class="btn btn-delete" href="<?= BASE_URL ?>categoria/delete/<?= $category->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
 
-                <a class="btn btn-add" href="<?= BASE_URL ?>subcategoria/add/<?= $item['id'] ?>"><i class="fas fa-plus"></i>Subcategoria</a>
+                <a class="btn btn-add" href="<?= BASE_URL ?>subcategoria/add/<?= $category->id ?>"><i class="fas fa-plus"></i>Subcategoria</a>
 
-                <a class="btn btn-primary" href="<?= BASE_URL ?>subcategoria/view/<?= $item['id'] ?>"><i class="fas fa-eye"></i>Subcategorias</a>
+                <a class="btn btn-primary" href="<?= BASE_URL ?>subcategoria/view/<?= $category->id ?>"><i class="fas fa-eye"></i>Subcategorias</a>
             </td>
         </tr>
     <?php endforeach; ?>

@@ -46,6 +46,14 @@ class ProductDAO
         return $result->fetchAll(PDO::FETCH_CLASS, Product::class);
     }
 
+    public function delete(int $id): bool
+    {
+        $sql = "UPDATE products SET soft_delete = 1 WHERE id = :id";
+        $sql = self::$conn->prepare($sql);
+        $sql->bindValue(':id', $id);
+        return $sql->execute();
+    }
+
     public function save(Product $product): bool
     {
         $sql = "INSERT INTO products (cod, name, price, quantity, min_quantity, category_id, subcategory_id, company_id, soft_delete) VALUES (:cod, :name, :price, :quantity, :min_quantity, :category_id, :subcategory_id, :company_id, :soft_delete)";
@@ -56,11 +64,11 @@ class ProductDAO
             $sql->bindValue(':name', $product->name);
             $sql->bindValue(':price', $product->price);
             $sql->bindValue(':quantity', $product->quantity);
-            $sql->bindValue(':min_quantity', $product->minQuantity);
-            $sql->bindValue(':category_id', $product->categoryId);
-            $sql->bindValue(':subcategory_id', $product->subCategoryId);
-            $sql->bindValue(':company_id', $product->companyId);
-            $sql->bindValue(':soft_delete', $product->softDelete);
+            $sql->bindValue(':min_quantity', $product->min_quantity);
+            $sql->bindValue(':category_id', $product->category_id);
+            $sql->bindValue(':subcategory_id', $product->subcategory_id);
+            $sql->bindValue(':company_id', $product->company_id);
+            $sql->bindValue(':soft_delete', $product->soft_delete ?? 0);
         } else {
             $sql = "UPDATE products SET cod = :cod, name = :name, price = :price, quantity = :quantity, min_quantity = :min_quantity, category_id = :category_id, subcategory_id = :subcategory_id, company_id = :company_id, soft_delete = :soft_delete WHERE id = :id";
 
@@ -69,11 +77,11 @@ class ProductDAO
             $sql->bindValue(':name', $product->name);
             $sql->bindValue(':price', $product->price);
             $sql->bindValue(':quantity', $product->quantity);
-            $sql->bindValue(':min_quantity', $product->minQuantity);
-            $sql->bindValue(':category_id', $product->categoryId);
-            $sql->bindValue(':subcategory_id', $product->subCategoryId);
-            $sql->bindValue(':company_id', $product->companyId);
-            $sql->bindValue(':soft_delete', $product->softDelete);
+            $sql->bindValue(':min_quantity', $product->min_quantity);
+            $sql->bindValue(':category_id', $product->category_id);
+            $sql->bindValue(':subcategory_id', $product->subcategory_id);
+            $sql->bindValue(':company_id', $product->company_id);
+            $sql->bindValue(':soft_delete', $product->soft_delete ?? 0);
             $sql->bindValue(':id', $product->id);
         }
 

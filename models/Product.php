@@ -11,11 +11,11 @@ class Product
     public string $name;
     public float $price;
     public float $quantity;
-    public float $minQuantity;
-    public int $categoryId;
-    public int $subCategoryId;
-    public int $companyId;
-    public int $softDelete;
+    public float $min_quantity;
+    public int $category_id;
+    public int $subcategory_id;
+    public int $company_id;
+    public int $soft_delete;
 
     public function __construct() {}
 }

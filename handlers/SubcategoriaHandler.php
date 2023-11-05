@@ -15,9 +15,14 @@
 require '../config.php';
 require '../vendor/autoload.php';
 
+use DAO\SubcategoryDAO;
+use Database\MySQLDatabase;
 use Models\Subcategory;
 
-$objSubcategories = new Subcategory();
+$objSubcategories = new SubcategoryDAO();
+$objSubcategories->getConnection(new MySQLDatabase);
+
+$category_id = $_POST['category'];
 
 // Obtém as subcategorias para a categoria fornecida via POST
-echo json_encode($objSubcategories->getSubcategories($_POST['category']));
+echo json_encode($objSubcategories->all("category_id = {$category_id}"));

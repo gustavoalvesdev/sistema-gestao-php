@@ -4,37 +4,63 @@
 
 <form method="POST" class="form">
 
-    Código de Barras:<br />
-    <input type="text" name="cod" required /><br /><br />
+    <div class="form-row">
+        <div class="form-field w30">
+            <label for="cod">Código de Barras:</label>
+            <input type="text" name="cod" required />
+        </div>
+        <!-- form-field -->
+        <div class="form-field w70">
+            <label for="name">Nome:</label>
+            <input type="text" name="name" required />
+        </div>
+        <!-- form-field -->
+    </div>
+    <!-- form-row -->
 
-    Nome do Produto:<br />
-    <input type="text" name="name" required /><br /><br />
+    <div class="form-row">
+        <div class="form-field w50">
+            <label for="category_id">Categoria:</label>
+            <select name="category_id" id="category">
+                <option>SELECIONE A CATEGORIA</option>
+                <?php foreach($list as $item): ?>
+                    <option value="<?= $item->id ?>"><?= mb_strtoupper($item->name) ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <!-- form-field -->
+        <div class="form-field w50">
+            <label for="subcategory_id">Subcategoria:</label>
+            <select name="subcategory_id" id="subcategories" disabled>
+                <option value="0">SELECIONE A SUBCATEGORIA...</option>
+            </select>
+        </div>
+    </div>
+    <!-- form-row -->
 
-    Categoria:<br />
-    <select name="category_id" id="category">
-        <option>SELECIONE A CATEGORIA</option>
-        <?php foreach($list as $item): ?>
-            <option value="<?= $item['id'] ?>"><?= mb_strtoupper($item['name']) ?></option>
-        <?php endforeach; ?>
-    </select>
-    <br /><br />
+    <div class="form-row">
+        <div class="form-field w33">
+            <label for="price">Preço do Produto:</label>
+            <input type="text" name="price" placeholder="R$ " required />
+        </div>
+        <!-- form-field -->
+        <div class="form-field w33">
+            <label for="quantity">Quantidade:</label>   
+            <input type="text" name="quantity" required />       
+        </div>
+        <!-- form-field -->
+        <div class="form-field w33">
+            <label for="min_quantity">Qtd. Mínima:</label>    
+            <input type="text" name="min_quantity" required />    
+        </div>
+        <!-- form-field -->
+    </div>
+    <!-- form-row -->                
 
-    Subcategoria:<br />
-    <select name="subcategory_id" id="subcategories" disabled>
-        <option value="0">SELECIONE A SUBCATEGORIA...</option>
-    </select>
-    <br /><br />
-
-    Preço do Produto:<br />
-    <input type="text" name="price" required /><br /><br />
-
-    Quantidade:<br />
-    <input type="text" name="quantity" required /><br /><br />
-
-    Qtd. Mínima:<br />
-    <input type="text" name="min_quantity" required /><br /><br />
-
-    <button type="submit" class="btn btn-add btn-lg"><i class="fas fa-plus"></i> Adicionar Produto</button>
+    <div class="form-row">
+        <button type="submit" class="btn btn-add btn-lg"><i class="fas fa-plus"></i> Adicionar Produto</button>
+    </div>
+    <!-- form-row -->     
  
 </form>
 <!-- form -->

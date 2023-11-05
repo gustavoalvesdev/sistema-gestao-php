@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 25/10/2023 às 01:27
+-- Tempo de geração: 05/11/2023 às 21:03
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -30,19 +30,20 @@ SET time_zone = "+00:00";
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `compeny_id` int(11) NOT NULL
+  `compeny_id` int(11) NOT NULL,
+  `soft_delete` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Despejando dados para a tabela `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `compeny_id`) VALUES
-(1, 'PAPELARIA', 1),
-(2, 'BRINQUEDOS', 1),
-(3, 'PERFUMARIA', 1),
-(4, 'BEBIDAS', 1),
-(5, 'TESTE', 1);
+INSERT INTO `categories` (`id`, `name`, `compeny_id`, `soft_delete`) VALUES
+(1, 'PAPELARIA', 1, 0),
+(2, 'BRINQUEDOS', 1, 0),
+(3, 'PERFUMARIA', 1, 0),
+(4, 'BEBIDAS', 1, 0),
+(5, 'TESTE', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -170,21 +171,17 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `cod`, `name`, `price`, `quantity`, `min_quantity`, `category_id`, `subcategory_id`, `company_id`, `soft_delete`) VALUES
-(10, '7891360615194', 'Lápis de cor faber castell 12 cores', 2, 7, 3, 1, 1, 1, 1),
 (11, '7891360507048', 'giz de cera faber castell c/ 15 cores', 14, 18, 10, 1, 1, 1, 1),
-(12, '7897629204543', 'lapiseira 0.9 técnica', 11, 35, 35, 1, 1, 1, 1),
-(13, '7896342411092', 'borracha branca mercur', 7, 25, 20, 1, 2, 1, 1),
-(14, '121212', 'Sem Subcategoria', 12, 451, 12, 1, 0, 1, 1),
+(12, '7897629204543', 'lapiseira 0.9 técnica', 11, 35, 35, 1, 1, 1, 0),
+(13, '7896342411092', 'borracha branca mercur', 7, 25, 20, 1, 2, 1, 0),
+(14, '121212', 'Sem Subcategoria', 12, 451, 12, 1, 0, 1, 0),
 (15, '12121', 'Teste Decimal', 1, 45, 45, 4, 9, 1, 1),
-(16, '3232', 'Mais decimal', 12, 12, 3, 2, 5, 1, 1),
+(16, '3232', 'Mais decimal', 12, 12, 3, 2, 5, 1, 0),
 (17, '23423432', 'TESTE NAMESPACE FINAL', 12, 43, 32, 5, 11, 1, 1),
-(18, '32323', 'ACTIVE RECORD', 12, 12, 12, 2, 6, 1, 1),
-(19, '23242', 'VÍRGULA', 12.24, 12, 5, 2, 6, 1, 1),
-(20, '534532', 'VINTE E CINCO', 12.25, 12, 12, 5, 11, 1, 1),
-(21, '234532', 'CASA DOS MIL', 1325.58, 12, 12, 3, 8, 1, 1),
-(22, '2920481821019', 'Bonca da Barbie 2023', 25, 18, 15, 2, 5, 0, 1),
-(23, '353342', 'Barra de Chocolate Arcor', 35, 26, 12, 5, 11, 0, 1),
-(24, '12121', 'Outro', 12.25, 15, 12, 3, 7, 0, 0);
+(20, '534532', 'VINTE E CINCO', 12.25, 12, 12, 5, 11, 1, 0),
+(21, '234532', 'CASA DOS MIL', 1325.58, 12, 12, 3, 8, 1, 0),
+(22, '2920481821019', 'Bonca da Barbie 2023', 25, 18, 15, 2, 5, 0, 0),
+(24, '12121', 'Outro', 12.25, 15, 12, 3, 7, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -305,7 +302,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_number`, `user_email`, `user_pass`, `user_token`, `company_id`) VALUES
-(1, 123, 'gustavoalvesdasilva@outlook.com', '81dc9bdb52d04dc20036dbd8313ed055', '7868d2968beb437ae1d1a7f9cdb41b47', 1);
+(1, 123, 'gustavoalvesdasilva@outlook.com', '81dc9bdb52d04dc20036dbd8313ed055', '00534b9fdfb9c3adea28eadfb5e5c841', 1);
 
 -- --------------------------------------------------------
 

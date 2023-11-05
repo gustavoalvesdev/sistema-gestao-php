@@ -3,6 +3,8 @@
 namespace Controllers;
 
 use Core\Controller;
+use DAO\CategoryDAO;
+use Database\MySQLDatabase;
 use Models\User;
 use Models\Category;
 
@@ -50,15 +52,18 @@ class CategoriaController extends Controller
     {
         $data = array();
 
-        $c = new Category();
+        $c = new CategoryDAO();
+        $c->getConnection(new MySQLDatabase);
 
         $s = '';
 
         if (! empty($_GET['busca'])) {
             $s = trim($_GET['busca']);
+            $data['categories'] = $c->all("name = '{$s}' AND soft_delete = 0");
+        } else {
+            $data['categories'] = $c->all("soft_delete = 0");
         }
 
-        $data['list'] = $c->getCategories($s);
 
         $this->loadView('categoria', $data);
     }
@@ -78,14 +83,26 @@ class CategoriaController extends Controller
 
     }
 
+    public function edit(int $id)
+    {
+        $categoriaDao = new CategoryDAO();
+        $categoriaDao->getConnection(new MySQLDatabase);
+
+        $categoria = $categoriaDao->find($id);
+
+        $this->data['category'] = $categoria;
+
+        $this->loadView('categoria-edit', $this->data);
+
+    }
+
     public function delete($id)
     {
-        $c = new Category();
+        $c = new CategoryDAO();
+        $c->getConnection(new MySQLDatabase);
 
         if (! empty($id)) {
-
-            $name = addslashes($id);
-            $c->deleteCategory($id);
+            $c->delete($id);
         }
 
         header('Location: '.BASE_URL.'categoria');
