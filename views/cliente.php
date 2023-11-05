@@ -11,9 +11,9 @@
 
 <br /><br />
 
-<h1 style="color: white">Lista de Clientes</h1>
+<p style="margin: 30px 0;"><a class="btn btn-add btn-lg" href="<?= BASE_URL.'cliente/add' ?>"><i class="fas fa-plus"></i> Adicionar Cliente</a></p>
 
-<a class="btn btn-add btn-lg" href="<?= BASE_URL.'cliente/add' ?>"><i class="fas fa-plus"></i> Adicionar Cliente</a>
+<p style="color:white"><a href="<?= BASE_URL ?>" style="color:white">Home</a> / Clientes</p>
 
 <form method="GET" class="form-busca">
     <br /><br />

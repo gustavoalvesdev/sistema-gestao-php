@@ -40,7 +40,7 @@
             <td>
                 <a class="btn btn-edit" href="<?= BASE_URL ?>produto/edit/<?= $product->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
 
-                <a class="btn btn-delete" href="<?= BASE_URL ?>produto/delete/<?= $product->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
+                <a onclick="return confirm('Tem certeza que deseja excluir este produto?')" class="btn btn-delete" href="<?= BASE_URL ?>produto/delete/<?= $product->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
             </td>
         </tr>
 
