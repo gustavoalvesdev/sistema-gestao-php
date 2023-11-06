@@ -99,15 +99,7 @@
             <!-- form-field -->
         </div>
         <!-- form-row -->
-    
-        <div class="form-row">
-            <div class="form-field w50">
-                <label for="category">Categoria:</label>
-                <input type="text" name="category" id="category"   />
-            </div>
-            <!-- form-field -->
-        </div>
-        <!-- form-row -->
+
         <br>
         <div class="form-row">
             <button type="submit" class="btn btn-add btn-lg"><i class="fas fa-plus"></i> Adicionar Cliente</button>

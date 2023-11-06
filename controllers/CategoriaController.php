@@ -59,7 +59,7 @@ class CategoriaController extends Controller
 
         if (! empty($_GET['busca'])) {
             $s = trim($_GET['busca']);
-            $data['categories'] = $c->all("name = '{$s}' AND soft_delete = 0");
+            $data['categories'] = $c->all("name LIKE '%{$s}%' AND soft_delete = 0");
         } else {
             $data['categories'] = $c->all("soft_delete = 0");
         }

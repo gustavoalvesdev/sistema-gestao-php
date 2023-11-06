@@ -3,6 +3,8 @@
 namespace Controllers;
 
 use Core\Controller;
+use DAO\CustomerDAO;
+use Database\MySQLDatabase;
 use Models\User;
 use Models\Customer;
 
@@ -24,18 +26,24 @@ class ClienteController extends Controller
 
     public function index()
     {
+        $customerDao = new CustomerDAO();
+        $customerDao->getConnection(new MySQLDatabase);
 
-        $s = '';
 
         if (! empty($_GET['busca'])) {
 
-            $s = trim($_GET['busca']);
+            $busca = trim(addslashes($_GET['busca']));
 
+            $customers = $customerDao->all("soft_delete = 0 AND name LIKE '%$busca%' OR cpf LIKE '%$busca%'");  
+
+        } else {
+            $customers = $customerDao->all('soft_delete = 0');  
         }
+        
 
-        $c = new Customer();
+        
 
-        $this->data['list'] = $c->getCustomers($s);
+        $this->data['customers'] = $customers;
 
         $this->loadView('cliente', $this->data);
     }
@@ -43,41 +51,30 @@ class ClienteController extends Controller
     public function add()
     {
 
-        $c = new Customer();
-
+        
         if (! empty($_POST['name'])) {
+            
+            $customer = new Customer();
+            
+            $customer->name = addslashes($_POST['name']);
+            $customer->rg = addslashes($_POST['rg']);
+            $customer->cpf = addslashes($_POST['cpf']);
+            $customer->email = addslashes($_POST['email']);
+            $customer->cellphone = addslashes($_POST['cellphone']);
+            $customer->phone = addslashes($_POST['phone']);
+            $customer->zipcode = addslashes($_POST['zipcode']);
+            $customer->street = addslashes($_POST['street']);
+            $customer->number = addslashes($_POST['number']);
+            $customer->district = addslashes($_POST['district']);
+            $customer->city = addslashes($_POST['city']);
+            $customer->state = addslashes($_POST['state']);
+            $customer->complement = addslashes($_POST['complement']);
+            
+            $customerDao = new CustomerDAO;
 
-            $name       = $_POST['name'      ];
-            $rg         = $_POST['rg'        ];
-            $cpf        = $_POST['cpf'       ];
-            $email      = $_POST['email'     ];
-            $cellphone  = $_POST['cellphone' ];
-            $phone      = $_POST['phone'     ];
-            $zipcode    = $_POST['zipcode'   ];
-            $street     = $_POST['street'    ];
-            $number     = $_POST['number'    ];
-            $district   = $_POST['district'  ];
-            $city       = $_POST['city'      ];
-            $complement = $_POST['complement'];
-            $state      = $_POST['state'     ];
-            $category   = $_POST['category'  ];
+            $customerDao->getConnection(new MySQLDatabase);
 
-            $c->addCustomer(
-                $name,
-                $rg,
-                $cpf,
-                $email,
-                $cellphone,
-                $phone,
-                $zipcode,
-                $street,
-                $number,
-                $district,
-                $city,
-                $complement,
-                $state,
-                $category
-            );
+            $customerDao->save($customer);
 
             header('Location: '.BASE_URL.'cliente');
             exit;
@@ -139,12 +136,11 @@ class ClienteController extends Controller
 
     public function delete($id)
     {
-        $c = new Customer();
+        $c = new CustomerDAO();
+        $c->getConnection(new MySQLDatabase);
 
         if (! empty($id)) {
-
-            $id = addslashes($id);
-            $c->deleteCustomer($id);
+            $c->delete($id);
         }
 
         header('Location: '.BASE_URL.'cliente');

@@ -46,7 +46,7 @@ class ProdutoController extends Controller
 
         if (! empty($_GET['busca'])) {
 
-            $s = trim($_GET['busca']);
+            $s = trim(addslashes($_GET['busca']));
             $this->data['list'] = $p->all("soft_delete = 0 AND name LIKE '%$s%' OR cod LIKE '%$s%'");
         } else {
             $this->data['list'] = $p->all("soft_delete = 0");
