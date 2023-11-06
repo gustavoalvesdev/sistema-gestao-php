@@ -1,7 +1,7 @@
 <style>
     body {
         height: 100vh;
-        background-image: url('<?= BASE_URL ?>assets/images/products_bg.jpg');
+        background-image: url('<?= BASE_URL ?>assets/images/products_bg.png');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;

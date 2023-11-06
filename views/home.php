@@ -1,13 +1,13 @@
 <style>
 body {
-    background-image: url('<?= BASE_URL ?>assets/images/home_bg.jpg');
+    background-image: url('<?= BASE_URL ?>assets/images/home_bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 </style>
 
-<h1 style="color: white">SGI - Sistema de Gestão Interno</h1>
+<h1 style="color: #333">SGI - Sistema de Gestão Interno</h1>
 
 <p style="color:white">Home</p>
 

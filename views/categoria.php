@@ -1,6 +1,6 @@
 <style>
     body {
-        background-image: url('<?= BASE_URL ?>assets/images/categories_bg.jpg');
+        background-image: url('<?= BASE_URL ?>assets/images/categories_bg.png');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
