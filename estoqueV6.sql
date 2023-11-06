@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/11/2023 às 21:03
+-- Tempo de geração: 06/11/2023 às 01:14
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -43,7 +43,7 @@ INSERT INTO `categories` (`id`, `name`, `compeny_id`, `soft_delete`) VALUES
 (2, 'BRINQUEDOS', 1, 0),
 (3, 'PERFUMARIA', 1, 0),
 (4, 'BEBIDAS', 1, 0),
-(5, 'TESTE', 1, 0);
+(5, 'TESTE', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -138,14 +138,14 @@ INSERT INTO `customers` (`id`, `name`, `rg`, `cpf`, `email`, `cellphone`, `phone
 (20, 'Tele Esfihas', '', '', '', '98132-8606 / 97783-9966', '(11) 2053-9066', '08255-000', 'Avenida Nagib Farah Maluf', '1606', 'Conjunto Residencial José Bonifácio', 'São Paulo', 'SP', '', 'Lanchonetes', 1, 1),
 (21, 'Açougue JB', '', '', '', '(11) 96185-6388', '2523-0081', '08255000', 'Avenida Nagib Farah Maluf', '1614', 'Conjunto Residencial José Bonifácio', 'São Paulo', 'SP', '', 'Açougues', 1, 1),
 (22, 'Passarela Fashion', '', '', '', '(11) 96348-7557', '', '08253-015', 'Avenida Nagib Farah Maluf', '1616', 'Conjunto Residencial José Bonifácio', 'São Paulo', 'SP', '', 'Roupas e Acessórios', 1, 1),
-(23, 'Pedro Cardoso Lemos', '12.324.321-x', '404.214.343.20', 'pedro@lemos.com', '(11) 12133-4321', '(1!) 1234-3432', '08530-000', 'Rua Santos Dumont', '225', 'Vila Ana Maria', 'Ferraz de Vasconcelos', 'SP', 'Perto da Praia', '', 1, 0),
-(24, 'Maria Silva', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, 0),
-(25, 'Fernanda Souza', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, 0),
-(26, 'Ribeiro Santos', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, 0),
-(27, 'Jovem Tranquilao', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, 0),
-(28, 'Gente Doida', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, 0),
-(29, 'Mais um exemplo', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, 0),
-(30, 'Vamos ver se rola', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, 0);
+(23, 'Pedro Cardoso Lemos', '12.324.321-x', '404.214.343.20', 'pedro@lemos.com', '(11) 12133-4321', '(11) 1234-3432', '08530-000', 'Rua Santos Dumont', '225', 'Vila Ana Maria', 'Ferraz de Vasconcelos', 'SP', 'Perto da Praia', '', 1, 0),
+(24, 'Maria Silva', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, 1),
+(25, 'Fernanda Souza', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, 1),
+(26, 'Ribeiro Santos', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, 1),
+(27, 'Jovem Tranquilao', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, 1),
+(28, 'Gente Doida', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, 1),
+(29, 'Mais um exemplo', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, 1),
+(30, 'Vamos ver se rola', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -172,8 +172,8 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `cod`, `name`, `price`, `quantity`, `min_quantity`, `category_id`, `subcategory_id`, `company_id`, `soft_delete`) VALUES
 (11, '7891360507048', 'giz de cera faber castell c/ 15 cores', 14, 18, 10, 1, 1, 1, 1),
-(12, '7897629204543', 'lapiseira 0.9 técnica', 11, 35, 35, 1, 1, 1, 0),
-(13, '7896342411092', 'borracha branca mercur', 7, 25, 20, 1, 2, 1, 0),
+(12, '7897629204543', 'lapiseira 0.9 técnica', 11, 35, 35, 1, 1, 1, 1),
+(13, '7896342411092', 'borracha branca mercur', 7, 25, 20, 3, 7, 1, 1),
 (14, '121212', 'Sem Subcategoria', 12, 451, 12, 1, 0, 1, 0),
 (15, '12121', 'Teste Decimal', 1, 45, 45, 4, 9, 1, 1),
 (16, '3232', 'Mais decimal', 12, 12, 3, 2, 5, 1, 0),
@@ -181,7 +181,9 @@ INSERT INTO `products` (`id`, `cod`, `name`, `price`, `quantity`, `min_quantity`
 (20, '534532', 'VINTE E CINCO', 12.25, 12, 12, 5, 11, 1, 0),
 (21, '234532', 'CASA DOS MIL', 1325.58, 12, 12, 3, 8, 1, 0),
 (22, '2920481821019', 'Bonca da Barbie 2023', 25, 18, 15, 2, 5, 0, 0),
-(24, '12121', 'Outro', 12.25, 15, 12, 3, 7, 0, 1);
+(24, '12121', 'Outro', 12.25, 15, 12, 3, 7, 0, 1),
+(25, '084843', 'Folha de Loro', 222.25, 12, 5, 2, 5, 1, 0),
+(26, '4534534', 'Outra Coisa', 25.32, 12, 45, 3, 8, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -327,8 +329,16 @@ CREATE TABLE `workers` (
   `bairro` varchar(100) NOT NULL,
   `cidade` varchar(100) NOT NULL,
   `complemento` varchar(100) NOT NULL,
-  `estado` varchar(2) NOT NULL
+  `estado` varchar(2) NOT NULL,
+  `soft_delete` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `workers`
+--
+
+INSERT INTO `workers` (`id`, `nome`, `rg`, `cpf`, `email`, `celular`, `telefone`, `senha`, `cargo`, `nivel_acesso`, `cep`, `endereco`, `numero`, `bairro`, `cidade`, `complemento`, `estado`, `soft_delete`) VALUES
+(1, 'Seu Pedro', '48.123.123-x', '404.404.404-04', 'seupedro@sistemas.com', '(11) 91111-1111', '(11) 4111-1111', '81dc9bdb52d04dc20036dbd8313ed055', 'Vila Santa Margarida', 1, '08544100', 'Rua dos Goivos', '19', 'Vila Santa Margarida', 'Ferraz de Vasconcelos', '', 'SP', 0);
 
 --
 -- Índices para tabelas despejadas
@@ -426,7 +436,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT de tabela `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de tabela `providers`
@@ -456,7 +466,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `workers`
 --
 ALTER TABLE `workers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

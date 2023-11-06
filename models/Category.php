@@ -2,9 +2,6 @@
 
 namespace Models;
 
-use Core\Model;
-use Database\Database;
-
 class Category
 {   
     public $id;

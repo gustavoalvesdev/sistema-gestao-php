@@ -4,7 +4,9 @@ namespace Controllers;
 
 use Core\Controller;
 use DAO\FuncionarioDAO;
+use DAO\WorkerDAO;
 use Database\Database;
+use Database\MySQLDatabase;
 use Models\User;
 use Models\Customer;
 use Models\Funcionario;
@@ -36,8 +38,12 @@ class FuncionarioController extends Controller
         }
 
         //$f = new Funcionario();
+        $workerDao = new WorkerDAO();
+        $workerDao->getConnection(new MySQLDatabase);
 
-        $this->data['list'] = [];
+        $workers = $workerDao->all('soft_delete = 0');  
+
+        $this->data['workers'] = $workers;
 
         $this->loadView('funcionario', $this->data);
     }

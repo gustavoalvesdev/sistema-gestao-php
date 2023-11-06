@@ -32,17 +32,17 @@
         <th>Nível</th>
         <th>Ações</th>
     </tr>
-    <?php foreach($list as $item): ?>
+    <?php foreach($workers as $worker): ?>
 
         <tr style="background-color: white; border: 1px solid #4052AE;">
-            <td><?= mb_strtoupper($item['name'], "utf8") ?></td>
-            <td><?= $item['cellphone'] ?></td>
-            <td><?= $item['phone'] ?></td>
-            <td><?= $item['access_level'] ?></td>
+            <td><?= mb_strtoupper($worker->nome, "utf8") ?></td>
+            <td><?= $worker->celular ?></td>
+            <td><?= $worker->telefone ?></td>
+            <td><?= $worker->nivel_acesso ?></td>
             <td>
-                <a class="btn btn-edit" href="<?= BASE_URL ?>cliente/edit/<?= $item['id'] ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
+                <a class="btn btn-edit" href="<?= BASE_URL ?>cliente/edit/<?= $worker->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
 
-                <a onclick="return confirm('Tem certeza que deseja excluir este cliente?')" class="btn btn-delete" href="<?= BASE_URL ?>cliente/delete/<?= $item['id'] ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
+                <a onclick="return confirm('Tem certeza que deseja excluir este funcionário?')" class="btn btn-delete" href="<?= BASE_URL ?>cliente/delete/<?= $worker->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
             </td>
         </tr>
 
