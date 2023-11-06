@@ -1,7 +1,7 @@
 <style>
     body {
         height: 100vh;
-        background-image: url('<?= BASE_URL ?>assets/images/customers_bg.jpg');
+        background-image: url('<?= BASE_URL ?>assets/images/customers_bg.png');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -13,7 +13,7 @@
 
 <p style="margin: 30px 0;"><a class="btn btn-add btn-lg" href="<?= BASE_URL.'cliente/add' ?>"><i class="fas fa-plus"></i> Adicionar Cliente</a></p>
 
-<p style="color:white"><a href="<?= BASE_URL ?>" style="color:white">Home</a> / Clientes</p>
+<p style="color:#333"><a href="<?= BASE_URL ?>" style="color:#333">Home</a> / Clientes</p>
 
 <form method="GET" class="form-busca">
     <br /><br />

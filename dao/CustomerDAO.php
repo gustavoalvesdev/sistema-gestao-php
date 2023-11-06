@@ -20,7 +20,7 @@ class CustomerDAO
 
     public function find(int $id): Customer
     {
-        $sql = "SELECT * FROM customers WHERE id = :id";
+        $sql = "SELECT * FROM customers WHERE soft_delete = 0 AND id = :id";
         $sql = self::$conn->prepare($sql);
         $sql->bindValue(':id', $id);
         $result = new Customer;

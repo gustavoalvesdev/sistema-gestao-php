@@ -1,7 +1,7 @@
 <style>
     body {
         height: 100vh;
-        background-image: url('<?= BASE_URL ?>assets/images/customers_bg.jpg');
+        background-image: url('<?= BASE_URL ?>assets/images/workers_bg.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -9,11 +9,11 @@
     }
 </style>
 
-<h1 style="color: white">Lista de Funcionários</h1>
+<h1 style="color: #333">Lista de Funcionários</h1>
 
 <p style="margin: 30px 0;"><a class="btn btn-add btn-lg" href="<?= BASE_URL.'funcionario/add' ?>"><i class="fas fa-plus"></i> Adicionar Funcionário</a></p>
 
-<p style="color:white"><a href="<?= BASE_URL ?>" style="color:white">Home</a> / Funcionários</p>
+<p style="color:#333"><a href="<?= BASE_URL ?>" style="color:#333">Home</a> / Funcionários</p>
 
 <form method="GET" class="form-busca">
     <br /><br />

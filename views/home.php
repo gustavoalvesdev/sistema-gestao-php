@@ -42,29 +42,29 @@ body {
     </a>
 
     <a href="<?= BASE_URL ?>funcionario">
-        <div class="card" style="background-color: #5D7C89">
-            <p><strong><i class="fas fa-users"></i><br /> Funcionários</strong></p>
+        <div class="card" style="background-color: #7A5449">
+            <p><strong><i class="fas fa-briefcase"></i><br /> Funcionários</strong></p>
         </div>
         <!-- card -->
     </a>
 
-    <div class="card" style="background-color: #7A5449">
+    <div class="card" style="background-color: #F93F3B">
         <p><strong><i class="fas fa-cash-register"></i><br /> Vendas</strong></p>
     </div>
     <!-- card -->
-    <div class="card" style="background-color: #F93F3B">
+    <div class="card" style="background-color: #84C25B">
         <p><strong><i class="fas fa-wallet"></i><br /> Contas</strong></p>
     </div>
     <!-- card -->
 
     <a href="<?= BASE_URL ?>relatorio">
-        <div class="card" style="background-color: #84C25B">
+        <div class="card" style="background-color: #00BCD0">
             <p><strong><i class="fas fa-copy"></i><br /> Relatórios</strong></p>
         </div>
         <!-- card -->
     </a>
 
-    <div class="card" style="background-color: #00BCD0">
+    <div class="card" style="background-color: #7D6320">
         <p><strong><i class="fas fa-chart-pie"></i><br /> Dashboards</strong></p>
     </div>
     <!-- card -->

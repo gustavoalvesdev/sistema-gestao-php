@@ -85,52 +85,39 @@ class ClienteController extends Controller
 
     public function edit($id)
     {
-        $this->data = array('info' => '');
 
-        $c = new Customer();
+        $customerDao = new CustomerDAO;
+        $customerDao->getConnection(new MySQLDatabase);
 
-        if (! empty($_POST['name'])) {
+        $customer = $customerDao->find($id);
 
-            $name       = addslashes($_POST['name'      ]);
-            $rg         = addslashes($_POST['rg'        ]);
-            $cpf        = addslashes($_POST['cpf'       ]);
-            $email      = addslashes($_POST['email'     ]);
-            $cellphone  = addslashes($_POST['cellphone' ]);
-            $phone      = addslashes($_POST['phone'     ]);
-            $zipcode    = addslashes($_POST['zipcode'   ]);
-            $street     = addslashes($_POST['street'    ]);
-            $number     = addslashes($_POST['number'    ]);
-            $district   = addslashes($_POST['district'  ]);
-            $city       = addslashes($_POST['city'      ]);
-            $complement = addslashes($_POST['complement']);
-            $state      = addslashes($_POST['state'     ]);
-            $category   = addslashes($_POST['category'  ]);
-            $id         = addslashes($id                 );
+        $this->data['customer'] = $customer;
 
-            if ($c->editCostumer(
-                $name,
-                $rg,
-                $cpf,
-                $email,
-                $cellphone,
-                $phone,
-                $zipcode,
-                $street,
-                $number,
-                $district,
-                $city,
-                $complement,
-                $state,
-                $category,
-                $id
-            )) {
-                header('Location: '.BASE_URL.'cliente');
-            }
+        if (isset($_POST['name'])) {
 
+            $customer = new Customer;
+
+            $customer->name = addslashes($_POST['name']);
+            $customer->rg = addslashes($_POST['rg']);
+            $customer->cpf = addslashes($_POST['cpf']);
+            $customer->email = addslashes($_POST['email']);
+            $customer->cellphone = addslashes($_POST['cellphone']);
+            $customer->phone = addslashes($_POST['phone']);
+            $customer->zipcode = addslashes($_POST['zipcode']);
+            $customer->street = addslashes($_POST['street']);
+            $customer->number= addslashes($_POST['number']);
+            $customer->district = addslashes($_POST['district']);
+            $customer->city = addslashes($_POST['city']);
+            $customer->state = addslashes($_POST['state']);
+            $customer->complement = addslashes($_POST['complement']);
+            $customer->id = $id;
+
+            $customerDao->save($customer);
+
+            header('Location: '.BASE_URL.'cliente');
+            exit;
         }
 
-        $this->data['info'] = $c->getCostumer($id);
-        
         $this->loadView('cliente-edit', $this->data);
     }
 
