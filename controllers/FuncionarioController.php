@@ -63,7 +63,7 @@ class FuncionarioController extends Controller
             $f->setTelefone(addslashes($_POST['phone']));
             $f->setSenha(addslashes($_POST['password']));
             $f->setCargo(addslashes($_POST['role']));
-            $f->setNivelAcesso(addslashes(intval($_POST['access_level'])));
+            $f->setNivelAcesso(addslashes($_POST['access_level']));
             $f->setCep(addslashes($_POST['zipcode']));
             $f->setEndereco(addslashes($_POST['street']));
             $f->setNumero(addslashes($_POST['number']));
@@ -90,7 +90,15 @@ class FuncionarioController extends Controller
 
     public function delete($id)
     {
+        $workerDao = new WorkerDAO();
+        $workerDao->getConnection(new MySQLDatabase);
 
+        if (! empty($id)) {
+            $workerDao->delete($id);
+        }
+
+        header('Location: '.BASE_URL.'funcionario');
+        exit;
     }
 
     public function __destruct()

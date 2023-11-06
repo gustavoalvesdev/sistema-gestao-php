@@ -57,8 +57,8 @@
         <div class="form-field w25">
             <label for="access_level">Nível de Acesso:</label>
             <select name="access_level">
-                <option value="1">Usuário</option>
-                <option value="2">Administrador</option>
+                <option value="Usuário">Usuário</option>
+                <option value="Administrador">Administrador</option>
             </select>
         </div>
         <!-- form-field -->

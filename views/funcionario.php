@@ -40,9 +40,9 @@
             <td><?= $worker->telefone ?></td>
             <td><?= $worker->nivel_acesso ?></td>
             <td>
-                <a class="btn btn-edit" href="<?= BASE_URL ?>cliente/edit/<?= $worker->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
+                <a class="btn btn-edit" href="<?= BASE_URL ?>funcionario/edit/<?= $worker->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
 
-                <a onclick="return confirm('Tem certeza que deseja excluir este funcionário?')" class="btn btn-delete" href="<?= BASE_URL ?>cliente/delete/<?= $worker->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
+                <a onclick="return confirm('Tem certeza que deseja excluir este funcionário?')" class="btn btn-delete" href="<?= BASE_URL ?>funcionario/delete/<?= $worker->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
             </td>
         </tr>
 
