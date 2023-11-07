@@ -27,7 +27,7 @@ body {
         <!-- card -->
     </a>
 
-    <a href="<?= BASE_URL ?>provider">
+    <a href="<?= BASE_URL ?>fornecedor">
         <div class="card" style="background-color: #FF9632">
             <p><strong><i class="fas fa-industry"></i><br /> Fornecedores</strong></p>
         </div>

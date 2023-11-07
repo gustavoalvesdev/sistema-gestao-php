@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06/11/2023 às 02:26
+-- Tempo de geração: 07/11/2023 às 02:37
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -144,7 +144,12 @@ INSERT INTO `customers` (`id`, `name`, `rg`, `cpf`, `email`, `cellphone`, `phone
 (27, 'Jovem Tranquilao', '', '', '', '', '', '', '', '', '', '', '', '', 1, 1),
 (28, 'Gente Doida', '', '', '', '', '', '', '', '', '', '', '', '', 1, 1),
 (29, 'Mais um exemplo', '', '', '', '', '', '', '', '', '', '', '', '', 1, 1),
-(30, 'Vamos ver se rola', '', '', '', '', '', '', '', '', '', '', '', '', 1, 1);
+(30, 'Vamos ver se rola', '', '', '', '', '', '', '', '', '', '', '', '', 1, 1),
+(31, 'Gustavo Alves da Silva', '48.050.443-x', '404.310.328-07', 'gustavoalvesdasilva@outlook.com', '(11) 99653-1308', '(11) 4679-7017', '08544100', 'Rua dos Goivos', '19', 'Vila Santa Margarida', 'Ferraz de Vasconcelos', 'SP', 'Perto do CAIC', 1, 1),
+(32, 'Gustavo Alves da Silva', '48.050.443-x', '404.310.328-07', 'gustavoalvesdasilva@outlook.com', '(11) 99653-1308', '(11) 4679-7017', '08544100', 'Rua dos Goivos', '19', 'Vila Santa Margarida', 'Ferraz de Vasconcelos', 'SP', 'Teste', 1, 1),
+(33, 'Pedro Santos', '12.324.321-x', '404.214.343.20', 'pedro@lemos.com', '(11) 12133-4321', '(11) 1234-3432', '08530-000', 'Rua Santos Dumont', '225', 'Vila Ana Maria', 'Ferraz de Vasconcelos', 'SP', 'Perto da Praia', 1, 1),
+(34, 'Pedro Santos', '12.324.321-x', '404.214.343.20', 'pedro@lemos.com', '(11) 7777-7777', '(11) 91234-5678', '08530-000', 'Rua Santos Dumont', '225', 'Vila Ana Maria', 'Ferraz de Vasconcelos', 'SP', 'Perto da Praia', 1, 0),
+(35, 'Pedro Santos', '12.324.321-x', '404.214.343.20', 'pedro@lemos.com', '(11) 5555-5555', '(11) 1234-3432', '08530-000', 'Rua Santos Dumont', '225', 'Vila Ana Maria', 'Ferraz de Vasconcelos', 'SP', 'Perto da Praia', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -173,16 +178,17 @@ INSERT INTO `products` (`id`, `cod`, `name`, `price`, `quantity`, `min_quantity`
 (11, '7891360507048', 'giz de cera faber castell c/ 15 cores', 14, 18, 10, 1, 1, 1, 1),
 (12, '7897629204543', 'lapiseira 0.9 técnica', 11, 35, 35, 1, 1, 1, 1),
 (13, '7896342411092', 'borracha branca mercur', 7, 25, 20, 3, 7, 1, 1),
-(14, '121212', 'Sem Subcategoria', 12, 451, 12, 1, 0, 1, 0),
+(14, '121212', 'Doido', 12, 451, 12, 1, 0, 1, 0),
 (15, '12121', 'Teste Decimal', 1, 45, 45, 4, 9, 1, 1),
 (16, '3232', 'Mais decimal', 12, 12, 3, 2, 5, 1, 0),
 (17, '23423432', 'TESTE NAMESPACE FINAL', 12, 43, 32, 5, 11, 1, 1),
 (20, '534532', 'VINTE E CINCO', 12.25, 12, 12, 5, 11, 1, 0),
 (21, '234532', 'CASA DOS MIL', 1325.58, 12, 12, 3, 8, 1, 0),
-(22, '2920481821019', 'Bonca da Barbie 2023', 25, 18, 15, 2, 5, 0, 0),
+(22, '2920481821019', 'Bonca da Barbie 2023', 25, 18, 15, 2, 5, 0, 1),
 (24, '12121', 'Outro', 12.25, 15, 12, 3, 7, 0, 1),
-(25, '084843', 'Folha de Loro', 222.25, 12, 5, 2, 5, 1, 0),
-(26, '4534534', 'Outra Coisa', 25.32, 12, 45, 3, 8, 1, 0);
+(25, '084843', 'Folha de Loro', 222.25, 12, 5, 2, 5, 1, 1),
+(26, '4534534', 'Outra Coisa', 25.32, 12, 45, 3, 8, 1, 0),
+(27, '32323', 'PRODUTO BOM', 25, 12, 5, 2, 5, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -194,20 +200,21 @@ CREATE TABLE `providers` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `url` varchar(200) NOT NULL,
-  `company_id` int(11) NOT NULL
+  `company_id` int(11) NOT NULL,
+  `soft_delete` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Despejando dados para a tabela `providers`
 --
 
-INSERT INTO `providers` (`id`, `name`, `url`, `company_id`) VALUES
-(1, 'KINGSTON', 'WWW.KINGSTON.COM', 1),
-(2, 'SEAGATE', 'WWW.SEAGATE.COM', 1),
-(3, 'CORSAIR', 'WWW.CORSAIR.COM', 1),
-(4, 'OLYMPUS', 'WWW.OLYMPUS.COM', 1),
-(5, 'FUTURAIM', 'https://futuraim.com.br', 1),
-(6, 'Atual Card', 'https://www.atualcard.com.br/', 0);
+INSERT INTO `providers` (`id`, `name`, `url`, `company_id`, `soft_delete`) VALUES
+(1, 'KINGSTON', 'WWW.KINGSTON.COM', 1, 0),
+(2, 'SEAGATE', 'WWW.SEAGATE.COM', 1, 0),
+(3, 'CORSAIR', 'WWW.CORSAIR.COM', 1, 0),
+(4, 'OLYMPUS', 'WWW.OLYMPUS.COM', 1, 0),
+(5, 'FUTURAIM', 'https://futuraim.com.br', 1, 0),
+(6, 'Atual Card', 'https://www.atualcard.com.br/', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -303,7 +310,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_number`, `user_email`, `user_pass`, `user_token`, `company_id`) VALUES
-(1, 123, 'gustavoalvesdasilva@outlook.com', '81dc9bdb52d04dc20036dbd8313ed055', '00534b9fdfb9c3adea28eadfb5e5c841', 1);
+(1, 123, 'gustavoalvesdasilva@outlook.com', '81dc9bdb52d04dc20036dbd8313ed055', 'b20a1e0840b9b916e1ac1fa1ad057e0b', 1);
 
 -- --------------------------------------------------------
 
@@ -430,13 +437,13 @@ ALTER TABLE `companies`
 -- AUTO_INCREMENT de tabela `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de tabela `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de tabela `providers`

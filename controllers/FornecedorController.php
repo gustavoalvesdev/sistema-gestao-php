@@ -2,10 +2,12 @@
 
 namespace Controllers;
 use Core\Controller;
+use DAO\ProviderDAO;
+use Database\MySQLDatabase;
 use Models\User;
 use Models\Provider;
 
-class ProviderController extends Controller 
+class FornecedorController extends Controller 
 {
     public function __construct()
     {
@@ -17,50 +19,32 @@ class ProviderController extends Controller
             header('Location: '.BASE_URL.'login');
             exit;
         }
-        
-        $data = array();
 
-        $data['menu'] = array(
-            array(
-                'class' => 'link-home',
-                'id' => '',
-                'link' => BASE_URL,
-                'text' => 'Início'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'produto',
-                'text' => 'Configurações'
-            ),
-            array(
-                'class' => '',
-                'id' => '',
-                'link' => BASE_URL.'categoria',
-                'text' => 'Usuários'
-            )
-        );
-
-        $this->loadView('template_parts/header', $data);
+        $this->loadView('template_parts/header', $this->data);
     }
 
     public function index()
     {
-        $data = array();
+        $providerDao = new ProviderDAO();
+        $providerDao->getConnection(new MySQLDatabase);
 
-        $m = new Provider();
-
-        $s = '';
 
         if (! empty($_GET['busca'])) {
 
-            $s = addslashes(trim($_GET['busca']));
+            $busca = trim(addslashes($_GET['busca']));
 
+            $providers = $providerDao->all("soft_delete = 0 AND name LIKE '%$busca%' OR url LIKE '%$busca%'");  
+
+        } else {
+            $providers = $providerDao->all('soft_delete = 0');  
         }
+        
 
-        $data['list'] = $m->getProviders($s);
+        
 
-        $this->loadView('provider-list', $data);
+        $this->data['providers'] = $providers;
+
+        $this->loadView('fornecedor', $this->data);
     }
 
     public function add()
