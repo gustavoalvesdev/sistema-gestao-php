@@ -10,7 +10,7 @@
 <div style="padding: 2%;">
 
     <div style="background-color: white; padding: 5px 10px; border-radius: 10px; margin-bottom: 20px;">
-
+        
         <h1>Editar Categoria</h1>
 
         <p style="color:black"><a href="<?= BASE_URL ?>" style="color:black">Home</a> / <a href="<?= BASE_URL ?>categoria" style="color:black">Categorias</a> / Editar Categoria</p>

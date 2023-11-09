@@ -29,7 +29,9 @@
         Categoria:<br />
         <select name="category_id" id="category">
             <?php foreach($categories as $category): ?>
-                <option value="<?= $category->id ?>" <?= ($category->id == $product->category_id) ? 'selected' : '' ?> ><?= mb_strtoupper($category->name) ?></option>
+                <?php if ($category->soft_delete != 1): ?>
+                    <option value="<?= $category->id ?>" <?= ($category->id == $product->category_id) ? 'selected' : '' ?> ><?= mb_strtoupper($category->name) ?></option>
+                <?php endif; ?>
             <?php endforeach; ?>
         </select>
         <br /><br />

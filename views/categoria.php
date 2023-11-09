@@ -7,6 +7,16 @@
     }
 </style>
 
+<?php if (isset($_GET['items_associated'])):  ?>
+    
+    <script>
+
+        alert('Não foi possível excluir esta categoria pois há produto(s) cadastrado(s) associado(s) a ela!');
+
+    </script>
+
+<?php endif; ?>
+
 <br /><br />
 <p style="margin: 30px 0;"><a class="btn btn-add btn-lg" href="<?= BASE_URL.'categoria/add' ?>"><i class="fas fa-plus"></i> Adicionar Categoria</a></p>
 
@@ -34,7 +44,7 @@
             <td>
                 <a class="btn btn-edit" href="<?= BASE_URL ?>categoria/edit/<?= $category->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
                 
-                <a class="btn btn-delete" href="<?= BASE_URL ?>categoria/delete/<?= $category->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
+                <a onclick="return confirm('Tem certeza que deseja excluir esta categoria?')" class="btn btn-delete" href="<?= BASE_URL ?>categoria/delete/<?= $category->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
 
                 <a class="btn btn-add" href="<?= BASE_URL ?>subcategoria/add/<?= $category->id ?>"><i class="fas fa-plus"></i>Subcategoria</a>
 

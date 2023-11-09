@@ -11,7 +11,7 @@
 
 <p style="margin: 30px 0;"><a class="btn btn-add btn-lg" href="<?= BASE_URL.'produto/add' ?>"><i class="fas fa-plus"></i> Adicionar Produto</a></p>
 
-<p style="color:white"><a href="<?= BASE_URL ?>" style="color:white">Home</a> / Produtos</p>
+<p style="color:#333"><a href="<?= BASE_URL ?>" style="color:#333">Home</a> / Produtos</p>
 
 <form method="GET" class="form-busca">
     <br /><br />

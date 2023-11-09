@@ -48,6 +48,9 @@ class CategoryDAO
 
     public function delete(int $id): bool
     {
+
+        $product = new ProductDAO;
+
         $sql = "UPDATE categories SET soft_delete = 1 WHERE id = :id";
         $sql = self::$conn->prepare($sql);
         $sql->bindValue(':id', $id);
@@ -61,13 +64,13 @@ class CategoryDAO
         if (empty($category->id)) {
             $sql = self::$conn->prepare($sql);
             $sql->bindValue(':name', $category->name);
-            $sql->bindValue(':company_id', $category->company_id);
+            $sql->bindValue(':company_id', $category->company_id ?? 1);
         } else {
             $sql = "UPDATE categories SET name = :name, company_id = :company_id WHERE id = :id";
 
             $sql = self::$conn->prepare($sql);
             $sql->bindValue(':name', $category->name);
-            $sql->bindValue(':company_id', $category->company_id);
+            $sql->bindValue(':company_id', $category->company_id ?? 1);
             $sql->bindValue(':id', $category->id);
         }
 

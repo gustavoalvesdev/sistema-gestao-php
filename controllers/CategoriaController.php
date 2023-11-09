@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Core\Controller;
 use DAO\CategoryDAO;
+use DAO\ProductDAO;
 use Database\MySQLDatabase;
 use Models\User;
 use Models\Category;
@@ -72,11 +73,20 @@ class CategoriaController extends Controller
     {
         $data = array();
 
-        $c = new Category();
+        $category = new Category();
 
         if (! empty($_POST['name'])) {
             $name = mb_strtoupper(addslashes($_POST['name']));
-            $c->addCategory($name);
+            
+            $category->name = $name;
+
+            $dao = new CategoryDAO;
+            $dao->getConnection(new MySQLDatabase);
+
+            $dao->save($category);
+
+            header('Location: ' . BASE_URL . 'categoria');
+
         }
 
         $this->loadView('categoria-add', $data);
@@ -92,6 +102,18 @@ class CategoriaController extends Controller
 
         $this->data['category'] = $categoria;
 
+        if (isset($_POST['name'])) {
+
+            $category = new Category;
+            $category->name = addslashes($_POST['name']);
+            $category->id = $id;
+
+            $categoriaDao->save($category);
+
+            header('Location: ' . BASE_URL . 'categoria');
+            
+        }
+
         $this->loadView('categoria-edit', $this->data);
 
     }
@@ -102,7 +124,21 @@ class CategoriaController extends Controller
         $c->getConnection(new MySQLDatabase);
 
         if (! empty($id)) {
-            $c->delete($id);
+            
+
+
+            $product = new ProductDAO;
+            $product->getConnection(new MySQLDatabase);
+
+            $product = $product->all('category_id = ' . $id);
+
+            if (count($product) > 0) {
+                header("Location: " . BASE_URL . 'categoria?items_associated=true');
+                exit;
+            } else {
+                $c->delete($id);
+            }
+
         }
 
         header('Location: '.BASE_URL.'categoria');
