@@ -28,14 +28,14 @@
         <th>Nome</th>
         <th>Ações</th>
     </tr>
-    <?php foreach($list as $item): ?>
+    <?php foreach($list as $subcategory): ?>
         <tr style="background-color: white; border: 1px solid #4052AE;">
-            <td><?= $item['id'] ?></td>
-            <td><?= mb_strtoupper($item['name']); ?></td>
+            <td><?= $subcategory->id ?></td>
+            <td><?= mb_strtoupper($subcategory->name); ?></td>
             <td>
-                <a class="btn btn-edit" href="<?= BASE_URL ?>subcategoria/edit/<?= $item['id'] ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
+                <a class="btn btn-edit" href="<?= BASE_URL ?>subcategoria/edit/<?= $subcategory->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
                 
-                <a class="btn btn-delete" href="<?= BASE_URL ?>subcategoria/delete/<?= $item['id'] ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
+                <a class="btn btn-delete" href="<?= BASE_URL ?>subcategoria/delete/<?= $subcategory->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
             </td>
         </tr>
     <?php endforeach; ?>

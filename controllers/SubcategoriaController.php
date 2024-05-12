@@ -5,6 +5,9 @@ use Core\Controller;
 use Models\User;
 use Models\Category;
 use Models\Subcategory;
+use DAO\CategoryDAO;
+use Database\MySQLDatabase;
+use DAO\SubcategoryDAO;
 
 class SubcategoriaController extends Controller 
 {
@@ -75,7 +78,8 @@ class SubcategoriaController extends Controller
     {
         $data = array();
 
-        $sub = new Subcategory();
+        $sub = new SubcategoryDAO();
+        $sub->getConnection(new MySQLDatabase);
 
         $categoryId = addslashes($categoryId);
 
@@ -84,11 +88,14 @@ class SubcategoriaController extends Controller
             exit;
         }
 
-        $c = new Category();
-        $category = $c->getCategoryName($categoryId);
+        $c = new CategoryDAO();
+        
+        $c->getConnection(new MySQLDatabase);
 
-        $data['list'] = $sub->getSubcategories($categoryId);
-        $data['name'] = $category;
+        $category = $c->find($categoryId);
+
+        $data['list'] = $sub->all("category_id = " . $categoryId);
+        $data['name'] = $category->name;
 
         $this->loadView('subcategoria-view', $data);
     }

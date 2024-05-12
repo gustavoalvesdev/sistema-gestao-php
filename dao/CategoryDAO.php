@@ -77,5 +77,4 @@ class CategoryDAO
         return $sql->execute();
 
     }
-
 }
