@@ -19,14 +19,7 @@ body {
         </div>
         <!-- card -->
     </a>
-
-    <a href="<?php BASE_URL ?>categoria">
-        <div class="card" style="background-color: #4052AE">
-            <p><strong><i class="fas fa-list"></i><br /> Categorias</strong></p>
-        </div>
-        <!-- card -->
-    </a>
-
+    
     <a href="<?= BASE_URL ?>fornecedor">
         <div class="card" style="background-color: #FF9632">
             <p><strong><i class="fas fa-industry"></i><br /> Fornecedores</strong></p>
@@ -35,7 +28,7 @@ body {
     </a>
 
     <a href="<?= BASE_URL ?>cliente">
-        <div class="card" style="background-color: #5D7C89">
+        <div class="card" style="background-color: #4052AE">
             <p><strong><i class="fas fa-users"></i><br /> Clientes</strong></p>
         </div>
         <!-- card -->

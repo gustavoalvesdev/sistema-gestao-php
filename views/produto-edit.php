@@ -20,38 +20,42 @@
 
     <form method="POST" class="form" style="background-color: white; padding:30px; border-radius: 10px;">
 
-        Código de Barras:<br />
-        <input type="text" name="cod" required value="<?= $product->cod ?>" /><br /><br />
+        <div class="form-row">
+            <div class="form-field w30">
+                <label for="cod">Código de Barras:</label>
+                <input type="text" name="cod" required value="<?= $product->cod ?>" />
+            </div>
+            <!-- form-field -->
+            <div class="form-field w70">
+                <label for="name">Nome do Produto:</label>
+                <input type="text" name="name" required value="<?= $product->name ?>" />
+            </div>
+            <!-- form-field -->
+        </div>
+        <!-- form-row -->
+        
+        <div class="form-row">
+            <div class="form-field w33">
+                <label class="price">Preço do Produto:</label>
+                <input type="text" name="price" required value="<?= number_format($product->price, 2, ',', '.') ?>" />
+            </div>
+            <!-- form-field -->
+            <div class="form-field w33">
+                <label for="quantity">Quantidade:</label>
+                <input type="text" name="quantity" required value="<?= number_format($product->quantity, 2, ',', '.') ?>" />
+            </div>
+            <!-- form-field -->
+            <div class="form-field w33">
+                <label for="quantity">Qtd. Mínima:</label>
+                <input type="text" name="min_quantity" required value="<?= number_format($product->min_quantity, 2, ',', '.') ?>" />
+            </div>
+        </div>
+        <!-- form-row -->
 
-        Nome do Produto:<br />
-        <input type="text" name="name" required value="<?= $product->name ?>" /><br /><br />
-
-        Categoria:<br />
-        <select name="category_id" id="category">
-            <?php foreach($categories as $category): ?>
-                <?php if ($category->soft_delete != 1): ?>
-                    <option value="<?= $category->id ?>" <?= ($category->id == $product->category_id) ? 'selected' : '' ?> ><?= mb_strtoupper($category->name) ?></option>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        </select>
-        <br /><br />
-
-        Subcategoria:<br />
-        <select name="subcategory_id" id="subcategories" disabled>
-            <option value="0">SELECIONE A SUBCATEGORIA...</option>
-        </select>
-        <br /><br />
-
-        Preço do Produto:<br />
-        <input type="text" name="price" required value="<?= number_format($product->price, 2, ',', '.') ?>" /><br /><br />
-
-        Quantidade:<br />
-        <input type="text" name="quantity" required value="<?= number_format($product->quantity, 2, ',', '.') ?>" /><br /><br />
-
-        Qtd. Mínima:<br />
-        <input type="text" name="min_quantity" required value="<?= number_format($product->min_quantity, 2, ',', '.') ?>" /><br /><br />
-
-        <button class="btn btn-edit btn-lg" type="submit"><i class="fas fa-pencil-alt"></i> Editar</button>
+        <div class="form-row">
+            <button class="btn btn-edit btn-lg" type="submit"><i class="fas fa-pencil-alt"></i> Editar</button>
+        </div>
+        <!-- form-row -->  
     
     </form>
     <!-- form -->

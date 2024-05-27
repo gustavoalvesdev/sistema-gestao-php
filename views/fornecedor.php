@@ -34,7 +34,7 @@
 
         <tr style="background-color: white; border: 1px solid #4052AE;">
             <td><?= mb_strtoupper($provider->name, "utf8") ?></td>
-            <td><?= $provider->url ?></td>
+            <td><a target="_blank" href="<?= $provider->url ?>"><?= $provider->url ?></a></td>
             <td>
                 <a class="btn btn-edit" href="<?= BASE_URL ?>fornecedor/edit/<?= $provider->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
 

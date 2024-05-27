@@ -12,8 +12,6 @@ class Product
     public float $price;
     public float $quantity;
     public float $min_quantity;
-    public int $category_id;
-    public int $subcategory_id;
     public int $company_id;
     public int $soft_delete;
 

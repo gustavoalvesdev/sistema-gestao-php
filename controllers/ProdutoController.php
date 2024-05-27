@@ -2,15 +2,11 @@
 
 namespace Controllers;
 use Core\Controller;
-use DAO\CategoryDAO;
 use DAO\ProductDAO;
-use DAO\SubcategoryDAO;
 use Database\Database;
 use Database\MySQLDatabase;
 use Models\User;
 use Models\Product;
-use Models\Category;
-use Models\Subcategory;
 use PDO;
 
 class ProdutoController extends Controller 
@@ -62,10 +58,6 @@ class ProdutoController extends Controller
 
         $product = new Product();
 
-        $categoryDao = new CategoryDAO();
-        $categoryDao->getConnection(new MySQLDatabase);
-
-        $this->data['list'] = $categoryDao->all();
 
         if (! empty($_POST['cod'])) {
 
@@ -80,8 +72,6 @@ class ProdutoController extends Controller
             $min_quantity   = str_replace('.', '', $_POST['min_quantity']);
             $min_quantity = str_replace(',', '.', $min_quantity);
             $product->min_quantity = floatval($min_quantity);
-            $product->category_id    = intval($_POST['category_id'   ]);
-            $product->subcategory_id = intval($_POST['subcategory_id']);
             $product->company_id = 1;
 
             $dao = new ProductDAO;
@@ -104,20 +94,8 @@ class ProdutoController extends Controller
 
         $product = $productDao->find($id);
 
-        $categoryDao = new CategoryDAO();
-
-        $categoryDao->getConnection(new MySQLDatabase);
-
-        $categories = $categoryDao->all();
-
-        $subcategories = new SubcategoryDAO();
-        $subcategories->getConnection(new MySQLDatabase);
-
-        $subcategories = $subcategories->all();
 
         $this->data['product'] = $product;
-        $this->data['categories'] = $categories;
-        $this->data['subcategories'] = $subcategories;
 
         if (isset($_POST['cod'])) {
 
@@ -135,14 +113,6 @@ class ProdutoController extends Controller
             $productToEdit->min_quantity = floatval($min_quantity);
             
             $productToEdit->company_id = $product->company_id;
-            
-            if (!isset($_POST['subcategory_id']) || $_POST['subcategory_id'] === '0') {
-                $productToEdit->category_id = $product->category_id;
-                $productToEdit->subcategory_id = $product->subcategory_id;
-            } else {
-                $productToEdit->category_id = addslashes($_POST['category_id']);
-                $productToEdit->subcategory_id = addslashes($_POST['subcategory_id']);
-            }
 
             $productToEdit->id = $id;
 

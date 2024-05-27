@@ -33,25 +33,6 @@
         </div>
         <!-- form-row -->
     
-        <div class="form-row">
-            <div class="form-field w50">
-                <label for="category_id">Categoria:</label>
-                <select name="category_id" id="category">
-                    <option>SELECIONE A CATEGORIA</option>
-                    <?php foreach($list as $item): ?>
-                        <option value="<?= $item->id ?>"><?= mb_strtoupper($item->name) ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <!-- form-field -->
-            <div class="form-field w50">
-                <label for="subcategory_id">Subcategoria:</label>
-                <select name="subcategory_id" id="subcategories" disabled>
-                    <option value="0">SELECIONE A SUBCATEGORIA...</option>
-                </select>
-            </div>
-        </div>
-        <!-- form-row -->
     
         <div class="form-row">
             <div class="form-field w33">
@@ -60,7 +41,7 @@
             </div>
             <!-- form-field -->
             <div class="form-field w33">
-                <label for="quantity">Quantidade:</label>   
+                <label for="quantity">Qtd. Estoque:</label>   
                 <input type="text" name="quantity" required />       
             </div>
             <!-- form-field -->
@@ -85,4 +66,3 @@
 <script>
     let baseUrl = '<?= BASE_URL ?>';
 </script>
-<script src="<?= BASE_URL ?>assets/js/categories_handle.js"></script>

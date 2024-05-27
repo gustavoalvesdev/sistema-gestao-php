@@ -51,7 +51,9 @@ class FornecedorController extends Controller
     {
         $data = array();
 
-        $m = new Provider();
+        $provider = new Provider();
+        $providerDao = new ProviderDAO();
+        $providerDao->getConnection(new MySQLDatabase);
 
         $s = '';
 
@@ -65,15 +67,18 @@ class FornecedorController extends Controller
             $name = mb_strtoupper(addslashes($_POST['name']));
             $url  = mb_strtoupper(addslashes($_POST['url']));
 
-            $m->addProvider($name, $url);
+            $provider->name = $name;
+            $provider->url = $url;
 
-            header('Location: '.BASE_URL.'provider');
+            $providerDao->save($provider);
+
+            header('Location: '.BASE_URL.'fornecedor');
 
             exit;
 
         }
 
-        $data['list'] = $m->getProviders($s);
+        $data['list'] = $providerDao->all($s);
 
         $this->loadView('provider-add', $data);
     }
