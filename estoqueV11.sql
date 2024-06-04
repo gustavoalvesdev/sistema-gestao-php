@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27/05/2024 às 02:39
+-- Tempo de geração: 04/06/2024 às 20:37
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -119,32 +119,33 @@ CREATE TABLE `products` (
   `quantity` float NOT NULL,
   `min_quantity` float NOT NULL,
   `company_id` int(11) NOT NULL,
-  `soft_delete` int(11) NOT NULL DEFAULT 0
+  `soft_delete` int(11) NOT NULL DEFAULT 0,
+  `provider_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Despejando dados para a tabela `products`
 --
 
-INSERT INTO `products` (`id`, `cod`, `name`, `price`, `quantity`, `min_quantity`, `company_id`, `soft_delete`) VALUES
-(11, '7891360507048', 'giz de cera faber castell c/ 15 cores', 14, 18, 10, 1, 1),
-(12, '7897629204543', 'lapiseira 0.9 técnica', 11, 35, 35, 1, 1),
-(13, '7896342411092', 'borracha branca mercur', 7, 25, 20, 1, 1),
-(14, '121212', 'Doido', 12, 451, 12, 1, 1),
-(15, '12121', 'Teste Decimal', 1, 45, 45, 1, 1),
-(16, '3232', 'Mais decimal', 12, 12, 3, 1, 1),
-(17, '23423432', 'TESTE NAMESPACE FINAL', 12, 43, 32, 1, 1),
-(20, '534532', 'VINTE E CINCO', 12.25, 12, 12, 1, 1),
-(21, '234532', 'CASA DOS MIL', 1325.58, 12, 12, 1, 1),
-(22, '2920481821019', 'Bonca da Barbie 2023', 25, 18, 15, 0, 1),
-(24, '12121', 'Outro', 12.25, 15, 12, 0, 1),
-(25, '084843', 'Folha de Loro', 222.25, 12, 5, 1, 1),
-(26, '4534534', 'Outra Coisa', 25.32, 12, 45, 1, 1),
-(27, '32323', 'PRODUTO BOM', 25, 12, 5, 1, 1),
-(28, '7897653512447', 'LÁPIS DE COR FABBER CASTELL 12 CORES', 12.25, 35, 40, 1, 0),
-(29, '0074299057854', 'Carros - Hot Wheels - Sortimento MATTEL', 18, 25, 20, 1, 0),
-(30, '78787877', 'Produto Sem Loucura', 22, 12, 5, 1, 0),
-(31, '45454', 'OPA EDITEI', 25, 12, 23, 1, 1);
+INSERT INTO `products` (`id`, `cod`, `name`, `price`, `quantity`, `min_quantity`, `company_id`, `soft_delete`, `provider_id`) VALUES
+(11, '7891360507048', 'giz de cera faber castell c/ 15 cores', 14, 18, 10, 1, 1, 0),
+(12, '7897629204543', 'lapiseira 0.9 técnica', 11, 35, 35, 1, 1, 0),
+(13, '7896342411092', 'borracha branca mercur', 7, 25, 20, 1, 1, 0),
+(14, '121212', 'Doido', 12, 451, 12, 1, 1, 0),
+(15, '12121', 'Teste Decimal', 1, 45, 45, 1, 1, 0),
+(16, '3232', 'Mais decimal', 12, 12, 3, 1, 1, 0),
+(17, '23423432', 'TESTE NAMESPACE FINAL', 12, 43, 32, 1, 1, 0),
+(20, '534532', 'VINTE E CINCO', 12.25, 12, 12, 1, 1, 0),
+(21, '234532', 'CASA DOS MIL', 1325.58, 12, 12, 1, 1, 0),
+(22, '2920481821019', 'Bonca da Barbie 2023', 25, 18, 15, 0, 1, 0),
+(24, '12121', 'Outro', 12.25, 15, 12, 0, 1, 0),
+(25, '084843', 'Folha de Loro', 222.25, 12, 5, 1, 1, 0),
+(26, '4534534', 'Outra Coisa', 25.32, 12, 45, 1, 1, 0),
+(27, '32323', 'PRODUTO BOM', 25, 12, 5, 1, 1, 0),
+(28, '7897653512447', 'LÁPIS DE COR FABBER CASTELL 12 CORES', 12.25, 35, 40, 1, 1, 0),
+(29, '0074299057854', 'Carros - Hot Wheels - Sortimento MATTEL', 18, 25, 20, 1, 0, 0),
+(30, '78787877', 'Produto Sem Loucura', 22, 12, 5, 1, 0, 0),
+(31, '45454', 'OPA EDITEI', 25, 12, 23, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -154,24 +155,29 @@ INSERT INTO `products` (`id`, `cod`, `name`, `price`, `quantity`, `min_quantity`
 
 CREATE TABLE `providers` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `url` varchar(200) NOT NULL,
-  `company_id` int(11) NOT NULL,
-  `soft_delete` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `nome` varchar(100) NOT NULL,
+  `cnpj` varchar(100) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `telefone` varchar(30) NOT NULL,
+  `celular` varchar(30) NOT NULL,
+  `cep` varchar(100) NOT NULL,
+  `endereco` varchar(255) NOT NULL,
+  `numero` varchar(10) NOT NULL,
+  `complemento` varchar(200) NOT NULL,
+  `bairro` varchar(100) NOT NULL,
+  `cidade` varchar(100) NOT NULL,
+  `estado` varchar(2) NOT NULL,
+  `soft_delete` int(11) NOT NULL DEFAULT 0,
+  `company_id` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `providers`
 --
 
-INSERT INTO `providers` (`id`, `name`, `url`, `company_id`, `soft_delete`) VALUES
-(1, 'KINGSTON', 'WWW.KINGSTON.COM', 1, 0),
-(2, 'SEAGATE', 'WWW.SEAGATE.COM', 1, 0),
-(3, 'CORSAIR', 'WWW.CORSAIR.COM', 1, 0),
-(4, 'OLYMPUS', 'WWW.OLYMPUS.COM', 1, 0),
-(5, 'FUTURAIM', 'https://futuraim.com.br', 1, 0),
-(6, 'Atual Card', 'https://www.atualcard.com.br/', 0, 0),
-(7, 'MINHA VÓ', 'MINHAVO.COM.BR', 0, 0);
+INSERT INTO `providers` (`id`, `nome`, `cnpj`, `email`, `telefone`, `celular`, `cep`, `endereco`, `numero`, `complemento`, `bairro`, `cidade`, `estado`, `soft_delete`, `company_id`) VALUES
+(1, 'Erick e Anthony Marketing ME', '59.043.408/0001-93', 'vendas@erickeanthonymarketingme.com.br', '', '', '(67) 98931-2330', 'Rua Doutor Orestes Prata Tibery', '384', '', 'Centro', 'Três Lagoas', 'MS', 0, 1),
+(2, 'Gael e Leandro Joalheria ME', '42.913.473/0001-20', 'suporte@gaeleleandrojoalheriame.com.br', '(27) 3745-8367', '(27) 99805-4284', '29176-346', 'Rua Vista da Serra', '673', '', 'Vista da Serra I', 'Serra', 'ES', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -193,7 +199,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_number`, `user_email`, `user_pass`, `user_token`, `company_id`) VALUES
-(1, 123, 'gustavoalvesdasilva@outlook.com', '81dc9bdb52d04dc20036dbd8313ed055', '94e96714a4fcbe39773708f7bdb9bd17', 1);
+(1, 123, 'gustavoalvesdasilva@outlook.com', '81dc9bdb52d04dc20036dbd8313ed055', '2f4e14d6e38dc43ff77416479d1fffa2', 1);
 
 -- --------------------------------------------------------
 
@@ -296,7 +302,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT de tabela `providers`
 --
 ALTER TABLE `providers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `users`

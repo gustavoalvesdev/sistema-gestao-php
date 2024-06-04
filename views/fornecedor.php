@@ -27,18 +27,19 @@
 <table style="border: 1px solid #4052AE; background-color: #4052AE; overflow: auto" width="100%">
     <tr>
         <th>Nome</th>
-        <th>Site</th>
+        <th>E-mail</th>
         <th>Ações</th>
     </tr>
+    
     <?php foreach($providers as $provider): ?>
 
         <tr style="background-color: white; border: 1px solid #4052AE;">
-            <td><?= mb_strtoupper($provider->name, "utf8") ?></td>
-            <td><a target="_blank" href="<?= $provider->url ?>"><?= $provider->url ?></a></td>
+            <td><?= mb_strtoupper($provider->nome, "utf8") ?></td>
+            <td><?= mb_strtolower($provider->email, "utf8") ?></td>
             <td>
                 <a class="btn btn-edit" href="<?= BASE_URL ?>fornecedor/edit/<?= $provider->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
 
-                <a onclick="return confirm('Tem certeza que deseja excluir este fornecedor?')" class="btn btn-delete" href="<?= BASE_URL ?>provider/delete/<?= $provider->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
+                <a onclick="return confirm('Tem certeza que deseja excluir este fornecedor?')" class="btn btn-delete" href="<?= BASE_URL ?>fornecedor/delete/<?= $provider->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
             </td>
         </tr>
 

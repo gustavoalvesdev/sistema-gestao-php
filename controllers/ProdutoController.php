@@ -3,10 +3,12 @@
 namespace Controllers;
 use Core\Controller;
 use DAO\ProductDAO;
+use DAO\ProviderDAO;
 use Database\Database;
 use Database\MySQLDatabase;
 use Models\User;
 use Models\Product;
+use Models\Provider;
 use PDO;
 
 class ProdutoController extends Controller 
@@ -56,20 +58,24 @@ class ProdutoController extends Controller
     public function add()
     {
 
-        $product = new Product();
+        $providerDao = new ProviderDAO();
+        $providerDao->getConnection(new MySQLDatabase);
 
+        $this->data['providers'] = $providerDao->all();
 
         if (! empty($_POST['cod'])) {
 
-            $product->cod           = $_POST['cod'           ];
-            $product->name          = $_POST['name'          ];
+            $product = new Product();
+
+            $product->cod = $_POST['cod'];
+            $product->name = $_POST['name'];
             $price = str_replace('.', '' , $_POST['price']);
             $price = str_replace(',', '.', $price);
-            $product->price         = floatval($price);
+            $product->price = floatval($price);
             $quantity = str_replace('.', '', $_POST['quantity']);
             $quantity = str_replace(',', '.', $quantity);
-            $product->quantity      = floatval($quantity);
-            $min_quantity   = str_replace('.', '', $_POST['min_quantity']);
+            $product->quantity = floatval($quantity);
+            $min_quantity = str_replace('.', '', $_POST['min_quantity']);
             $min_quantity = str_replace(',', '.', $min_quantity);
             $product->min_quantity = floatval($min_quantity);
             $product->company_id = 1;

@@ -33,7 +33,7 @@ class FornecedorController extends Controller
 
             $busca = trim(addslashes($_GET['busca']));
 
-            $providers = $providerDao->all("soft_delete = 0 AND name LIKE '%$busca%' OR url LIKE '%$busca%'");  
+            $providers = $providerDao->all("soft_delete = 0 AND name LIKE '%$busca%' OR cnpj LIKE '%$busca%'");  
 
         } else {
             $providers = $providerDao->all('soft_delete = 0');  
@@ -63,12 +63,23 @@ class FornecedorController extends Controller
 
         }
 
-        if (! empty($_POST['name'])) {
-            $name = mb_strtoupper(addslashes($_POST['name']));
-            $url  = mb_strtoupper(addslashes($_POST['url']));
+        if (! empty($_POST['nome'])) {
+            
 
-            $provider->name = $name;
-            $provider->url = $url;
+            $provider->nome = addslashes($_POST['nome']);
+            $provider->cnpj = addslashes($_POST['cnpj']);
+            $provider->email = addslashes($_POST['email']);
+            $provider->celular = addslashes($_POST['celular']);
+            $provider->telefone = addslashes($_POST['telefone']);
+            $provider->cep = addslashes($_POST['cep']);
+            $provider->endereco = addslashes($_POST['endereco']);
+            $provider->numero = addslashes($_POST['numero']);
+            $provider->bairro = addslashes($_POST['bairro']);
+            $provider->cidade = addslashes($_POST['cidade']);
+            $provider->complemento = addslashes($_POST['complemento']);
+            $provider->estado = addslashes($_POST['estado']);
+            $provider->soft_delete = 0;
+            $provider->company_id = 1;
 
             $providerDao->save($provider);
 
@@ -117,6 +128,19 @@ class FornecedorController extends Controller
         $data['info'] = $provInfo;
 
         $this->loadView('provider-edit', $data);
+    }
+
+    public function delete($providerId)
+    {
+        $providerDao = new ProviderDAO();
+        $providerDao->getConnection(new MySQLDatabase);
+
+        if (!empty($providerId)) {
+            $providerDao->delete($providerId);
+        }
+
+        header('Location: ' . BASE_URL . 'fornecedor');
+        exit;
     }
 
     public function __destruct()

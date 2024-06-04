@@ -51,8 +51,23 @@
             </div>
             <!-- form-field -->
         </div>
-        <!-- form-row -->                
-    
+        <!-- form-row -->   
+
+        <div class="form-row">
+            <div class="form-field w100">
+                <label for="provider_id">Fornecedor:</label>
+                <select name="provider_id" id="provider_id">
+                    <?php foreach ($providers as $provider): ?>
+                    <option value="<?= $provider->id ?>"><?= $provider->nome ?> - <?= $provider->cnpj ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <!-- provider_id -->
+            </div>
+            <!-- form-field -->
+            
+        </div>
+        <!-- form-row -->             
+        <br />
         <div class="form-row">
             <button type="submit" class="btn btn-add btn-lg"><i class="fas fa-plus"></i> Adicionar Produto</button>
         </div>

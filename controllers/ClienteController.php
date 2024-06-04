@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Core\Controller;
 use DAO\CustomerDAO;
+use DAO\ProviderDAO;
 use Database\MySQLDatabase;
 use Models\User;
 use Models\Customer;
@@ -50,8 +51,6 @@ class ClienteController extends Controller
 
     public function add()
     {
-
-        
         if (! empty($_POST['name'])) {
             
             $customer = new Customer();
