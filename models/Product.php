@@ -14,6 +14,7 @@ class Product
     public float $min_quantity;
     public int $company_id;
     public int $soft_delete;
+    public int $provider_id;
 
     public function __construct() {}
 }

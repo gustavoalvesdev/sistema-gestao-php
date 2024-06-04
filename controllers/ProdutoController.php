@@ -79,6 +79,8 @@ class ProdutoController extends Controller
             $min_quantity = str_replace(',', '.', $min_quantity);
             $product->min_quantity = floatval($min_quantity);
             $product->company_id = 1;
+            $product->soft_delete = 0;
+            $product->provider_id = $_POST['provider_id'];
 
             $dao = new ProductDAO;
             $dao->getConnection(new MySQLDatabase);

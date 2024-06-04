@@ -56,7 +56,7 @@ class ProductDAO
 
     public function save(Product $product): bool
     {
-        $sql = "INSERT INTO products (cod, name, price, quantity, min_quantity, company_id, soft_delete) VALUES (:cod, :name, :price, :quantity, :min_quantity, :company_id, :soft_delete)";
+        $sql = "INSERT INTO products (cod, name, price, quantity, min_quantity, company_id, soft_delete, provider_id) VALUES (:cod, :name, :price, :quantity, :min_quantity, :company_id, :soft_delete, :provider_id)";
 
         if (empty($product->id)) {
             $sql = self::$conn->prepare($sql);
@@ -67,8 +67,9 @@ class ProductDAO
             $sql->bindValue(':min_quantity', $product->min_quantity);
             $sql->bindValue(':company_id', $product->company_id);
             $sql->bindValue(':soft_delete', $product->soft_delete ?? 0);
+            $sql->bindValue(':provider_id', $product->provider_id);
         } else {
-            $sql = "UPDATE products SET cod = :cod, name = :name, price = :price, quantity = :quantity, min_quantity = :min_quantity, company_id = :company_id, soft_delete = :soft_delete WHERE id = :id";
+            $sql = "UPDATE products SET cod = :cod, name = :name, price = :price, quantity = :quantity, min_quantity = :min_quantity, company_id = :company_id, soft_delete = :soft_delete, provider_id = :provider_id WHERE id = :id";
 
             $sql = self::$conn->prepare($sql);
             $sql->bindValue(':cod', $product->cod);
@@ -78,6 +79,7 @@ class ProductDAO
             $sql->bindValue(':min_quantity', $product->min_quantity);
             $sql->bindValue(':company_id', $product->company_id);
             $sql->bindValue(':soft_delete', $product->soft_delete ?? 0);
+            $sql->bindValue(':provider_id', $product->provider_id);
             $sql->bindValue(':id', $product->id);
         }
 
