@@ -4,12 +4,12 @@ namespace Core;
 
 class Controller 
 {
-    protected $data;
+    protected $dados;
     protected $user;
 
     public function __construct()
     {
-        $this->data['menu'] = array(
+        $this->dados['menu'] = array(
             array(
                 'class' => 'link-home',
                 'id' => '',

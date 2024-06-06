@@ -1,18 +1,18 @@
 function limpa_formulario_cep() {
 
-    document.getElementById('rua').value = ("");
+    document.getElementById('endereco').value = ("");
     document.getElementById('bairro').value = ("");
     document.getElementById('cidade').value = ("");
-    document.getElementById('uf').value = ("");
+    document.getElementById('estado').value = ("");
 }
 
 function meu_callback(conteudo) {
     if (!("erro" in conteudo)) {
         //Atualiza os campos com os valores.
-        document.getElementById('rua').value = (conteudo.logradouro);
+        document.getElementById('endereco').value = (conteudo.logradouro);
         document.getElementById('bairro').value = (conteudo.bairro);
         document.getElementById('cidade').value = (conteudo.localidade);
-        document.getElementById('uf').value = (conteudo.uf);
+        document.getElementById('estado').value = (conteudo.uf);
     } //end if.
     else {
         //CEP não Encontrado.
@@ -36,10 +36,10 @@ function pesquisacep(valor) {
         if (validacep.test(cep)) {
 
             //Preenche os campos com "..." enquanto consulta webservice.
-            document.getElementById('rua').value = "...";
+            document.getElementById('endereco').value = "...";
             document.getElementById('bairro').value = "...";
             document.getElementById('cidade').value = "...";
-            document.getElementById('uf').value = "...";
+            document.getElementById('estado').value = "...";
 
             //Cria um elemento javascript.
             var script = document.createElement('script');

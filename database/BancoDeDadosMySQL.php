@@ -6,7 +6,7 @@ namespace Database;
 
 use Database\Interfaces\DatabaseInterface;
 
-final class MySQLDatabase implements DatabaseInterface
+final class BancoDeDadosMySQL implements DatabaseInterface
 {
 
     private static ?\PDO $instance = null;

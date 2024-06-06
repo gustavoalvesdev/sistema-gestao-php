@@ -31,16 +31,16 @@
         <th>Telefone</th>
         <th>Ações</th>
     </tr>
-    <?php foreach($customers as $customer): ?>
+    <?php foreach($clientes as $cliente): ?>
 
         <tr style="background-color: white; border: 1px solid #4052AE;">
-            <td><?= mb_strtoupper($customer->name, "utf8") ?></td>
-            <td><?= $customer->cellphone ?></td>
-            <td><?= $customer->phone ?></td>
+            <td><?= mb_strtoupper($cliente->nome, "utf8") ?></td>
+            <td><?= $cliente->celular ?></td>
+            <td><?= $cliente->telefone ?></td>
             <td>
-                <a class="btn btn-edit" href="<?= BASE_URL ?>cliente/edit/<?= $customer->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
+                <a class="btn btn-edit" href="<?= BASE_URL ?>cliente/editar/<?= $cliente->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
 
-                <a onclick="return confirm('Tem certeza que deseja excluir este cliente?')" class="btn btn-delete" href="<?= BASE_URL ?>cliente/delete/<?= $customer->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
+                <a onclick="return confirm('Tem certeza que deseja excluir este cliente?')" class="btn btn-delete" href="<?= BASE_URL ?>cliente/excluir/<?= $cliente->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
             </td>
         </tr>
 

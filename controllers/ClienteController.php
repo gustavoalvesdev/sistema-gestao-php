@@ -3,11 +3,10 @@
 namespace Controllers;
 
 use Core\Controller;
-use DAO\CustomerDAO;
-use DAO\ProviderDAO;
-use Database\MySQLDatabase;
+use DAO\ClienteDAO;
+use Database\BancoDeDadosMySQL;
 use Models\User;
-use Models\Customer;
+use Models\Cliente;
 
 class ClienteController extends Controller 
 {
@@ -22,111 +21,111 @@ class ClienteController extends Controller
             exit;
         }
 
-        $this->loadView('template_parts/header', $this->data);
+        $this->loadView('template_parts/header', $this->dados);
     }
 
     public function index()
     {
-        $customerDao = new CustomerDAO();
-        $customerDao->getConnection(new MySQLDatabase);
+        $clienteDao = new ClienteDAO();
+        $clienteDao->obterConexao(new BancoDeDadosMySQL);
 
 
         if (! empty($_GET['busca'])) {
 
             $busca = trim(addslashes($_GET['busca']));
 
-            $customers = $customerDao->all("soft_delete = 0 AND name LIKE '%$busca%' OR cpf LIKE '%$busca%'");  
+            $clientes = $clienteDao->todos("soft_delete = 0 AND (nome LIKE '%$busca%' OR cpf LIKE '%$busca%')");  
 
         } else {
-            $customers = $customerDao->all('soft_delete = 0');  
+            $clientes = $clienteDao->todos('soft_delete = 0');  
         }
         
 
         
 
-        $this->data['customers'] = $customers;
+        $this->dados['clientes'] = $clientes;
 
-        $this->loadView('cliente', $this->data);
+        $this->loadView('clientes', $this->dados);
     }
 
-    public function add()
+    public function adicionar()
     {
-        if (! empty($_POST['name'])) {
+        if (! empty($_POST['nome'])) {
             
-            $customer = new Customer();
+            $cliente = new Cliente();
             
-            $customer->name = addslashes($_POST['name']);
-            $customer->rg = addslashes($_POST['rg']);
-            $customer->cpf = addslashes($_POST['cpf']);
-            $customer->email = addslashes($_POST['email']);
-            $customer->cellphone = addslashes($_POST['cellphone']);
-            $customer->phone = addslashes($_POST['phone']);
-            $customer->zipcode = addslashes($_POST['zipcode']);
-            $customer->street = addslashes($_POST['street']);
-            $customer->number = addslashes($_POST['number']);
-            $customer->district = addslashes($_POST['district']);
-            $customer->city = addslashes($_POST['city']);
-            $customer->state = addslashes($_POST['state']);
-            $customer->complement = addslashes($_POST['complement']);
+            $cliente->nome = addslashes($_POST['nome']);
+            $cliente->rg = addslashes($_POST['rg']);
+            $cliente->cpf = addslashes($_POST['cpf']);
+            $cliente->email = addslashes($_POST['email']);
+            $cliente->celular = addslashes($_POST['celular']);
+            $cliente->telefone = addslashes($_POST['telefone']);
+            $cliente->cep = addslashes($_POST['cep']);
+            $cliente->endereco = addslashes($_POST['endereco']);
+            $cliente->numero = addslashes($_POST['numero']);
+            $cliente->bairro = addslashes($_POST['bairro']);
+            $cliente->cidade = addslashes($_POST['cidade']);
+            $cliente->estado = addslashes($_POST['estado']);
+            $cliente->complemento = addslashes($_POST['complemento']);
             
-            $customerDao = new CustomerDAO;
+            $clienteDao = new ClienteDAO;
 
-            $customerDao->getConnection(new MySQLDatabase);
+            $clienteDao->obterConexao(new BancoDeDadosMySQL);
 
-            $customerDao->save($customer);
+            $clienteDao->salvar($cliente);
+
+            header('Location: '.BASE_URL.'clientes');
+            exit;
+        }
+
+        $this->loadView('adicionar-cliente', $this->dados);
+    }
+
+    public function editar($id)
+    {
+
+        $clienteDao = new ClienteDAO;
+        $clienteDao->obterConexao(new BancoDeDadosMySQL);
+
+        $cliente = $clienteDao->encontrar($id);
+
+        $this->dados['cliente'] = $cliente;
+
+        if (isset($_POST['nome'])) {
+
+            $cliente = new Cliente;
+
+            $cliente->nome = addslashes($_POST['nome']);
+            $cliente->rg = addslashes($_POST['rg']);
+            $cliente->cpf = addslashes($_POST['cpf']);
+            $cliente->email = addslashes($_POST['email']);
+            $cliente->celular = addslashes($_POST['celular']);
+            $cliente->telefone = addslashes($_POST['telefone']);
+            $cliente->cep = addslashes($_POST['cep']);
+            $cliente->endereco = addslashes($_POST['endereco']);
+            $cliente->numero = addslashes($_POST['numero']);
+            $cliente->bairro = addslashes($_POST['bairro']);
+            $cliente->cidade = addslashes($_POST['cidade']);
+            $cliente->estado = addslashes($_POST['estado']);
+            $cliente->complemento = addslashes($_POST['complemento']);
+            $cliente->id = $id;
+
+            $clienteDao->salvar($cliente);
 
             header('Location: '.BASE_URL.'cliente');
             exit;
         }
 
-        $this->loadView('cliente-add', $this->data);
+        $this->loadView('editar-cliente', $this->dados);
     }
 
-    public function edit($id)
+    public function excluir($id)
     {
-
-        $customerDao = new CustomerDAO;
-        $customerDao->getConnection(new MySQLDatabase);
-
-        $customer = $customerDao->find($id);
-
-        $this->data['customer'] = $customer;
-
-        if (isset($_POST['name'])) {
-
-            $customer = new Customer;
-
-            $customer->name = addslashes($_POST['name']);
-            $customer->rg = addslashes($_POST['rg']);
-            $customer->cpf = addslashes($_POST['cpf']);
-            $customer->email = addslashes($_POST['email']);
-            $customer->cellphone = addslashes($_POST['cellphone']);
-            $customer->phone = addslashes($_POST['phone']);
-            $customer->zipcode = addslashes($_POST['zipcode']);
-            $customer->street = addslashes($_POST['street']);
-            $customer->number= addslashes($_POST['number']);
-            $customer->district = addslashes($_POST['district']);
-            $customer->city = addslashes($_POST['city']);
-            $customer->state = addslashes($_POST['state']);
-            $customer->complement = addslashes($_POST['complement']);
-            $customer->id = $id;
-
-            $customerDao->save($customer);
-
-            header('Location: '.BASE_URL.'cliente');
-            exit;
-        }
-
-        $this->loadView('cliente-edit', $this->data);
-    }
-
-    public function delete($id)
-    {
-        $c = new CustomerDAO();
-        $c->getConnection(new MySQLDatabase);
+        $c = new ClienteDAO();
+        $c->obterConexao(new BancoDeDadosMySQL);
 
         if (! empty($id)) {
-            $c->delete($id);
+            $c->excluir($id);
         }
 
         header('Location: '.BASE_URL.'cliente');

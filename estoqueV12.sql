@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04/06/2024 às 20:37
+-- Tempo de geração: 06/06/2024 às 22:19
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -24,52 +24,33 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `companies`
+-- Estrutura para tabela `clientes`
 --
 
-CREATE TABLE `companies` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `name` varchar(100) NOT NULL DEFAULT '',
-  `nfe_number` int(8) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Despejando dados para a tabela `companies`
---
-
-INSERT INTO `companies` (`id`, `name`, `nfe_number`) VALUES
-(1, 'Studio Color', 12);
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `customers`
---
-
-CREATE TABLE `customers` (
+CREATE TABLE `clientes` (
   `id` int(11) NOT NULL,
-  `name` varchar(200) NOT NULL,
+  `nome` varchar(200) NOT NULL,
   `rg` varchar(20) DEFAULT NULL,
   `cpf` varchar(20) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `cellphone` varchar(200) DEFAULT NULL,
-  `phone` varchar(200) DEFAULT NULL,
-  `zipcode` varchar(12) DEFAULT NULL,
-  `street` varchar(100) DEFAULT NULL,
-  `number` varchar(8) DEFAULT NULL,
-  `district` varchar(50) DEFAULT NULL,
-  `city` varchar(100) DEFAULT NULL,
-  `state` varchar(50) DEFAULT NULL,
-  `complement` varchar(100) DEFAULT NULL,
+  `celular` varchar(200) DEFAULT NULL,
+  `telefone` varchar(200) DEFAULT NULL,
+  `cep` varchar(12) DEFAULT NULL,
+  `endereco` varchar(100) DEFAULT NULL,
+  `numero` varchar(8) DEFAULT NULL,
+  `bairro` varchar(50) DEFAULT NULL,
+  `cidade` varchar(100) DEFAULT NULL,
+  `estado` varchar(50) DEFAULT NULL,
+  `complemento` varchar(100) DEFAULT NULL,
   `company_id` int(11) DEFAULT 1,
   `soft_delete` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `customers`
+-- Despejando dados para a tabela `clientes`
 --
 
-INSERT INTO `customers` (`id`, `name`, `rg`, `cpf`, `email`, `cellphone`, `phone`, `zipcode`, `street`, `number`, `district`, `city`, `state`, `complement`, `company_id`, `soft_delete`) VALUES
+INSERT INTO `clientes` (`id`, `nome`, `rg`, `cpf`, `email`, `celular`, `telefone`, `cep`, `endereco`, `numero`, `bairro`, `cidade`, `estado`, `complemento`, `company_id`, `soft_delete`) VALUES
 (3, 'Gustavo Alves da Silva', '48.050.443-x', '404.310.328-07', 'gustavoalvesdasilva@outlook.com', '(11) 99653-1308', '(11) 4679-', '08544-100', 'Rua dos Goivos', '19', 'Vila Santa Margarida', 'Ferraz de Vasconcelos', 'SP', 'Perto do CAIC', 0, 1),
 (4, 'Editado', 'Editado', 'Editado', 'editao@editado.com', 'Editado', 'editado', 'Editado', 'Editado', 'Editado', 'Editado', 'Editado', 'Editado', 'Editado', 1, 1),
 (5, 'Gustavo Editado', '11.111.111-2', '111.111.111-11', 'gustavoalvesdasilva@outlook.com', '(11) 999999-9999', '(11) 4444-4444', '01310-100', 'Avenida Paulista', '12', 'Bela Vista', 'São Paulo', 'SP', 'Perto do MASP', 1, 1),
@@ -90,7 +71,7 @@ INSERT INTO `customers` (`id`, `name`, `rg`, `cpf`, `email`, `cellphone`, `phone
 (20, 'Tele Esfihas', '', '', '', '98132-8606 / 97783-9966', '(11) 2053-9066', '08255-000', 'Avenida Nagib Farah Maluf', '1606', 'Conjunto Residencial José Bonifácio', 'São Paulo', 'SP', '', 1, 1),
 (21, 'Açougue JB', '', '', '', '(11) 96185-6388', '2523-0081', '08255000', 'Avenida Nagib Farah Maluf', '1614', 'Conjunto Residencial José Bonifácio', 'São Paulo', 'SP', '', 1, 1),
 (22, 'Passarela Fashion', '', '', '', '(11) 96348-7557', '', '08253-015', 'Avenida Nagib Farah Maluf', '1616', 'Conjunto Residencial José Bonifácio', 'São Paulo', 'SP', '', 1, 1),
-(23, 'Pedro Cardoso Lemos', '12.324.321-x', '404.214.343.20', 'pedro@lemos.com', '(11) 12133-4321', '(11) 1234-3432', '08530-000', 'Rua Santos Dumont', '225', 'Vila Ana Maria', 'Ferraz de Vasconcelos', 'SP', 'Perto da Praia', 1, 0),
+(23, 'Pedro Cardoso Lemos', '12.324.321-x', '404.214.343.20', 'pedro@lemos.com', '(11) 12133-4321', '(11) 1234-3432', '08530-000', 'Rua Santos Dumont', '225', 'Vila Ana Maria', 'Ferraz de Vasconcelos', 'SP', 'Perto da Praia', 1, 1),
 (24, 'Maria Silva', '', '', '', '', '', '', '', '', '', '', '', '', 1, 1),
 (25, 'Fernanda Souza', '', '', '', '', '', '', '', '', '', '', '', '', 1, 1),
 (26, 'Ribeiro Santos', '', '', '', '', '', '', '', '', '', '', '', '', 1, 1),
@@ -101,9 +82,28 @@ INSERT INTO `customers` (`id`, `name`, `rg`, `cpf`, `email`, `cellphone`, `phone
 (31, 'Gustavo Alves da Silva', '48.050.443-x', '404.310.328-07', 'gustavoalvesdasilva@outlook.com', '(11) 99653-1308', '(11) 4679-7017', '08544100', 'Rua dos Goivos', '19', 'Vila Santa Margarida', 'Ferraz de Vasconcelos', 'SP', 'Perto do CAIC', 1, 1),
 (32, 'Gustavo Alves da Silva', '48.050.443-x', '404.310.328-07', 'gustavoalvesdasilva@outlook.com', '(11) 99653-1308', '(11) 4679-7017', '08544100', 'Rua dos Goivos', '19', 'Vila Santa Margarida', 'Ferraz de Vasconcelos', 'SP', 'Teste', 1, 1),
 (33, 'Pedro Santos', '12.324.321-x', '404.214.343.20', 'pedro@lemos.com', '(11) 12133-4321', '(11) 1234-3432', '08530-000', 'Rua Santos Dumont', '225', 'Vila Ana Maria', 'Ferraz de Vasconcelos', 'SP', 'Perto da Praia', 1, 1),
-(34, 'Pedro Santos', '12.324.321-x', '404.214.343.20', 'pedro@lemos.com', '(11) 7777-7777', '(11) 91234-5678', '08530-000', 'Rua Santos Dumont', '225', 'Vila Ana Maria', 'Ferraz de Vasconcelos', 'SP', 'Perto da Praia', 1, 0),
+(34, 'Gustavo Alves da Silva', '48.050.443-x', '404.310.328-07', 'gustavoalvesdasilva@outlook.com', '(11) 99653-1308', '(11) 99653-1308', '08544-100', 'Rua dos Goivos', '19', 'Vila Santa Margarida', 'SP', 'SP', 'Perto do CAIC', 1, 1),
 (35, 'Pedro Santos', '12.324.321-x', '404.214.343.20', 'pedro@lemos.com', '(11) 5555-5555', '(11) 1234-3432', '08530-000', 'Rua Santos Dumont', '225', 'Vila Ana Maria', 'Ferraz de Vasconcelos', 'SP', 'Perto da Praia', 1, 1),
 (36, 'Gustavo Alves da Silva', '48050443x', '40431032807', 'gustavoalvesdasilva@outlook.com', '(11) 99653-1308', '(11) 4679-7017', '08544100', 'Rua dos Goivos', '19', 'Vila Santa Margarida', 'Ferraz de Vasconcelos', 'SP', 'Perto do CAIC', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `companies`
+--
+
+CREATE TABLE `companies` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `name` varchar(100) NOT NULL DEFAULT '',
+  `nfe_number` int(8) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `companies`
+--
+
+INSERT INTO `companies` (`id`, `name`, `nfe_number`) VALUES
+(1, 'Studio Color', 12);
 
 -- --------------------------------------------------------
 
@@ -143,9 +143,10 @@ INSERT INTO `products` (`id`, `cod`, `name`, `price`, `quantity`, `min_quantity`
 (26, '4534534', 'Outra Coisa', 25.32, 12, 45, 1, 1, 0),
 (27, '32323', 'PRODUTO BOM', 25, 12, 5, 1, 1, 0),
 (28, '7897653512447', 'LÁPIS DE COR FABBER CASTELL 12 CORES', 12.25, 35, 40, 1, 1, 0),
-(29, '0074299057854', 'Carros - Hot Wheels - Sortimento MATTEL', 18, 25, 20, 1, 0, 0),
-(30, '78787877', 'Produto Sem Loucura', 22, 12, 5, 1, 0, 0),
-(31, '45454', 'OPA EDITEI', 25, 12, 23, 1, 1, 0);
+(29, '0074299057854', 'Carros - Hot Wheels - Sortimento MATTEL', 18, 25, 20, 1, 1, 0),
+(30, '78787877', 'Produto Sem Loucura', 22, 12, 5, 1, 1, 0),
+(31, '45454', 'OPA EDITEI', 25, 12, 23, 1, 1, 0),
+(32, '123456789', 'FARINHA DE TRIGO editada', 25, 45, 55, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -199,7 +200,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_number`, `user_email`, `user_pass`, `user_token`, `company_id`) VALUES
-(1, 123, 'gustavoalvesdasilva@outlook.com', '81dc9bdb52d04dc20036dbd8313ed055', '2f4e14d6e38dc43ff77416479d1fffa2', 1);
+(1, 123, 'gustavoalvesdasilva@outlook.com', '81dc9bdb52d04dc20036dbd8313ed055', 'e84be4045904c42529c722c40f65b340', 1);
 
 -- --------------------------------------------------------
 
@@ -241,15 +242,15 @@ INSERT INTO `workers` (`id`, `nome`, `rg`, `cpf`, `email`, `celular`, `telefone`
 --
 
 --
--- Índices de tabela `companies`
+-- Índices de tabela `clientes`
 --
-ALTER TABLE `companies`
+ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `customers`
+-- Índices de tabela `companies`
 --
-ALTER TABLE `customers`
+ALTER TABLE `companies`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -281,22 +282,22 @@ ALTER TABLE `workers`
 --
 
 --
+-- AUTO_INCREMENT de tabela `clientes`
+--
+ALTER TABLE `clientes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
 -- AUTO_INCREMENT de tabela `companies`
 --
 ALTER TABLE `companies`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de tabela `customers`
---
-ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
-
---
 -- AUTO_INCREMENT de tabela `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de tabela `providers`
