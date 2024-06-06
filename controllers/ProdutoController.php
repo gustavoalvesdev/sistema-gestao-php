@@ -102,8 +102,11 @@ class ProdutoController extends Controller
 
         $product = $productDao->find($id);
 
+        $providerDao = new ProviderDAO();
+        $providerDao->getConnection(new MySQLDatabase);
 
         $this->data['product'] = $product;
+        $this->data['providers'] = $providerDao->all();
 
         if (isset($_POST['cod'])) {
 
@@ -119,6 +122,7 @@ class ProdutoController extends Controller
             $min_quantity   = str_replace('.', '', $_POST['min_quantity']);
             $min_quantity = str_replace(',', '.', $min_quantity);
             $productToEdit->min_quantity = floatval($min_quantity);
+            $productToEdit->provider_id = addslashes($_POST['provider_id']);
             
             $productToEdit->company_id = $product->company_id;
 

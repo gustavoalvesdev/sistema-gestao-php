@@ -53,6 +53,21 @@
         <!-- form-row -->
 
         <div class="form-row">
+            <div class="form-field w100">
+                <label for="provider_id">Fornecedor:</label>
+                <select name="provider_id" id="provider_id">
+                    <?php foreach ($providers as $provider): ?>
+                    <option value="<?= $provider->id ?>" <?= ($provider->id == $product->provider_id) ? 'selected' : ''; ?>><?= $provider->nome ?> - <?= $provider->cnpj ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <!-- provider_id -->
+            </div>
+            <!-- form-field -->
+            
+        </div>
+        <!-- form-row -->             
+
+        <div class="form-row">
             <button class="btn btn-edit btn-lg" type="submit"><i class="fas fa-pencil-alt"></i> Editar</button>
         </div>
         <!-- form-row -->  
