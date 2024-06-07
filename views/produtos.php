@@ -9,7 +9,7 @@
     }
 </style>
 
-<p style="margin: 30px 0;"><a class="btn btn-add btn-lg" href="<?= BASE_URL.'produto/add' ?>"><i class="fas fa-plus"></i> Adicionar Produto</a></p>
+<p style="margin: 30px 0;"><a class="btn btn-add btn-lg" href="<?= BASE_URL.'produto/adicionar' ?>"><i class="fas fa-plus"></i> Adicionar Produto</a></p>
 
 <p style="color:#333"><a href="<?= BASE_URL ?>" style="color:#333">Home</a> / Produtos</p>
 
@@ -30,17 +30,17 @@
         <th>Qtd.</th>
         <th>Ações</th>
     </tr>
-    <?php foreach($list as $product): ?>
+    <?php foreach($produtos as $produto): ?>
 
         <tr style="background-color: white; border: 1px solid #4052AE;">
-            <td><?= $product->cod ?></td>
-            <td><?= mb_strtoupper($product->name); ?></td>
-            <td>R$ <?= number_format($product->price, 2, ',', '.') ?></td>
-            <td><?= $product->quantity ?></td>
+            <td><?= $produto->codigo ?></td>
+            <td><?= mb_strtoupper($produto->nome); ?></td>
+            <td>R$ <?= number_format($produto->preco, 2, ',', '.') ?></td>
+            <td><?= $produto->quantidade ?></td>
             <td>
-                <a class="btn btn-edit" href="<?= BASE_URL ?>produto/edit/<?= $product->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
+                <a class="btn btn-edit" href="<?= BASE_URL ?>produto/editar/<?= $produto->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
 
-                <a onclick="return confirm('Tem certeza que deseja excluir este produto?')" class="btn btn-delete" href="<?= BASE_URL ?>produto/delete/<?= $product->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
+                <a onclick="return confirm('Tem certeza que deseja excluir este produto?')" class="btn btn-delete" href="<?= BASE_URL ?>produto/excluir/<?= $produto->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
             </td>
         </tr>
 

@@ -12,8 +12,8 @@
 
 <div style="padding: 2%;">
     <div style="background-color: white; padding: 5px 10px; border-radius: 10px; margin-bottom: 20px;">
-        <h1>Adicionar Fornecedor</h1>
-        <p style="color: black;"><a href="<?= BASE_URL ?>" style="color: black;">Home</a> / <a href="<?= BASE_URL ?>fornecedor" style="color: black;">Fornecedores</a> / Adicionar Fornecedor</p>
+        <h1>Editar Fornecedor</h1>
+        <p style="color: black;"><a href="<?= BASE_URL ?>" style="color: black;">Home</a> / <a href="<?= BASE_URL ?>fornecedor" style="color: black;">Fornecedores</a> / Editar Fornecedor</p>
     </div>
 </div>
 
@@ -22,12 +22,12 @@
     <div class="form-row">
         <div class="form-field w50">
             <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome" required />
+            <input type="text" name="nome" id="nome" value="<?= $fornecedor->nome ?>" required />
         </div>
         <!-- form-field -->
         <div class="form-field w50">
             <label for="cnpj">CNPJ:</label>
-            <input type="text" name="cnpj" id="cnpj" />
+            <input type="text" name="cnpj" id="cnpj" value="<?= $fornecedor->cnpj ?>" />
         </div>
         <!-- form-field -->
     </div>
@@ -36,17 +36,17 @@
     <div class="form-row">
         <div class="form-field w50">
             <label for="email">E-mail:</label>
-            <input type="email" name="email"  />
+            <input type="email" name="email" value="<?= $fornecedor->email ?>" />
         </div>
         <!-- form-field -->
         <div class="form-field w25">
             <label for="celular">Celular:</label>
-            <input type="text" name="celular" />
+            <input type="text" name="celular" value="<?= $fornecedor->celular ?>" />
         </div>
         <!-- form-field -->
         <div class="form-field w25" id="row-phone">
             <label for="telefone">Telefone Fixo:</label>
-            <input type="text" name="telefone" />
+            <input type="text" name="telefone" value="<?= $fornecedor->telefone ?>" />
         </div>
         <!-- form-field -->
     </div>
@@ -55,17 +55,17 @@
     <div class="form-row">
         <div class="form-field w30">
             <label for="cep">CEP:</label>
-            <input type="text" name="cep" id="cep" onblur="pesquisacep(this.value);"  />
+            <input type="text" name="cep" id="cep" onblur="pesquisacep(this.value);" value="<?= $fornecedor->cep ?>"  />
         </div>
         <!-- form-field -->
         <div class="form-field w50">
             <label for="endereco">Endereço:</label>
-            <input type="text" name="endereco" id="rua"   />
+            <input type="text" name="endereco" id="endereco"  value="<?= $fornecedor->endereco ?>" />
         </div>
         <!-- form-field -->
         <div class="form-field w20" id="row-number">
             <label for="numero">Número:</label>
-            <input type="text" name="numero" id="number"   />
+            <input type="text" name="numero" id="numero" value="<?= $fornecedor->numero ?>" />
         </div>
         <!-- form-field -->
     </div>
@@ -74,23 +74,23 @@
     <div class="form-row">
         <div class="form-field w25">
             <label for="bairro">Bairro:</label>
-            <input type="text" name="bairro" id="bairro" />
+            <input type="text" name="bairro" id="bairro" value="<?= $fornecedor->bairro ?>" />
         </div>
         <!-- form-field -->
         <div class="form-field w25">
             <label for="cidade">Cidade:</label>
-            <input type="text" name="cidade" id="cidade"   />
+            <input type="text" name="cidade" id="cidade" value="<?= $fornecedor->cidade ?>"  />
         </div>
         <!-- form-field -->
         <div class="form-field w25">
             <label for="complemento">Complemento:</label>
-            <input type="text" name="complemento" id="complement"   />
+            <input type="text" name="complemento" id="complemento" value="<?= $fornecedor->complemento ?>" />
         </div>
         <!-- form-field -->
 
         <div class="form-field w25">
             <label for="estado">Estado:</label>
-            <input type="text" name="estado" id="uf"   />
+            <input type="text" name="estado" id="estado" value="<?= $fornecedor->estado ?>" />
         </div>
         <!-- form-field -->
     </div>
@@ -98,9 +98,11 @@
 
     <br>
     <div class="form-row">
-        <button type="submit" class="btn btn-add btn-lg"><i class="fas fa-plus"></i> Adicionar Fornecedor</button>
+        <button type="submit" name="action" class="btn btn-add btn-lg"><i class="fas fa-plus"></i> Editar Fornecedor</button>
     </div>
     <!-- form-row -->
  
 </form>
 <!-- form -->
+
+<script src="<?= BASE_URL ?>assets/js/viacep.js"></script>

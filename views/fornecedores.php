@@ -11,14 +11,14 @@
 
 <h1 style="color: #333">Lista de Fornecedores</h1>
 
-<p style="margin: 30px 0;"><a class="btn btn-add btn-lg" href="<?= BASE_URL.'fornecedor/add' ?>"><i class="fas fa-plus"></i> Adicionar Fornecedor</a></p>
+<p style="margin: 30px 0;"><a class="btn btn-add btn-lg" href="<?= BASE_URL.'fornecedor/adicionar' ?>"><i class="fas fa-plus"></i> Adicionar Fornecedor</a></p>
 
 <p style="color:#333"><a href="<?= BASE_URL ?>" style="color:#333">Home</a> / Fornecedores</p>
 
 <form method="GET" class="form-busca">
     <br /><br />
     <fieldset style="background-color: white">
-        <input type="text" id="busca" name="busca" value="<?= ($_GET['busca']) ?? ''; ?>" placeholder="Digite nome ou site do fornecedor" style="width:100%; height:40px; font-size: 18px" />
+        <input type="text" id="busca" name="busca" value="<?= ($_GET['busca']) ?? ''; ?>" placeholder="Digite nome ou CNPJ do fornecedor" style="width:100%; height:40px; font-size: 18px" />
         <!-- busca -->
     </fieldset>
 </form>
@@ -31,15 +31,15 @@
         <th>Ações</th>
     </tr>
     
-    <?php foreach($providers as $provider): ?>
+    <?php foreach($fornecedores as $fornecedor): ?>
 
         <tr style="background-color: white; border: 1px solid #4052AE;">
-            <td><?= mb_strtoupper($provider->nome, "utf8") ?></td>
-            <td><?= mb_strtolower($provider->email, "utf8") ?></td>
+            <td><?= mb_strtoupper($fornecedor->nome, "utf8") ?></td>
+            <td><?= mb_strtolower($fornecedor->email, "utf8") ?></td>
             <td>
-                <a class="btn btn-edit" href="<?= BASE_URL ?>fornecedor/edit/<?= $provider->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
+                <a class="btn btn-edit" href="<?= BASE_URL ?>fornecedor/editar/<?= $fornecedor->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
 
-                <a onclick="return confirm('Tem certeza que deseja excluir este fornecedor?')" class="btn btn-delete" href="<?= BASE_URL ?>fornecedor/delete/<?= $provider->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
+                <a onclick="return confirm('Tem certeza que deseja excluir este fornecedor?')" class="btn btn-delete" href="<?= BASE_URL ?>fornecedor/excluir/<?= $fornecedor->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
             </td>
         </tr>
 

@@ -1,9 +1,11 @@
 <?php 
 
 namespace Controllers;
+
+use BancoDeDados\BancoDeDadosMySQL;
 use Core\Controller;
-use Models\User;
-use Models\Product;
+use DAO\ProdutoDAO;
+use DAO\UsuarioDAO;
 
 class RelatorioController extends Controller
 {
@@ -11,16 +13,15 @@ class RelatorioController extends Controller
     {
         parent::__construct();
 
-        $this->user = new User();
+        $usuario_dao = new UsuarioDAO();
 
-        if (! $this->user->checkLogin()) {
+        if (! $usuario_dao->verificarLogin($this->usuario)) {
             header('Location: '.BASE_URL.'login');
             exit;
         }
 
-        $data = array();
 
-        $data['menu'] = array(
+        $this->dados['menu'] = array(
             array(
                 'class' => '',
                 'id' => '',
@@ -35,19 +36,18 @@ class RelatorioController extends Controller
             )
         );
 
-        $this->loadView('template_parts/header', $data);
+        $this->loadView('template_parts/header', $this->dados);
 
     }
 
     public function index()
     {
-        $data = array();
+        $produto_dao = new ProdutoDAO();
+        $produto_dao::obter_conexao(new BancoDeDadosMySQL);
 
-        $p = new Product();
+        $this->dados['lista'] = $produto_dao->todos("quantidade_minima < quantidade");
 
-        $data['list'] = $p->getLowQuantityProducts();
-
-        $this->loadView('relatorio', $data);
+        $this->loadView('relatorios', $this->dados);
     }
 
     public function __destruct()

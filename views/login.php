@@ -14,17 +14,17 @@
             <h1>Sistema de Gestão</h1>
             <form method="POST">
                 Seu e-mail:<br />
-                <input type="email" name="user_email" /><br /><br />
+                <input type="email" name="email" /><br /><br />
             
                 Sua senha:<br />
-                <input type="password" name="password" /><br /><br />
+                <input type="password" name="senha" /><br /><br />
             
                 <input type="submit" value="Entrar" />
             </form>
             
-            <?php if (! empty($msg)): ?>
+            <?php if (! empty($mensagem)): ?>
             
-                <h2><?= $msg ?></h2>
+                <h2><?= $mensagem ?></h2>
             
             <?php endif; ?>
 

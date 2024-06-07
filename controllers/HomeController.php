@@ -1,9 +1,11 @@
 <?php
 
 namespace Controllers;
+
+use BancoDeDados\BancoDeDadosMySQL;
 use Core\Controller;
-use Models\User;
-use Models\Product;
+use DAO\UsuarioDAO;
+use Models\Usuario;
 
 class HomeController extends Controller 
 {
@@ -12,19 +14,21 @@ class HomeController extends Controller
     {
         parent::__construct();
 
-        $this->user = new User();
+        $this->usuario = new Usuario();
+        $usuarioDao = new UsuarioDAO();
+        $usuarioDao->obterConexao(new BancoDeDadosMySQL);
 
-        if (! $this->user->checkLogin()) {
+        if (! $usuarioDao->verificarLogin($this->usuario)) {
             header('Location: '.BASE_URL.'login');
             exit;
         }
 
-        $this->loadView('template_parts/header', $this->data);
+        $this->loadView('template_parts/header', $this->dados);
     }
 
     public function index() 
     {
-        $this->loadView('home', $this->data);
+        $this->loadView('home', $this->dados);
     }
 
     public function __destruct()

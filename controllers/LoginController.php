@@ -1,28 +1,33 @@
 <?php 
 
 namespace Controllers;
+
+use BancoDeDados\BancoDeDadosMySQL;
 use Core\Controller;
-use Models\User;
+use DAO\UsuarioDAO;
+use Models\Usuario;
 
 class LoginController extends Controller 
 {
     public function index()
     {
         
-        $data = array(
-            'msg'=> ''
-        );
+        $this->dados['mensagem'] = '';
 
-        if (!empty($_POST['user_email'])) {
+        if (!empty($_POST['email'])) {
             
-            $email = $_POST['user_email'];
-            $upass = $_POST['password'  ];
+            $email = addslashes($_POST['email']);
+            $senha = addslashes($_POST['senha']);
 
-            $user = new User();
+            $usuario = new Usuario();
+            $usuarioDao = new UsuarioDAO();
+            $usuarioDao->obterConexao(new BancoDeDadosMySQL);
+            $usuario->email = $email;
+            $usuario->senha = $senha;
 
-            if ($user->verifyUser($email, $upass)) {
+            if ($usuarioDao->verificarUsuario($usuario)) {
 
-                $token = $user->createToken($email);
+                $token = $usuarioDao->criarToken($usuario);
                 $_SESSION['token'] = $token;
 
                 header('Location: '.BASE_URL);
@@ -30,13 +35,13 @@ class LoginController extends Controller
 
             } else {
 
-                $data['msg'] = 'E-mail e/ou senha errados!';
+                $this->dados['mensagem'] = 'E-mail e/ou senha errados!';
                 
             }
 
         }
 
-        $this->loadView('login', $data);
+        $this->loadView('login', $this->dados);
 
     }
 

@@ -4,25 +4,24 @@ declare(strict_types=1);
 
 namespace Models;
 
-class Worker
+class Fornecedor
 {
     public int $id;
     public string $nome;
-    public string $cpf;
+    public string $cnpj;
     public string $email;
-    public string $celular;
     public string $telefone;
-    public string $senha;
-    public string $cargo;
-    public string $nivel_acesso;
+    public string $celular;
     public string $cep;
     public string $endereco;
     public string $numero;
+    public string $complemento;
     public string $bairro;
     public string $cidade;
-    public string $complemento;
     public string $estado;
+    public string $soft_delete;
+    public string $company_id;
 
-    public function __construct() { }
-
+    public function __construct() {}
+    
 }

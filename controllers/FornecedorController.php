@@ -1,11 +1,12 @@
 <?php 
 
 namespace Controllers;
+
+use BancoDeDados\BancoDeDadosMySQL;
 use Core\Controller;
-use DAO\ProviderDAO;
-use Database\MySQLDatabase;
-use Models\User;
-use Models\Provider;
+use DAO\FornecedorDAO;
+use DAO\UsuarioDAO;
+use Models\Fornecedor;
 
 class FornecedorController extends Controller 
 {
@@ -13,47 +14,46 @@ class FornecedorController extends Controller
     {
         parent::__construct();
 
-        $this->user = new User();
+        $usuario_dao = new UsuarioDAO();
+        $usuario_dao::obterConexao(new BancoDeDadosMySQL);
 
-        if (! $this->user->checkLogin()) {
+        if (! $usuario_dao->verificarLogin($this->usuario)) {
             header('Location: '.BASE_URL.'login');
             exit;
         }
 
-        $this->loadView('template_parts/header', $this->data);
+        $this->loadView('template_parts/header', $this->dados);
     }
 
     public function index()
     {
-        $providerDao = new ProviderDAO();
-        $providerDao->getConnection(new MySQLDatabase);
+        $fornecedorDao = new FornecedorDAO();
+        $fornecedorDao->obter_conexao(new BancoDeDadosMySQL);
 
 
         if (! empty($_GET['busca'])) {
 
-            $busca = trim(addslashes($_GET['busca']));
+            $termo_de_busca = trim(addslashes($_GET['busca']));
 
-            $providers = $providerDao->all("soft_delete = 0 AND name LIKE '%$busca%' OR cnpj LIKE '%$busca%'");  
+            $fornecedores = $fornecedorDao->todos("soft_delete = 0 AND (nome LIKE '%$termo_de_busca%' OR cnpj LIKE '%$termo_de_busca%')");  
 
         } else {
-            $providers = $providerDao->all('soft_delete = 0');  
+            $fornecedores = $fornecedorDao->todos('soft_delete = 0');  
         }
         
 
         
 
-        $this->data['providers'] = $providers;
+        $this->dados['fornecedores'] = $fornecedores;
 
-        $this->loadView('fornecedor', $this->data);
+        $this->loadView('fornecedores', $this->dados);
     }
 
-    public function add()
+    public function adicionar()
     {
-        $data = array();
-
-        $provider = new Provider();
-        $providerDao = new ProviderDAO();
-        $providerDao->getConnection(new MySQLDatabase);
+        $fornecedor = new Fornecedor();
+        $fornecedorDao = new FornecedorDAO();
+        $fornecedorDao->obter_conexao(new BancoDeDadosMySQL);
 
         $s = '';
 
@@ -66,22 +66,22 @@ class FornecedorController extends Controller
         if (! empty($_POST['nome'])) {
             
 
-            $provider->nome = addslashes($_POST['nome']);
-            $provider->cnpj = addslashes($_POST['cnpj']);
-            $provider->email = addslashes($_POST['email']);
-            $provider->celular = addslashes($_POST['celular']);
-            $provider->telefone = addslashes($_POST['telefone']);
-            $provider->cep = addslashes($_POST['cep']);
-            $provider->endereco = addslashes($_POST['endereco']);
-            $provider->numero = addslashes($_POST['numero']);
-            $provider->bairro = addslashes($_POST['bairro']);
-            $provider->cidade = addslashes($_POST['cidade']);
-            $provider->complemento = addslashes($_POST['complemento']);
-            $provider->estado = addslashes($_POST['estado']);
-            $provider->soft_delete = 0;
-            $provider->company_id = 1;
+            $fornecedor->nome = addslashes($_POST['nome']);
+            $fornecedor->cnpj = addslashes($_POST['cnpj']);
+            $fornecedor->email = addslashes($_POST['email']);
+            $fornecedor->celular = addslashes($_POST['celular']);
+            $fornecedor->telefone = addslashes($_POST['telefone']);
+            $fornecedor->cep = addslashes($_POST['cep']);
+            $fornecedor->endereco = addslashes($_POST['endereco']);
+            $fornecedor->numero = addslashes($_POST['numero']);
+            $fornecedor->bairro = addslashes($_POST['bairro']);
+            $fornecedor->cidade = addslashes($_POST['cidade']);
+            $fornecedor->complemento = addslashes($_POST['complemento']);
+            $fornecedor->estado = addslashes($_POST['estado']);
+            $fornecedor->soft_delete = 0;
+            $fornecedor->company_id = 1;
 
-            $providerDao->save($provider);
+            $fornecedorDao->salvar($fornecedor);
 
             header('Location: '.BASE_URL.'fornecedor');
 
@@ -89,54 +89,70 @@ class FornecedorController extends Controller
 
         }
 
-        $data['list'] = $providerDao->all($s);
+        //$this->dados['lista'] = $fornecedorDao->todos($s);
 
-        $this->loadView('provider-add', $data);
+        $this->loadView('adicionar-fornecedor', $this->dados);
     }
 
-    public function edit($providerId)
+    public function editar($idDoFornecedor)
     {
-        $data = array();
+        $fornecedor = new Fornecedor();
 
-        $provider = new Provider();
+        $id = addslashes($idDoFornecedor);
 
-        $id = addslashes($providerId);
+        $fornecedor_dao = new FornecedorDAO();
+        $fornecedor_dao->obter_conexao(new BancoDeDadosMySQL);
 
         if (isset($_POST['action'])) {
 
-            $name = addslashes($_POST['name']);
-            $url = addslashes($_POST['url']);
+            $fornecedor->id = $id;
+            $fornecedor->nome = addslashes($_POST['nome']);
+            $fornecedor->cnpj = addslashes($_POST['cnpj']);
+            $fornecedor->email = addslashes($_POST['email']);
+            $fornecedor->celular = addslashes($_POST['celular']);
+            $fornecedor->telefone = addslashes($_POST['telefone']);
+            $fornecedor->cep = addslashes($_POST['cep']);
+            $fornecedor->endereco = addslashes($_POST['endereco']);
+            $fornecedor->numero = addslashes($_POST['numero']);
+            $fornecedor->bairro = addslashes($_POST['bairro']);
+            $fornecedor->cidade = addslashes($_POST['cidade']);
+            $fornecedor->complemento = addslashes($_POST['complemento']);
+            $fornecedor->estado = addslashes($_POST['estado']);
+            $fornecedor->soft_delete = 0;
+            $fornecedor->company_id = 1;
 
-            if (empty($name)) {
-                header('Location: ' . BASE_URL . 'provider/');
+            if (empty($fornecedor->nome)) {
+                header('Location: ' . BASE_URL . 'fornecedor/');
                 exit;
             }
 
-            $provider->editProvider($name, $url, $providerId);
+            
+            
+            $fornecedor_dao->salvar($fornecedor);
 
-            header('Location: ' . BASE_URL . 'provider/');
+            header('Location: ' . BASE_URL . 'fornecedor');
 
         }
 
         if (empty($id)) {
-            header('Location: ' . BASE_URL . 'provider/');
+            header('Location: ' . BASE_URL . 'fornecedor');
             exit;
         }
 
-        $provInfo = $provider->getProvider($id);
+        $fornecedor = $fornecedor_dao->encontrar($id);
 
-        $data['info'] = $provInfo;
+        $this->dados['fornecedor'] = $fornecedor;
 
-        $this->loadView('provider-edit', $data);
+        $this->loadView('editar-fornecedor', $this->dados);
     }
 
-    public function delete($providerId)
+    public function excluir($idDoFornecedor)
     {
-        $providerDao = new ProviderDAO();
-        $providerDao->getConnection(new MySQLDatabase);
+        $fornecedor_dao = new FornecedorDAO();
+        $fornecedor_dao->obter_conexao(new BancoDeDadosMySQL);
 
-        if (!empty($providerId)) {
-            $providerDao->delete($providerId);
+        if (!empty($idDoFornecedor)) {
+            $fornecedor_dao->excluir($idDoFornecedor);
         }
 
         header('Location: ' . BASE_URL . 'fornecedor');

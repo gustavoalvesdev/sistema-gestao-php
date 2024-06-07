@@ -8,7 +8,7 @@ class NotFoundController extends Controller
 
     public function index() 
     {
-        $this->loadView('not-found');
+        $this->loadView('pagina-nao-encontrada');
     }
 
 }

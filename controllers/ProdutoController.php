@@ -2,133 +2,124 @@
 
 namespace Controllers;
 use Core\Controller;
-use DAO\ProductDAO;
-use DAO\ProviderDAO;
-use Database\Database;
-use Database\MySQLDatabase;
-use Models\User;
-use Models\Product;
-use Models\Provider;
-use PDO;
+use DAO\ProdutoDAO;
+use DAO\FornecedorDAO;
+use BancoDeDados\BancoDeDadosMySQL;
+use DAO\UsuarioDAO;
+use Models\Usuario;
+use Models\Produto;
 
 class ProdutoController extends Controller 
 {
-
-    private PDO $conn;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->user = new User();
+        $usuarioDao = new UsuarioDAO();
+        $usuarioDao::obterConexao(new BancoDeDadosMySQL);
 
-        $this->conn = Database::getInstance();
-
-        if (! $this->user->checkLogin()) 
+        if (! $usuarioDao->verificarLogin($this->usuario)) 
         {
             header('Location: '.BASE_URL.'login');
             exit;
         }
 
-        $this->loadView('template_parts/header', $this->data);
+        $this->loadView('template_parts/header', $this->dados);
     }
 
     public function index() 
     {
 
-        $p = new ProductDAO();
+        $produto_dao = new ProdutoDAO();
 
-        $p->getConnection(new MySQLDatabase);
+        $produto_dao::obter_conexao(new BancoDeDadosMySQL);
 
-        $s = '';
+        $termo_a_ser_buscado = '';
 
         if (! empty($_GET['busca'])) {
 
-            $s = trim(addslashes($_GET['busca']));
-            $this->data['list'] = $p->all("soft_delete = 0 AND name LIKE '%$s%' OR cod LIKE '%$s%'");
+            $termo_a_ser_buscado = trim(addslashes($_GET['busca']));
+            $this->dados['produtos'] = $produto_dao->todos("soft_delete = 0 AND (nome LIKE '%$termo_a_ser_buscado%' OR codigo LIKE '%$termo_a_ser_buscado%')");
         } else {
-            $this->data['list'] = $p->all("soft_delete = 0");
+            $this->dados['produtos'] = $produto_dao->todos("soft_delete = 0");
         }
 
         
 
-        $this->loadView('produto', $this->data);
+        $this->loadView('produtos', $this->dados);
     }
 
-    public function add()
+    public function adicionar()
     {
 
-        $providerDao = new ProviderDAO();
-        $providerDao->getConnection(new MySQLDatabase);
+        $fornecedor_dao = new FornecedorDAO();
+        $fornecedor_dao::obter_conexao(new BancoDeDadosMySQL);
 
-        $this->data['providers'] = $providerDao->all();
+        $this->dados['fornecedores'] = $fornecedor_dao->todos();
 
-        if (! empty($_POST['cod'])) {
+        if (! empty($_POST['codigo'])) {
 
-            $product = new Product();
+            $produto = new Produto();
 
-            $product->cod = $_POST['cod'];
-            $product->name = $_POST['name'];
-            $price = str_replace('.', '' , $_POST['price']);
-            $price = str_replace(',', '.', $price);
-            $product->price = floatval($price);
-            $quantity = str_replace('.', '', $_POST['quantity']);
-            $quantity = str_replace(',', '.', $quantity);
-            $product->quantity = floatval($quantity);
-            $min_quantity = str_replace('.', '', $_POST['min_quantity']);
-            $min_quantity = str_replace(',', '.', $min_quantity);
-            $product->min_quantity = floatval($min_quantity);
-            $product->company_id = 1;
-            $product->soft_delete = 0;
-            $product->provider_id = $_POST['provider_id'];
+            $produto->codigo = $_POST['codigo'];
+            $produto->nome = $_POST['nome'];
+            $preco = str_replace('.', '' , $_POST['preco']);
+            $preco = str_replace(',', '.', $preco);
+            $produto->preco = floatval($preco);
+            $quantidade = str_replace('.', '', $_POST['quantidade']);
+            $quantidade = str_replace(',', '.', $quantidade);
+            $produto->quantidade = floatval($quantidade);
+            $quantidade_minima = str_replace('.', '', $_POST['quantidade_minima']);
+            $quantidade_minima = str_replace(',', '.', $quantidade_minima);
+            $produto->quantidade_minima = floatval($quantidade_minima);
+            $produto->company_id = 1;
+            $produto->soft_delete = 0;
+            $produto->id_do_fornecedor = $_POST['id_do_fornecedor'];
 
-            $dao = new ProductDAO;
-            $dao->getConnection(new MySQLDatabase);
+            $produto_dao = new ProdutoDAO;
+            $produto_dao::obter_conexao(new BancoDeDadosMySQL);
 
-            $dao->save($product);
+            $produto_dao->salvar($produto);
 
             header('Location: '.BASE_URL.'produto');
             exit;
         }
 
-        $this->loadView('produto-add', $this->data);
+        $this->loadView('adicionar-produto', $this->dados);
     }
 
-    public function edit($id)
+    public function editar($id)
     {    
-        $productDao = new ProductDAO();
+        $produto_dao = new ProdutoDAO();
 
-        $productDao->getConnection(new MySQLDatabase);
+        $produto_dao::obter_conexao(new BancoDeDadosMySQL);
 
-        $product = $productDao->find($id);
+        $produto = $produto_dao->encontrar($id);
 
-        $providerDao = new ProviderDAO();
-        $providerDao->getConnection(new MySQLDatabase);
+        $fornecedor_dao = new FornecedorDAO();
+        $fornecedor_dao::obter_conexao(new BancoDeDadosMySQL);
 
-        $this->data['product'] = $product;
-        $this->data['providers'] = $providerDao->all();
+        $this->dados['produto'] = $produto;
+        $this->dados['fornecedores'] = $fornecedor_dao->todos();
 
-        if (isset($_POST['cod'])) {
-
-            $productToEdit = new Product();
-            $productToEdit->cod = addslashes($_POST['cod']);
-            $productToEdit->name = addslashes($_POST['name']);
-            $price = str_replace('.', '' , $_POST['price']);
-            $price = str_replace(',', '.', $price);
-            $productToEdit->price = floatval($price);
-            $quantity = str_replace('.', '', $_POST['quantity']);
-            $quantity = str_replace(',', '.', $quantity);
-            $productToEdit->quantity      = floatval($quantity);
-            $min_quantity   = str_replace('.', '', $_POST['min_quantity']);
-            $min_quantity = str_replace(',', '.', $min_quantity);
-            $productToEdit->min_quantity = floatval($min_quantity);
-            $productToEdit->provider_id = addslashes($_POST['provider_id']);
+        if (isset($_POST['codigo'])) {
+            $produto = new Produto();
+            $produto->id = addslashes($id);
+            $produto->codigo = addslashes($_POST['codigo']);
+            $produto->nome = addslashes($_POST['nome']);
+            $preco = str_replace('.', '' , $_POST['preco']);
+            $preco = str_replace(',', '.', $preco);
+            $produto->preco = floatval($preco);
+            $quantidade = str_replace('.', '', $_POST['quantidade']);
+            $quantidade = str_replace(',', '.', $quantidade);
+            $produto->quantidade = floatval($quantidade);
+            $quantidade_minima = str_replace('.', '', $_POST['quantidade_minima']);
+            $quantidade_minima = str_replace(',', '.', $quantidade_minima);
+            $produto->quantidade_minima = floatval($quantidade_minima);
+            $produto->id_do_fornecedor = addslashes($_POST['id_do_fornecedor']);
             
-            $productToEdit->company_id = $product->company_id;
-
-            $productToEdit->id = $id;
-
-            $productDao->save($productToEdit);
+            $produto_dao->salvar($produto);
 
             header('Location: ' . BASE_URL . 'produto');
             exit;
@@ -136,18 +127,18 @@ class ProdutoController extends Controller
         }
 
         
-        $this->loadView('produto-edit', $this->data);
+        $this->loadView('editar-produto', $this->dados);
     }
 
-    public function delete($id)
+    public function excluir($id)
     {
         
-        $productDao = new ProductDAO();
-        $productDao->getConnection(new MySQLDatabase);
+        $produto_dao = new ProdutoDAO();
+        $produto_dao::obter_conexao(new BancoDeDadosMySQL);
 
         if (! empty($id)) {
 
-            $productDao->delete($id);
+            $produto_dao->excluir($id);
         }
 
         header('Location: '.BASE_URL.'produto');

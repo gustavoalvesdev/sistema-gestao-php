@@ -22,13 +22,13 @@
 
         <div class="form-row">
             <div class="form-field w30">
-                <label for="cod">Código de Barras:</label>
-                <input type="text" name="cod" required value="<?= $product->cod ?>" />
+                <label for="codigo">Código de Barras:</label>
+                <input type="text" name="codigo" required value="<?= $produto->codigo ?>" />
             </div>
             <!-- form-field -->
             <div class="form-field w70">
                 <label for="name">Nome do Produto:</label>
-                <input type="text" name="name" required value="<?= $product->name ?>" />
+                <input type="text" name="nome" required value="<?= $produto->nome ?>" />
             </div>
             <!-- form-field -->
         </div>
@@ -36,28 +36,28 @@
         
         <div class="form-row">
             <div class="form-field w33">
-                <label class="price">Preço do Produto:</label>
-                <input type="text" name="price" required value="<?= number_format($product->price, 2, ',', '.') ?>" />
+                <label class="preco">Preço do Produto:</label>
+                <input type="text" name="preco" required value="<?= number_format($produto->preco, 2, ',', '.') ?>" />
             </div>
             <!-- form-field -->
             <div class="form-field w33">
-                <label for="quantity">Quantidade:</label>
-                <input type="text" name="quantity" required value="<?= number_format($product->quantity, 2, ',', '.') ?>" />
+                <label for="quantidade">Quantidade:</label>
+                <input type="text" name="quantidade" required value="<?= number_format($produto->quantidade, 2, ',', '.') ?>" />
             </div>
             <!-- form-field -->
             <div class="form-field w33">
-                <label for="quantity">Qtd. Mínima:</label>
-                <input type="text" name="min_quantity" required value="<?= number_format($product->min_quantity, 2, ',', '.') ?>" />
+                <label for="quantidade_minima">Qtd. Mínima:</label>
+                <input type="text" name="quantidade_minima" required value="<?= number_format($produto->quantidade_minima, 2, ',', '.') ?>" />
             </div>
         </div>
         <!-- form-row -->
 
         <div class="form-row">
             <div class="form-field w100">
-                <label for="provider_id">Fornecedor:</label>
-                <select name="provider_id" id="provider_id">
-                    <?php foreach ($providers as $provider): ?>
-                    <option value="<?= $provider->id ?>" <?= ($provider->id == $product->provider_id) ? 'selected' : ''; ?>><?= $provider->nome ?> - <?= $provider->cnpj ?></option>
+                <label for="id_do_fornecedor">Fornecedor:</label>
+                <select name="id_do_fornecedor" id="id_do_fornecedor">
+                    <?php foreach ($fornecedores as $fornecedor): ?>
+                    <option value="<?= $fornecedor->id ?>" <?= ($fornecedor->id == $produto->id_do_fornecedor) ? 'selected' : ''; ?>><?= $fornecedor->nome ?> - <?= $fornecedor->cnpj ?></option>
                     <?php endforeach; ?>
                 </select>
                 <!-- provider_id -->
@@ -79,4 +79,3 @@
 <script>
     let baseUrl = '<?= BASE_URL ?>';
 </script>
-<script src="<?= BASE_URL ?>assets/js/categories_handle.js"></script>

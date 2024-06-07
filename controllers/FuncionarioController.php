@@ -2,13 +2,10 @@
 
 namespace Controllers;
 
+use BancoDeDados\BancoDeDadosMySQL;
 use Core\Controller;
 use DAO\FuncionarioDAO;
-use DAO\WorkerDAO;
-use Database\Database;
-use Database\MySQLDatabase;
-use Models\User;
-use Models\Customer;
+use DAO\UsuarioDAO;
 use Models\Funcionario;
 
 class FuncionarioController extends Controller 
@@ -17,84 +14,125 @@ class FuncionarioController extends Controller
     {
         parent::__construct();
 
-        $this->user = new User();
+        $usuario_dao = new UsuarioDAO();
+        $usuario_dao::obterConexao(new BancoDeDadosMySQL);
 
-        if (! $this->user->checkLogin()) {
+        if (! $usuario_dao->verificarLogin($this->usuario)) {
             header('Location: '.BASE_URL.'login');
             exit;
         }
 
-        $this->loadView('template_parts/header', $this->data);
+        $this->loadView('template_parts/header', $this->dados);
     }
 
     public function index()
     {
-        $s = '';
+        $termo_a_ser_buscado = '';
+
+        $funcionario_dao = new FuncionarioDAO();
+        $funcionario_dao::obter_conexao(new BancoDeDadosMySQL);
 
         if (! empty($_GET['busca'])) {
 
-            $s = trim($_GET['busca']);
+            $termo_a_ser_buscado = trim($_GET['busca']);
+            $lista_de_funcionarios = $funcionario_dao->todos("soft_delete = 0 AND (nome LIKE '%$termo_a_ser_buscado%' OR cpf LIKE '%$termo_a_ser_buscado%')");
 
+        } else {
+            $lista_de_funcionarios = $funcionario_dao->todos('soft_delete = 0');  
         }
 
-        //$f = new Funcionario();
-        $workerDao = new WorkerDAO();
-        $workerDao->getConnection(new MySQLDatabase);
+        
 
-        $workers = $workerDao->all('soft_delete = 0');  
+        
 
-        $this->data['workers'] = $workers;
+        $this->dados['funcionarios'] = $lista_de_funcionarios;
 
-        $this->loadView('funcionario', $this->data);
+        $this->loadView('funcionarios', $this->dados);
     }
 
-    public function add()
+    public function adicionar()
     {
 
-        if (! empty($_POST['name'])) {
+        if (! empty($_POST['nome'])) {
 
-            $f = new Funcionario();
+            $funcionario = new Funcionario();
 
-            $f->setNome(addslashes($_POST['name']));
-            $f->setRg(addslashes($_POST['rg']));
-            $f->setCpf(addslashes($_POST['cpf']));
-            $f->setEmail(addslashes($_POST['email']));
-            $f->setCelular(addslashes($_POST['cellphone']));
-            $f->setTelefone(addslashes($_POST['phone']));
-            $f->setSenha(addslashes($_POST['password']));
-            $f->setCargo(addslashes($_POST['role']));
-            $f->setNivelAcesso(addslashes($_POST['access_level']));
-            $f->setCep(addslashes($_POST['zipcode']));
-            $f->setEndereco(addslashes($_POST['street']));
-            $f->setNumero(addslashes($_POST['number']));
-            $f->setBairro(addslashes($_POST['district']));
-            $f->setCidade(addslashes($_POST['city']));
-            $f->setComplemento(addslashes($_POST['complement']));
-            $f->setEstado(addslashes($_POST['state']));
+            $funcionario->nome = addslashes($_POST['nome']);
+            $funcionario->rg = addslashes($_POST['rg']);
+            $funcionario->cpf = addslashes($_POST['cpf']);
+            $funcionario->email = addslashes($_POST['email']);
+            $funcionario->celular = addslashes($_POST['celular']);
+            $funcionario->telefone = addslashes($_POST['telefone']);
+            $funcionario->senha = addslashes($_POST['senha']);
+            $funcionario->cargo = addslashes($_POST['cargo']);
+            $funcionario->nivel_de_acesso = addslashes($_POST['nivel_de_acesso']);
+            $funcionario->cep = addslashes($_POST['cep']);
+            $funcionario->endereco = addslashes($_POST['endereco']);
+            $funcionario->numero = addslashes($_POST['numero']);
+            $funcionario->bairro = addslashes($_POST['bairro']);
+            $funcionario->cidade = addslashes($_POST['cidade']);
+            $funcionario->complemento = addslashes($_POST['complemento']);
+            $funcionario->estado = addslashes($_POST['estado']);
 
-            $fd = new FuncionarioDAO(Database::getInstance());
+            $funcionario_dao = new FuncionarioDAO();
+            $funcionario_dao::obter_conexao(new BancoDeDadosMySQL);
 
-            $fd->add($f);
+            $funcionario_dao->salvar($funcionario);
 
             header('Location: '.BASE_URL.'funcionario');
             exit;
         }
 
-        $this->loadView('funcionario-add', $this->data);
+        $this->loadView('adicionar-funcionario', $this->dados);
     }
 
-    public function edit($id)
+    public function editar($id)
     {
-  
+        $funcionario_dao = new FuncionarioDAO;
+        $funcionario_dao::obter_conexao(new BancoDeDadosMySQL);
+
+        $funcionario = $funcionario_dao->encontrar($id);
+
+        $this->dados['funcionario'] = $funcionario;
+
+        if (isset($_POST['nome'])) {
+
+            $funcionario = new Funcionario;
+
+            $funcionario->nome = addslashes($_POST['nome']);
+            $funcionario->rg = addslashes($_POST['rg']);
+            $funcionario->cpf = addslashes($_POST['cpf']);
+            $funcionario->email = addslashes($_POST['email']);
+            $funcionario->celular = addslashes($_POST['celular']);
+            $funcionario->telefone = addslashes($_POST['telefone']);
+            $funcionario->senha = addslashes($_POST['senha']);
+            $funcionario->cargo = addslashes($_POST['cargo']);
+            $funcionario->nivel_de_acesso = addslashes($_POST['nivel_de_acesso']); 
+            $funcionario->cep = addslashes($_POST['cep']);
+            $funcionario->endereco = addslashes($_POST['endereco']);
+            $funcionario->numero = addslashes($_POST['numero']);
+            $funcionario->bairro = addslashes($_POST['bairro']);
+            $funcionario->cidade = addslashes($_POST['cidade']);
+            $funcionario->estado = addslashes($_POST['estado']);
+            $funcionario->complemento = addslashes($_POST['complemento']);
+            $funcionario->id = $id;
+
+            $funcionario_dao->salvar($funcionario);
+
+            header('Location: '.BASE_URL.'funcionario');
+            exit;
+        }
+
+        $this->loadView('editar-funcionario', $this->dados);
     }
 
-    public function delete($id)
+    public function excluir($id)
     {
-        $workerDao = new WorkerDAO();
-        $workerDao->getConnection(new MySQLDatabase);
+        $funcionario_dao = new FuncionarioDAO();
+        $funcionario_dao::obter_conexao(new BancoDeDadosMySQL);
 
         if (! empty($id)) {
-            $workerDao->delete($id);
+            $funcionario_dao->excluir($id);
         }
 
         header('Location: '.BASE_URL.'funcionario');

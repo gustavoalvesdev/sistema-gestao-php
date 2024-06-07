@@ -2,13 +2,17 @@
 
 namespace Core;
 
+use Models\Usuario;
+
 class Controller 
 {
     protected $dados;
-    protected $user;
+    protected $usuario;
 
     public function __construct()
     {
+        $this->usuario = new Usuario;
+
         $this->dados['menu'] = array(
             array(
                 'class' => 'link-home',
@@ -46,6 +50,6 @@ class Controller
 
     public function actionNotFound() 
     {
-        $this->loadView('not-found');
+        $this->loadView('pagina-nao-encontrada');
     }
 }

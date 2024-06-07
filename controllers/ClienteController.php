@@ -4,8 +4,8 @@ namespace Controllers;
 
 use Core\Controller;
 use DAO\ClienteDAO;
-use Database\BancoDeDadosMySQL;
-use Models\User;
+use DAO\UsuarioDAO;
+use BancoDeDados\BancoDeDadosMySQL;
 use Models\Cliente;
 
 class ClienteController extends Controller 
@@ -14,9 +14,10 @@ class ClienteController extends Controller
     {
         parent::__construct();
 
-        $this->user = new User();
+        $usuario_dao = new UsuarioDAO();
+        $usuario_dao::obterConexao(new BancoDeDadosMySQL);
 
-        if (! $this->user->checkLogin()) {
+        if (! $usuario_dao->verificarLogin($this->usuario)) {
             header('Location: '.BASE_URL.'login');
             exit;
         }
