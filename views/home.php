@@ -13,12 +13,25 @@ body {
 
 <div class="cards-container">
 
+    <a href="<?= BASE_URL ?>pesquisar">
+        <div class="card" style="background-color: #7D6320">
+            <p><strong><i class="fas fa-search"></i><br /> Pesquisar</strong></p>
+        </div>
+        <!-- card -->
+    </a>
+
+
     <a href="<?= BASE_URL ?>produto">
         <div class="card" style="background-color: #A028A9">
             <p><strong><i class="fas fa-box"></i><br /> Produtos</strong></p>
         </div>
         <!-- card -->
     </a>
+
+    <div class="card" style="background-color: #84C25B">
+        <p><strong><i class="fas fa-dolly"></i><br /> Estoque</strong></p>
+    </div>
+    <!-- card -->
     
     <a href="<?= BASE_URL ?>fornecedor">
         <div class="card" style="background-color: #FF9632">
@@ -41,12 +54,15 @@ body {
         <!-- card -->
     </a>
 
+    <a href="<?= BASE_URL ?>produto">
+        <div class="card" style="background-color: #A028A9">
+            <p><strong><i class="fas fa-gift"></i><br /> Pedidos</strong></p>
+        </div>
+        <!-- card -->
+    </a>
+
     <div class="card" style="background-color: #F93F3B">
         <p><strong><i class="fas fa-cash-register"></i><br /> Vendas</strong></p>
-    </div>
-    <!-- card -->
-    <div class="card" style="background-color: #84C25B">
-        <p><strong><i class="fas fa-wallet"></i><br /> Contas</strong></p>
     </div>
     <!-- card -->
 
@@ -55,12 +71,26 @@ body {
             <p><strong><i class="fas fa-copy"></i><br /> Relatórios</strong></p>
         </div>
         <!-- card -->
+    
+    
+    <a href="<?= BASE_URL ?>dashboard">
+        <div class="card" style="background-color: #7D6320">
+            <p><strong><i class="fas fa-chart-pie"></i><br /> Dashboards</strong></p>
+        </div>
+        <!-- card -->
     </a>
 
-    <div class="card" style="background-color: #7D6320">
-        <p><strong><i class="fas fa-chart-pie"></i><br /> Dashboards</strong></p>
+    <div class="card" style="background-color: #84C25B">
+        <p><strong><i class="fas fa-check-circle"></i><br /> Ordens de Serviço</strong></p>
     </div>
     <!-- card -->
+
+    <a href="<?= BASE_URL ?>fornecedor">
+        <div class="card" style="background-color: #FF9632">
+            <p><strong><i class="fas fa-user"></i><br /> Usuários</strong></p>
+        </div>
+        <!-- card -->
+    </a>
 
 </div>
 <!-- cards-container -->
