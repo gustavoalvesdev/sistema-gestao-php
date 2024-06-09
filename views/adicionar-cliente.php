@@ -16,8 +16,8 @@
 
         <p style="color:black"><a href="<?= BASE_URL ?>" style="color:black">Home</a> / <a href="<?= BASE_URL ?>cliente" style="color:black">Clientes</a> / Adicionar Cliente</p>
     </div>
-
-    <div class="form-row">
+    <form method="POST" class="form" style="background-color: white; padding: 30px; border-radius: 10px;">
+        <div class="form-row">
             <div class="form-field w33">
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" id="nome" required />

@@ -36,17 +36,17 @@
     <div class="form-row">
         <div class="form-field w50">
             <label for="email">E-mail:</label>
-            <input type="email" name="email" value="<?= $fornecedor->email ?>" />
+            <input type="email" name="email" id="email" value="<?= $fornecedor->email ?>" />
         </div>
         <!-- form-field -->
         <div class="form-field w25">
             <label for="celular">Celular:</label>
-            <input type="text" name="celular" value="<?= $fornecedor->celular ?>" />
+            <input type="text" name="celular" id="celular" value="<?= $fornecedor->celular ?>" />
         </div>
         <!-- form-field -->
         <div class="form-field w25" id="row-phone">
             <label for="telefone">Telefone Fixo:</label>
-            <input type="text" name="telefone" value="<?= $fornecedor->telefone ?>" />
+            <input type="text" name="telefone" id="telefone" value="<?= $fornecedor->telefone ?>" />
         </div>
         <!-- form-field -->
     </div>

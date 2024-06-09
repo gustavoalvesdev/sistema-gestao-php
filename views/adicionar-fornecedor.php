@@ -36,17 +36,17 @@
     <div class="form-row">
         <div class="form-field w50">
             <label for="email">E-mail:</label>
-            <input type="email" name="email"  />
+            <input type="email" name="email" id="email"  />
         </div>
         <!-- form-field -->
         <div class="form-field w25">
             <label for="celular">Celular:</label>
-            <input type="text" name="celular" />
+            <input type="text" name="celular" id="celular" />
         </div>
         <!-- form-field -->
         <div class="form-field w25" id="row-phone">
             <label for="telefone">Telefone Fixo:</label>
-            <input type="text" name="telefone" />
+            <input type="text" name="telefone" id="telefone" />
         </div>
         <!-- form-field -->
     </div>
@@ -79,18 +79,18 @@
         <!-- form-field -->
         <div class="form-field w25">
             <label for="cidade">Cidade:</label>
-            <input type="text" name="cidade" id="cidade"   />
+            <input type="text" name="cidade" id="cidade" />
         </div>
         <!-- form-field -->
         <div class="form-field w25">
             <label for="complemento">Complemento:</label>
-            <input type="text" name="complemento" id="complemento"   />
+            <input type="text" name="complemento" id="complemento" />
         </div>
         <!-- form-field -->
 
         <div class="form-field w25">
             <label for="estado">Estado:</label>
-            <input type="text" name="estado" id="estado"   />
+            <input type="text" name="estado" id="estado" />
         </div>
         <!-- form-field -->
     </div>

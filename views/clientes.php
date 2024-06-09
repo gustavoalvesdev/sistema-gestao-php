@@ -11,7 +11,7 @@
 
 <br /><br />
 
-<p style="margin: 30px 0;"><a class="btn btn-add btn-lg" href="<?= BASE_URL.'cliente/add' ?>"><i class="fas fa-plus"></i> Adicionar Cliente</a></p>
+<p style="margin: 30px 0;"><a class="btn btn-add btn-lg" href="<?= BASE_URL.'cliente/adicionar' ?>"><i class="fas fa-plus"></i> Adicionar Cliente</a></p>
 
 <p style="color:#333"><a href="<?= BASE_URL ?>" style="color:#333">Home</a> / Clientes</p>
 

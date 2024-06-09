@@ -75,7 +75,7 @@ class ClienteController extends Controller
 
             $clienteDao->salvar($cliente);
 
-            header('Location: '.BASE_URL.'clientes');
+            header('Location: '.BASE_URL.'cliente');
             exit;
         }
 

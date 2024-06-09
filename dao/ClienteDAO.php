@@ -60,7 +60,7 @@ class ClienteDAO
 
         if (empty($cliente->id)) {
             $sql = self::$conexaoComOBanco->prepare($sql);
-            $sql->bindValue(':name', $cliente->nome);
+            $sql->bindValue(':nome', $cliente->nome);
             $sql->bindValue(':rg', $cliente->rg);
             $sql->bindValue(':cpf', $cliente->cpf);
             $sql->bindValue(':email', $cliente->email);
