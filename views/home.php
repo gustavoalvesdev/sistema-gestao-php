@@ -28,11 +28,13 @@ body {
         <!-- card -->
     </a>
 
-    <div class="card" style="background-color: #84C25B">
-        <p><strong><i class="fas fa-dolly"></i><br /> Estoque</strong></p>
-    </div>
-    <!-- card -->
-    
+    <a href="<?= BASE_URL ?>estoque">
+        <div class="card" style="background-color: #84C25B">
+            <p><strong><i class="fas fa-dolly"></i><br /> Estoque</strong></p>
+        </div>
+        <!-- card -->
+    </a>
+
     <a href="<?= BASE_URL ?>fornecedor">
         <div class="card" style="background-color: #FF9632">
             <p><strong><i class="fas fa-industry"></i><br /> Fornecedores</strong></p>
@@ -54,19 +56,21 @@ body {
         <!-- card -->
     </a>
 
-    <a href="<?= BASE_URL ?>produto">
+    <a href="<?= BASE_URL ?>pedidos">
         <div class="card" style="background-color: #A028A9">
             <p><strong><i class="fas fa-gift"></i><br /> Pedidos</strong></p>
         </div>
         <!-- card -->
     </a>
 
-    <div class="card" style="background-color: #F93F3B">
-        <p><strong><i class="fas fa-cash-register"></i><br /> Vendas</strong></p>
-    </div>
-    <!-- card -->
+    <a href="<?= BASE_URL ?>vendas">
+        <div class="card" style="background-color: #F93F3B">
+            <p><strong><i class="fas fa-cash-register"></i><br /> Vendas</strong></p>
+        </div>
+        <!-- card -->
+    </a>
 
-    <a href="<?= BASE_URL ?>relatorio">
+    <a href="<?= BASE_URL ?>relatorios">
         <div class="card" style="background-color: #00BCD0">
             <p><strong><i class="fas fa-copy"></i><br /> Relatórios</strong></p>
         </div>
@@ -80,12 +84,14 @@ body {
         <!-- card -->
     </a>
 
-    <div class="card" style="background-color: #84C25B">
-        <p><strong><i class="fas fa-check-circle"></i><br /> Ordens de Serviço</strong></p>
-    </div>
-    <!-- card -->
+    <a href="<?= BASE_URL ?>ordensservico">
+        <div class="card" style="background-color: #84C25B">
+            <p><strong><i class="fas fa-check-circle"></i><br /> Ordens de Serviço</strong></p>
+        </div>
+        <!-- card -->
+    </a>
 
-    <a href="<?= BASE_URL ?>fornecedor">
+    <a href="<?= BASE_URL ?>usuarios">
         <div class="card" style="background-color: #FF9632">
             <p><strong><i class="fas fa-user"></i><br /> Usuários</strong></p>
         </div>
