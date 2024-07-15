@@ -1,5 +1,5 @@
 $(function () {
-    $('input[name=price], input[name=quantity], input[name=min_quantity]').mask('#.##0,00', { reverse: true });
+    $('input[name=preco], input[name=quantidade], input[name=quantidade_minima]').mask('#.##0,00', { reverse: true });
     $('input[name=cod]').mask('#');
 
     $('#cnpj').mask('00.000.000/0000-00', { reverse: true });

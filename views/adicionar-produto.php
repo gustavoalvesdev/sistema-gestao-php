@@ -21,13 +21,13 @@
     
         <div class="form-row">
             <div class="form-field w30">
-                <label for="cod">Código de Barras:</label>
-                <input type="text" name="cod" required />
+                <label for="codigo">Código de Barras:</label>
+                <input type="text" name="codigo" id="codigo" required />
             </div>
             <!-- form-field -->
             <div class="form-field w70">
-                <label for="name">Nome:</label>
-                <input type="text" name="name" required />
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome" required />
             </div>
             <!-- form-field -->
         </div>
@@ -36,18 +36,18 @@
     
         <div class="form-row">
             <div class="form-field w33">
-                <label for="price">Preço do Produto:</label>
-                <input type="text" name="price" placeholder="R$ " required />
+                <label for="preco">Preço do Produto:</label>
+                <input type="text" name="preco" id="preco" placeholder="R$ " required />
             </div>
             <!-- form-field -->
             <div class="form-field w33">
-                <label for="quantity">Qtd. Estoque:</label>   
-                <input type="text" name="quantity" required />       
+                <label for="quantidade">Qtd. Estoque:</label>   
+                <input type="text" name="quantidade" id="quantidade" required />       
             </div>
             <!-- form-field -->
             <div class="form-field w33">
-                <label for="min_quantity">Qtd. Mínima:</label>    
-                <input type="text" name="min_quantity" required />    
+                <label for="quantidade_minima">Qtd. Mínima:</label>    
+                <input type="text" name="quantidade_minima" id="quantidade_minima" required />    
             </div>
             <!-- form-field -->
         </div>
@@ -55,10 +55,10 @@
 
         <div class="form-row">
             <div class="form-field w100">
-                <label for="provider_id">Fornecedor:</label>
-                <select name="provider_id" id="provider_id">
-                    <?php foreach ($providers as $provider): ?>
-                    <option value="<?= $provider->id ?>"><?= $provider->nome ?> - <?= $provider->cnpj ?></option>
+                <label for="id_do_fornecedor">Fornecedor:</label>
+                <select name="id_do_fornecedor" id="id_do_fornecedor">
+                    <?php foreach ($fornecedores as $fornecedor): ?>
+                    <option value="<?= $fornecedor->id ?>"><?= $fornecedor->nome ?> - <?= $fornecedor->cnpj ?></option>
                     <?php endforeach; ?>
                 </select>
                 <!-- provider_id -->
