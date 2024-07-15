@@ -29,7 +29,7 @@ class Controller
             array(
                 'class' => '',
                 'id' => '',
-                'link' => BASE_URL.'categoria',
+                'link' => BASE_URL.'usuarios',
                 'text' => 'Usuários'
             ),
             array(
