@@ -69,6 +69,7 @@ class ClienteController extends Controller
             $cliente->cidade = addslashes($_POST['cidade']);
             $cliente->estado = addslashes($_POST['estado']);
             $cliente->complemento = addslashes($_POST['complemento']);
+            $cliente->company_id = addslashes($_SESSION['id_da_empresa']);
             
             $clienteDao = new ClienteDAO;
 

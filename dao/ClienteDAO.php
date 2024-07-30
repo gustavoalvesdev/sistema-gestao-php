@@ -56,7 +56,7 @@ class ClienteDAO
 
     public function salvar(Cliente $cliente): bool
     {
-        $sql = "INSERT INTO clientes (nome, rg, cpf, email, celular, telefone, cep, endereco, numero, bairro, cidade, estado, complemento) VALUES (:nome, :rg, :cpf, :email, :celular, :telefone, :cep, :estado, :numero, :bairro, :cidade, :estado, :complemento)";
+        $sql = "INSERT INTO clientes (nome, rg, cpf, email, celular, telefone, cep, endereco, numero, bairro, cidade, estado, complemento, company_id) VALUES (:nome, :rg, :cpf, :email, :celular, :telefone, :cep, :estado, :numero, :bairro, :cidade, :estado, :complemento, :company_id)";
 
         if (empty($cliente->id)) {
             $sql = self::$conexaoComOBanco->prepare($sql);
@@ -73,6 +73,7 @@ class ClienteDAO
             $sql->bindValue(':cidade', $cliente->cidade);
             $sql->bindValue(':estado', $cliente->estado);
             $sql->bindValue(':complemento', $cliente->complemento);
+            $sql->bindValue(':company_id', $cliente->company_id);
         } else {
             $sql = "UPDATE clientes SET nome = :nome, rg = :rg, cpf = :cpf, email = :email, celular = :celular, telefone = :telefone, cep = :cep, endereco = :endereco, numero = :numero, bairro = :bairro, cidade = :estado, estado = :estado, complemento = :complemento WHERE id = :id";
 
