@@ -90,36 +90,43 @@ class ClienteController extends Controller
         $clienteDao = new ClienteDAO;
         $clienteDao->obterConexao(new BancoDeDadosMySQL);
 
-        $cliente = $clienteDao->encontrar($id);
+        $cliente = $clienteDao->encontrar($id, addslashes($_SESSION['id_da_empresa']));
 
-        $this->dados['cliente'] = $cliente;
+        if ($cliente != null) {
 
-        if (isset($_POST['nome'])) {
+            $this->dados['cliente'] = $cliente;
 
-            $cliente = new Cliente;
+            if (isset($_POST['nome'])) {
 
-            $cliente->nome = addslashes($_POST['nome']);
-            $cliente->rg = addslashes($_POST['rg']);
-            $cliente->cpf = addslashes($_POST['cpf']);
-            $cliente->email = addslashes($_POST['email']);
-            $cliente->celular = addslashes($_POST['celular']);
-            $cliente->telefone = addslashes($_POST['telefone']);
-            $cliente->cep = addslashes($_POST['cep']);
-            $cliente->endereco = addslashes($_POST['endereco']);
-            $cliente->numero = addslashes($_POST['numero']);
-            $cliente->bairro = addslashes($_POST['bairro']);
-            $cliente->cidade = addslashes($_POST['cidade']);
-            $cliente->estado = addslashes($_POST['estado']);
-            $cliente->complemento = addslashes($_POST['complemento']);
-            $cliente->id = $id;
-
-            $clienteDao->salvar($cliente);
-
-            header('Location: '.BASE_URL.'cliente');
-            exit;
+                $cliente = new Cliente;
+    
+                $cliente->nome = addslashes($_POST['nome']);
+                $cliente->rg = addslashes($_POST['rg']);
+                $cliente->cpf = addslashes($_POST['cpf']);
+                $cliente->email = addslashes($_POST['email']);
+                $cliente->celular = addslashes($_POST['celular']);
+                $cliente->telefone = addslashes($_POST['telefone']);
+                $cliente->cep = addslashes($_POST['cep']);
+                $cliente->endereco = addslashes($_POST['endereco']);
+                $cliente->numero = addslashes($_POST['numero']);
+                $cliente->bairro = addslashes($_POST['bairro']);
+                $cliente->cidade = addslashes($_POST['cidade']);
+                $cliente->estado = addslashes($_POST['estado']);
+                $cliente->complemento = addslashes($_POST['complemento']);
+                $cliente->id = $id;
+    
+                $clienteDao->salvar($cliente);
+    
+                header('Location: '.BASE_URL.'cliente');
+                exit;
+            }
+    
+            $this->loadView('editar-cliente', $this->dados);
+        } else {
+            $this->loadView('home', $this->dados);
         }
 
-        $this->loadView('editar-cliente', $this->dados);
+        
     }
 
     public function excluir($id)

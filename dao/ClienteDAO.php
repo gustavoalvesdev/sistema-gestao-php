@@ -18,20 +18,23 @@ class ClienteDAO
         self::$conexaoComOBanco = $interfaceDeBancoDeDados::obterInstancia();
     }
 
-    public function encontrar(int $id): Cliente
+    public function encontrar(int $id, int $company_id): ?Cliente
     {
-        $sql = "SELECT * FROM clientes WHERE soft_delete = 0 AND id = :id";
+
+        $sql = "SELECT * FROM clientes WHERE soft_delete = 0 AND id = :id AND company_id = :company_id";
         $sql = self::$conexaoComOBanco->prepare($sql);
         $sql->bindValue(':id', $id);
+        $sql->bindValue(':company_id', $company_id);
         $result = new Cliente;
 
         $sql->execute();
 
         if ($sql->rowCount() > 0) {
             $result = $sql->fetchObject(Cliente::class);
+            return $result;
         }
 
-        return $result;
+        return null;
     }
 
     public function todos(string $filter = ''): array
