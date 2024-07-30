@@ -49,11 +49,12 @@ class ClienteDAO
         return $resultado->fetchAll(PDO::FETCH_CLASS, Cliente::class);
     }
 
-    public function excluir(int $id): bool
+    public function excluir(int $id, $company_id): bool
     {
-        $sql = "UPDATE clientes SET soft_delete = 1 WHERE id = :id";
+        $sql = "UPDATE clientes SET soft_delete = 1 WHERE id = :id AND company_id = :company_id";
         $sql = self::$conexaoComOBanco->prepare($sql);
         $sql->bindValue(':id', $id);
+        $sql->bindValue(':company_id', $company_id);
         return $sql->execute();
     }
 

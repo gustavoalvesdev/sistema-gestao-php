@@ -135,7 +135,7 @@ class ClienteController extends Controller
         $c->obterConexao(new BancoDeDadosMySQL);
 
         if (! empty($id)) {
-            $c->excluir($id);
+            $c->excluir($id, addslashes($_SESSION['id_da_empresa']));
         }
 
         header('Location: '.BASE_URL.'cliente');
