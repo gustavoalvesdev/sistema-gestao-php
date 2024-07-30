@@ -15,10 +15,10 @@ class HomeController extends Controller
         parent::__construct();
 
         $this->usuario = new Usuario();
-        $usuarioDao = new UsuarioDAO();
-        $usuarioDao->obterConexao(new BancoDeDadosMySQL);
+        $this->usuarioDao = new UsuarioDAO();
+        $this->usuarioDao->obterConexao(new BancoDeDadosMySQL);
 
-        if (! $usuarioDao->verificarLogin($this->usuario)) {
+        if (! $this->usuarioDao->verificarLogin($this->usuario)) {
             header('Location: '.BASE_URL.'login');
             exit;
         }

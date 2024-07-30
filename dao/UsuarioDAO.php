@@ -55,21 +55,30 @@ class UsuarioDAO
 
             $sql->execute();
 
-            if ($sql->rowCount() > 0) {
-
-                $usuario->info = $sql->fetch();
-
-                return true;
-            }
-
-            
+            return $sql->rowCount() > 0;
 
         }
 
-        return false;
-
     }
     
+    public function obterInformacoesDoUsuario(Usuario $usuario) {
+        
+        $informacoesDoUsuario = [];
+
+        $sql = "SELECT * FROM usuarios WHERE email = :email AND senha = md5(:senha)";
+
+        $sql = self::$conexaoComOBanco->prepare($sql);
+        $sql->bindValue(':email', $usuario->email);
+        $sql->bindValue(':senha', $usuario->senha);
+
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            $informacoesDoUsuario = $sql->fetch();
+        }
+
+        return $informacoesDoUsuario;
+    }
 
 }
 

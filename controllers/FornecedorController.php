@@ -30,15 +30,16 @@ class FornecedorController extends Controller
         $fornecedorDao = new FornecedorDAO();
         $fornecedorDao->obter_conexao(new BancoDeDadosMySQL);
 
+        $idDaEmpresa = $_SESSION['id_da_empresa'];
 
         if (! empty($_GET['busca'])) {
 
             $termo_de_busca = trim(addslashes($_GET['busca']));
 
-            $fornecedores = $fornecedorDao->todos("soft_delete = 0 AND (nome LIKE '%$termo_de_busca%' OR cnpj LIKE '%$termo_de_busca%')");  
+            $fornecedores = $fornecedorDao->todos("soft_delete = 0 AND (nome LIKE '%$termo_de_busca%' OR cnpj LIKE '%$termo_de_busca%') AND company_id = $idDaEmpresa");  
 
         } else {
-            $fornecedores = $fornecedorDao->todos('soft_delete = 0');  
+            $fornecedores = $fornecedorDao->todos("soft_delete = 0 AND company_id = $idDaEmpresa");  
         }
         
 

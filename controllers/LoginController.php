@@ -19,16 +19,22 @@ class LoginController extends Controller
             $email = addslashes($_POST['email']);
             $senha = addslashes($_POST['senha']);
 
-            $usuario = new Usuario();
-            $usuarioDao = new UsuarioDAO();
-            $usuarioDao->obterConexao(new BancoDeDadosMySQL);
-            $usuario->email = $email;
-            $usuario->senha = $senha;
+            $this->usuario = new Usuario();
+            $this->usuarioDao = new UsuarioDAO();
+            $this->usuarioDao->obterConexao(new BancoDeDadosMySQL);
+            $this->usuario->email = $email;
+            $this->usuario->senha = $senha;
 
-            if ($usuarioDao->verificarUsuario($usuario)) {
+            if ($this->usuarioDao->verificarUsuario($this->usuario)) {
 
-                $token = $usuarioDao->criarToken($usuario);
+
+                $token = $this->usuarioDao->criarToken($this->usuario);
+                
+                $idDaEmpresa = $this->usuarioDao->obterInformacoesDoUsuario($this->usuario)['company_id'];
+                
+                
                 $_SESSION['token'] = $token;
+                $_SESSION['id_da_empresa'] = $idDaEmpresa;
 
                 header('Location: '.BASE_URL);
                 exit;

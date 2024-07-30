@@ -8,6 +8,7 @@ class Controller
 {
     protected $dados;
     protected $usuario;
+    protected $usuarioDao;
 
     public function __construct()
     {

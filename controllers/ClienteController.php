@@ -30,15 +30,16 @@ class ClienteController extends Controller
         $clienteDao = new ClienteDAO();
         $clienteDao->obterConexao(new BancoDeDadosMySQL);
 
+        $idDaEmpresa = $_SESSION['id_da_empresa'];
 
         if (! empty($_GET['busca'])) {
 
             $busca = trim(addslashes($_GET['busca']));
 
-            $clientes = $clienteDao->todos("soft_delete = 0 AND (nome LIKE '%$busca%' OR cpf LIKE '%$busca%')");  
+            $clientes = $clienteDao->todos("soft_delete = 0 AND (nome LIKE '%$busca%' OR cpf LIKE '%$busca%')  AND company_id = $idDaEmpresa");  
 
         } else {
-            $clientes = $clienteDao->todos('soft_delete = 0');  
+            $clientes = $clienteDao->todos("soft_delete = 0  AND company_id = $idDaEmpresa");  
         }
         
 

@@ -37,12 +37,15 @@ class ProdutoController extends Controller
 
         $termo_a_ser_buscado = '';
 
+        $idDaEmpresa = $_SESSION['id_da_empresa'];
+
         if (! empty($_GET['busca'])) {
 
             $termo_a_ser_buscado = trim(addslashes($_GET['busca']));
-            $this->dados['produtos'] = $produto_dao->todos("soft_delete = 0 AND (nome LIKE '%$termo_a_ser_buscado%' OR codigo LIKE '%$termo_a_ser_buscado%')");
+           
+            $this->dados['produtos'] = $produto_dao->todos("soft_delete = 0 AND (nome LIKE '%$termo_a_ser_buscado%' OR codigo LIKE '%$termo_a_ser_buscado%') AND company_id = $idDaEmpresa");
         } else {
-            $this->dados['produtos'] = $produto_dao->todos("soft_delete = 0");
+            $this->dados['produtos'] = $produto_dao->todos("soft_delete = 0 AND company_id = $idDaEmpresa");
         }
 
         
