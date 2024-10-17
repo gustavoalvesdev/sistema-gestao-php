@@ -59,6 +59,8 @@ class UsuarioDAO
 
         }
 
+        return false;
+
     }
     
     public function obterInformacoesDoUsuario(Usuario $usuario) {
