@@ -1,7 +1,7 @@
 <style>
     body {
         height: 100vh;
-        background-image: url('<?= BASE_URL ?>assets/images/workers_bg.jpg');
+        background-image: url('<?= $_SERVER['BASE_URL'] ?>assets/images/workers_bg.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -11,9 +11,9 @@
 
 <h1 style="color: #333">Lista de Funcionários</h1>
 
-<p style="margin: 30px 0;"><a class="btn btn-add btn-lg" href="<?= BASE_URL.'funcionario/adicionar' ?>"><i class="fas fa-plus"></i> Adicionar Funcionário</a></p>
+<p style="margin: 30px 0;"><a class="btn btn-add btn-lg" href="<?= $_SERVER['BASE_URL'].'funcionario/adicionar' ?>"><i class="fas fa-plus"></i> Adicionar Funcionário</a></p>
 
-<p style="color:#333"><a href="<?= BASE_URL ?>" style="color:#333">Home</a> / Funcionários</p>
+<p style="color:#333"><a href="<?= $_SERVER['BASE_URL'] ?>" style="color:#333">Home</a> / Funcionários</p>
 
 <form method="GET" class="form-busca">
     <br /><br />
@@ -40,9 +40,9 @@
             <td><?= $funcionario->telefone ?></td>
             <td><?= $funcionario->nivel_de_acesso ?></td>
             <td>
-                <a class="btn btn-edit" href="<?= BASE_URL ?>funcionario/editar/<?= $funcionario->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
+                <a class="btn btn-edit" href="<?= $_SERVER['BASE_URL'] ?>funcionario/editar/<?= $funcionario->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
 
-                <a onclick="return confirm('Tem certeza que deseja excluir este funcionário?')" class="btn btn-delete" href="<?= BASE_URL ?>funcionario/excluir/<?= $funcionario->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
+                <a onclick="return confirm('Tem certeza que deseja excluir este funcionário?')" class="btn btn-delete" href="<?= $_SERVER['BASE_URL'] ?>funcionario/excluir/<?= $funcionario->id ?>"><i class="fas fa-minus-circle"></i> Excluir</a>
             </td>
         </tr>
 

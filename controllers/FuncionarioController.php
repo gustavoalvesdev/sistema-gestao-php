@@ -18,7 +18,7 @@ class FuncionarioController extends Controller
         $usuario_dao::obterConexao(new BancoDeDadosMySQL);
 
         if (! $usuario_dao->verificarLogin($this->usuario)) {
-            header('Location: '.BASE_URL.'login');
+            header('Location: '.$_SERVER['BASE_URL'].'login');
             exit;
         }
 
@@ -81,7 +81,7 @@ class FuncionarioController extends Controller
 
             $funcionario_dao->salvar($funcionario);
 
-            header('Location: '.BASE_URL.'funcionario');
+            header('Location: '.$_SERVER['BASE_URL'].'funcionario');
             exit;
         }
 
@@ -121,7 +121,7 @@ class FuncionarioController extends Controller
 
             $funcionario_dao->salvar($funcionario);
 
-            header('Location: '.BASE_URL.'funcionario');
+            header('Location: '.$_SERVER['BASE_URL'].'funcionario');
             exit;
         }
 
@@ -137,7 +137,7 @@ class FuncionarioController extends Controller
             $funcionario_dao->excluir($id);
         }
 
-        header('Location: '.BASE_URL.'funcionario');
+        header('Location: '.$_SERVER['BASE_URL'].'funcionario');
         exit;
     }
 

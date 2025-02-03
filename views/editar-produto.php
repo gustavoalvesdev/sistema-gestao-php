@@ -1,7 +1,7 @@
 <style>
     body {
         height: 100vh;
-        background-image: url('<?= BASE_URL ?>assets/images/products_bg.png');
+        background-image: url('<?= $_SERVER['BASE_URL'] ?>assets/images/products_bg.png');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -14,7 +14,7 @@
     <div style="background-color: white; padding: 5px 10px; border-radius: 10px; margin-bottom: 20px;">
         <h1>Editar Produto</h1>
 
-        <p style="color:black"><a href="<?= BASE_URL ?>" style="color:black">Home</a> / <a href="<?= BASE_URL ?>produto" style="color:black">Produtos</a> / Editar Produto</p>
+        <p style="color:black"><a href="<?= $_SERVER['BASE_URL'] ?>" style="color:black">Home</a> / <a href="<?= $_SERVER['BASE_URL'] ?>produto" style="color:black">Produtos</a> / Editar Produto</p>
     </div>
 
 
@@ -77,5 +77,5 @@
 
 </div>
 <script>
-    let baseUrl = '<?= BASE_URL ?>';
+    let baseUrl = '<?= $_SERVER['BASE_URL'] ?>';
 </script>

@@ -21,7 +21,7 @@ class ProdutoController extends Controller
 
         if (! $usuarioDao->verificarLogin($this->usuario)) 
         {
-            header('Location: '.BASE_URL.'login');
+            header('Location: '.$_SERVER['BASE_URL'].'login');
             exit;
         }
 
@@ -85,7 +85,7 @@ class ProdutoController extends Controller
 
             $produto_dao->salvar($produto);
 
-            header('Location: '.BASE_URL.'produto');
+            header('Location: '.$_SERVER['BASE_URL'].'produto');
             exit;
         }
 
@@ -124,7 +124,7 @@ class ProdutoController extends Controller
             
             $produto_dao->salvar($produto);
 
-            header('Location: ' . BASE_URL . 'produto');
+            header('Location: ' . $_SERVER['BASE_URL'] . 'produto');
             exit;
 
         }
@@ -144,9 +144,81 @@ class ProdutoController extends Controller
             $produto_dao->excluir($id);
         }
 
-        header('Location: '.BASE_URL.'produto');
+        header('Location: '.$_SERVER['BASE_URL'].'produto');
         exit;
         
+    }
+
+    public function json()
+    {
+        if (isset($_POST['action'])) {
+            
+            if (isset($_FILES['jsonFile']) && $_FILES['jsonFile']['name'] != '' && $_FILES['jsonFile']['error'] === UPLOAD_ERR_OK) {
+                
+                if ($_FILES['jsonFile']['type'] == 'application/json') {
+                    
+                    $deuCerto = false;
+
+                    $fileTmpPath = $_FILES['jsonFile']['tmp_name'];
+
+                    $fileContent = \file_get_contents($fileTmpPath);
+
+                    $jsonArray = json_decode($fileContent, true);
+
+                    if (\json_last_error() === JSON_ERROR_NONE) {
+                        foreach($jsonArray as $produtoArray) {
+                            
+                            
+                            $produto = new Produto();
+
+                            $produto->codigo = $produtoArray['codigo'];
+                            $produto->nome = $produtoArray['nome'];
+                            $preco = str_replace('.', '' , $produtoArray['preco']);
+                            $preco = str_replace(',', '.', $preco);
+                            $produto->preco = floatval($preco);
+                            $quantidade = str_replace('.', '', $produtoArray['quantidade']);
+                            $quantidade = str_replace(',', '.', $quantidade);
+                            $produto->quantidade = floatval($quantidade);
+                            $quantidade_minima = str_replace('.', '', $produtoArray['quantidade_minima']);
+                            $quantidade_minima = str_replace(',', '.', $quantidade_minima);
+                            $produto->quantidade_minima = floatval($quantidade_minima);
+                            $produto->company_id = addslashes($_SESSION['id_da_empresa']);;
+                            $produto->soft_delete = 0;
+                            $produto->id_do_fornecedor = $produtoArray['id_do_fornecedor'];
+
+                            $produto_dao = new ProdutoDAO;
+                            $produto_dao::obter_conexao(new BancoDeDadosMySQL);
+
+                            $deuCerto = $produto_dao->salvar($produto);
+
+                        }
+
+                        if ($deuCerto) {
+                            $_SESSION['uploadJson'] =  "<p style='color:green'>Cliente(s) salvo(s) com sucesso!</p>";
+                        } else {
+                            $_SESSION['uploadJson'] = "<p style='color:red;'>Falha ao salvar cliente(s)!</p>";
+                        }
+
+                        header('Location: ' . $_SERVER['BASE_URL'] . 'cliente');
+                        exit;
+                      
+                    }
+
+                } else {
+                    header('Location: ' . $_SERVER['BASE_URL'] . 'cliente');
+                    $_SESSION['formatoInvalido'] = 'Formato de arquivo inválido, o arquivo fornecido deve estar em formato JSON';
+                    exit;
+                }
+
+            } else {
+                header('Location: ' . $_SERVER['BASE_URL'] . 'cliente');
+                exit;
+            }
+
+        } else {
+            header('Location: ' . $_SERVER['BASE_URL'] . 'cliente');
+            exit;
+        }
     }
 
     public function __destruct()

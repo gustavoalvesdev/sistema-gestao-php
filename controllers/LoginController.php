@@ -36,7 +36,7 @@ class LoginController extends Controller
                 $_SESSION['token'] = $token;
                 $_SESSION['id_da_empresa'] = $idDaEmpresa;
 
-                header('Location: '.BASE_URL);
+                header('Location: '.$_SERVER['BASE_URL']);
                 exit;
 
             } else {
@@ -54,6 +54,6 @@ class LoginController extends Controller
     public function sair()
     {
         unset($_SESSION['token']);
-        header('Location: '.BASE_URL.'login');
+        header('Location: '.$_SERVER['BASE_URL'].'login');
     }
 }

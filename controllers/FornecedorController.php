@@ -18,7 +18,7 @@ class FornecedorController extends Controller
         $usuario_dao::obterConexao(new BancoDeDadosMySQL);
 
         if (! $usuario_dao->verificarLogin($this->usuario)) {
-            header('Location: '.BASE_URL.'login');
+            header('Location: '.$_SERVER['BASE_URL'].'login');
             exit;
         }
 
@@ -84,7 +84,7 @@ class FornecedorController extends Controller
 
             $fornecedorDao->salvar($fornecedor);
 
-            header('Location: '.BASE_URL.'fornecedor');
+            header('Location: '.$_SERVER['BASE_URL'].'fornecedor');
 
             exit;
 
@@ -123,7 +123,7 @@ class FornecedorController extends Controller
             $fornecedor->company_id = 1;
 
             if (empty($fornecedor->nome)) {
-                header('Location: ' . BASE_URL . 'fornecedor/');
+                header('Location: ' . $_SERVER['BASE_URL'] . 'fornecedor/');
                 exit;
             }
 
@@ -131,12 +131,12 @@ class FornecedorController extends Controller
             
             $fornecedor_dao->salvar($fornecedor);
 
-            header('Location: ' . BASE_URL . 'fornecedor');
+            header('Location: ' . $_SERVER['BASE_URL'] . 'fornecedor');
 
         }
 
         if (empty($id)) {
-            header('Location: ' . BASE_URL . 'fornecedor');
+            header('Location: ' . $_SERVER['BASE_URL'] . 'fornecedor');
             exit;
         }
 
@@ -156,7 +156,7 @@ class FornecedorController extends Controller
             $fornecedor_dao->excluir($idDoFornecedor);
         }
 
-        header('Location: ' . BASE_URL . 'fornecedor');
+        header('Location: ' . $_SERVER['BASE_URL'] . 'fornecedor');
         exit;
     }
 

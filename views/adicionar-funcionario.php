@@ -1,7 +1,7 @@
 <style>
     body {
         height: 100vh;
-        background-image: url('<?= BASE_URL ?>assets/images/workers_bg.jpg');
+        background-image: url('<?= $_SERVER['BASE_URL'] ?>assets/images/workers_bg.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -14,7 +14,7 @@
     <div style="background-color: white; padding: 5px 10px; border-radius: 10px; margin-bottom: 20px;">
         <h1>Adicionar Funcionário</h1>
 
-        <p style="color:black"><a href="<?= BASE_URL ?>" style="color:black">Home</a> / <a href="<?= BASE_URL ?>funcionario" style="color:black">Funcionários</a> / Adicionar Funcionário</p>
+        <p style="color:black"><a href="<?= $_SERVER['BASE_URL'] ?>" style="color:black">Home</a> / <a href="<?= $_SERVER['BASE_URL'] ?>funcionario" style="color:black">Funcionários</a> / Adicionar Funcionário</p>
     </div>
 
 
@@ -135,4 +135,4 @@
 </div>
 
 
-<script src="<?= BASE_URL ?>assets/js/viacep.js"></script>
+<script src="<?= $_SERVER['BASE_URL'] ?>assets/js/viacep.js"></script>

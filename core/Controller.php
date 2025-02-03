@@ -30,13 +30,13 @@ class Controller
             array(
                 'class' => '',
                 'id' => '',
-                'link' => BASE_URL.'usuarios',
+                'link' => $_SERVER['BASE_URL'] . 'usuarios',
                 'text' => 'Usuários'
             ),
             array(
                 'class' => '',
                 'id' => '',
-                'link' => $_SERVER['BASE_URL'] . '/login/sair',
+                'link' => $_SERVER['BASE_URL'] . 'login/sair',
                 'text' => 'Sair'
             )
         );

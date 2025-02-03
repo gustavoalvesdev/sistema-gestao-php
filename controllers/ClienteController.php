@@ -18,7 +18,7 @@ class ClienteController extends Controller
         $usuario_dao::obterConexao(new BancoDeDadosMySQL);
 
         if (! $usuario_dao->verificarLogin($this->usuario)) {
-            header('Location: '.BASE_URL.'login');
+            header('Location: '.$_SERVER['BASE_URL'].'login');
             exit;
         }
 
@@ -77,7 +77,7 @@ class ClienteController extends Controller
 
             $clienteDao->salvar($cliente);
 
-            header('Location: '.BASE_URL.'cliente');
+            header('Location: '.$_SERVER['BASE_URL'].'cliente');
             exit;
         }
 
@@ -117,7 +117,7 @@ class ClienteController extends Controller
     
                 $clienteDao->salvar($cliente);
     
-                header('Location: '.BASE_URL.'cliente');
+                header('Location: '.$_SERVER['BASE_URL'].'cliente');
                 exit;
             }
     
@@ -138,8 +138,81 @@ class ClienteController extends Controller
             $c->excluir($id, addslashes($_SESSION['id_da_empresa']));
         }
 
-        header('Location: '.BASE_URL.'cliente');
+        header('Location: '.$_SERVER['BASE_URL'].'cliente');
         exit;
+    }
+
+    public function json()
+    {
+        if (isset($_POST['action'])) {
+            
+            if (isset($_FILES['jsonFile']) && $_FILES['jsonFile']['name'] != '' && $_FILES['jsonFile']['error'] === UPLOAD_ERR_OK) {
+                
+                if ($_FILES['jsonFile']['type'] == 'application/json') {
+                    
+                    $deuCerto = false;
+
+                    $fileTmpPath = $_FILES['jsonFile']['tmp_name'];
+
+                    $fileContent = \file_get_contents($fileTmpPath);
+
+                    $jsonArray = json_decode($fileContent, true);
+
+                    if (\json_last_error() === JSON_ERROR_NONE) {
+                        foreach($jsonArray as $clienteArray) {
+                            
+                            $cliente = new Cliente;
+
+                            $cliente->nome = addslashes($clienteArray['nome']);
+                            $cliente->rg = addslashes($clienteArray['rg']);
+                            $cliente->cpf = addslashes($clienteArray['cpf']);
+                            $cliente->email = addslashes($clienteArray['email']);
+                            $cliente->celular = addslashes($clienteArray['celular']);
+                            $cliente->telefone = addslashes($clienteArray['telefone']);
+                            $cliente->cep = addslashes($clienteArray['cep']);
+                            $cliente->endereco = addslashes($clienteArray['endereco']);
+                            $cliente->numero = addslashes($clienteArray['numero']);
+                            $cliente->bairro = addslashes($clienteArray['bairro']);
+                            $cliente->cidade = addslashes($clienteArray['cidade']);
+                            $cliente->estado = addslashes($clienteArray['estado']);
+                            $cliente->complemento = addslashes($clienteArray['complemento']);
+                            $cliente->company_id = addslashes($_SESSION['id_da_empresa']);
+
+                            $clienteDao = new ClienteDAO;
+                            $clienteDao->obterConexao(new BancoDeDadosMySQL);
+
+                            $deuCerto = $clienteDao->salvar($cliente);
+                                
+                     
+
+                        }
+
+                        if ($deuCerto) {
+                            $_SESSION['uploadJson'] =  "<p style='color:green'>Cliente(s) salvo(s) com sucesso!</p>";
+                        } else {
+                            $_SESSION['uploadJson'] = "<p style='color:red;'>Falha ao salvar cliente(s)!</p>";
+                        }
+
+                        header('Location: ' . $_SERVER['BASE_URL'] . 'cliente');
+                        exit;
+                      
+                    }
+
+                } else {
+                    header('Location: ' . $_SERVER['BASE_URL'] . 'cliente');
+                    $_SESSION['formatoInvalido'] = 'Formato de arquivo inválido, o arquivo fornecido deve estar em formato JSON';
+                    exit;
+                }
+
+            } else {
+                header('Location: ' . $_SERVER['BASE_URL'] . 'cliente');
+                exit;
+            }
+
+        } else {
+            header('Location: ' . $_SERVER['BASE_URL'] . 'cliente');
+            exit;
+        }
     }
 
     public function __destruct()

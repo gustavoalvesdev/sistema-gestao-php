@@ -2,9 +2,7 @@
 
 session_start();
 
-require_once 'config.php';
-
-require  'vendor/autoload.php';
+require 'bootstrap.php';
 
 use Core\Core;
 

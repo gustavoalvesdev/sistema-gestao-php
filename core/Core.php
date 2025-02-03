@@ -5,60 +5,27 @@ namespace Core;
 class Core {
     public function run() 
     {
-        
-        $url = '/';
+        $url = \substr($_SERVER['REQUEST_URI'], 1);
+        $url = \explode('/', $url);
 
-        if (isset($_GET['url'])) {
-            $url .= $_GET['url'];
-        }
-        
-        $params = array();
+        $url = substr($_SERVER['REQUEST_URI'], 1);
+        $url = explode('/', $url);
 
-        if (!empty($url) && $url != '/') {
-            $url = explode('/', $url);
-            array_shift($url);
+        $controller = isset($url[0]) && $url[0] ? $url[0]: 'home';
+        $action = isset($url[1]) && $url[1] ? $url[1]: 'index';
+        $param = isset($url[2]) && $url[2] ? $url[2] : null;
 
-            $currentController =  'Controllers\\' .  ucfirst($url[0]).'Controller';
-
-            array_shift($url);
-
-            if (isset($url[0]) && !empty($url[0])) {
-                $currentAction = $url[0];
-                array_shift($url);
-            } else {
-                $currentAction = 'index';
-            }
-
-            if (count($url) > 0) {
-                $params = $url;
-            }
-
-        } else {
-            $currentController = 'Controllers\HomeController';
-            $currentAction = 'index';
+        if (! \class_exists($controller = "Controllers\\" . \ucfirst($controller) . 'Controller')) {
+            die('Página não encontrada');
         }
 
-        $fileName = explode('\\', $currentController);
-
-        if (! file_exists('controllers/'.$fileName[1].'.php')) {
-            $currentController = 'Controllers\NotFoundController';
+        if (! \method_exists($controller, $action)) {
+            $action = 'index';
+            $param = isset($url[1]) ? $url[1] : null;
         }
 
-        $c = new $currentController();
+        $response = \call_user_func_array([new $controller, $action], [$param]);
 
-        if (! method_exists($c, $currentAction)) {
-            $currentAction = 'actionNotFound';
-        }
-
-        call_user_func_array(
-            array(
-                $c, 
-                $currentAction
-            ), 
-            $params
-        );
-        
-
-        
+        echo $response;
     }
 }
