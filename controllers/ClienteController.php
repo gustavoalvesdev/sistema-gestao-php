@@ -34,7 +34,6 @@ class ClienteController extends Controller
         $idDaEmpresa = $_SESSION['id_da_empresa'];
 
         /* Paginação */
-        $offset = 0;
         $limite = 3;
         $total = $clienteDao->obter_total();
         $this->dados['paginas'] = ceil($total / $limite);
