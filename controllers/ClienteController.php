@@ -25,25 +25,34 @@ class ClienteController extends Controller
         $this->loadView('template_parts/header', $this->dados);
     }
 
-    public function index()
+    public function index(?int $p): void
     {
+
         $clienteDao = new ClienteDAO();
         $clienteDao->obterConexao(new BancoDeDadosMySQL);
 
         $idDaEmpresa = $_SESSION['id_da_empresa'];
 
+        /* Paginação */
+        $offset = 0;
+        $limite = 3;
+        $total = $clienteDao->obter_total();
+        $this->dados['paginas'] = ceil($total / $limite);
+        $this->dados['pagina_atual'] = 1;
+        if (!empty($p)) {
+            $this->dados['pagina_atual'] = intval($p);
+        }
+        $offset = ($this->dados['pagina_atual'] * $limite) - $limite;
+
         if (! empty($_GET['busca'])) {
 
             $busca = trim(addslashes($_GET['busca']));
 
-            $clientes = $clienteDao->todos("soft_delete = 0 AND (nome LIKE '%$busca%' OR cpf LIKE '%$busca%')  AND company_id = $idDaEmpresa");  
+            $clientes = $clienteDao->todos("soft_delete = 0 AND (nome LIKE '%$busca%' OR cpf LIKE '%$busca%')  AND company_id = $idDaEmpresa", $offset, $limite);  
 
         } else {
-            $clientes = $clienteDao->todos("soft_delete = 0  AND company_id = $idDaEmpresa");  
+            $clientes = $clienteDao->todos("soft_delete = 0  AND company_id = $idDaEmpresa", $offset, $limite);  
         }
-        
-
-        
 
         $this->dados['clientes'] = $clientes;
 

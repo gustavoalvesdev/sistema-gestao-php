@@ -18,6 +18,14 @@ class ClienteDAO
         self::$conexaoComOBanco = $interfaceDeBancoDeDados::obterInstancia();
     }
 
+    public function obter_total(): int
+    {
+        $sql = "SELECT COUNT(*) AS c FROM clientes WHERE soft_delete = 0";
+        $sql = self::$conexaoComOBanco->query($sql);
+        $sql = $sql->fetch();
+        return intval($sql['c']);
+    }
+
     public function encontrar(int $id, int $company_id): ?Cliente
     {
 
@@ -37,13 +45,15 @@ class ClienteDAO
         return null;
     }
 
-    public function todos(string $filter = ''): array
+    public function todos(string $filter = '', $offset, $limite): array
     {
         $sql = "SELECT * FROM clientes";
 
         if ($filter) {
             $sql .= " WHERE $filter";
         }
+
+        $sql .= " LIMIT $offset, $limite";
 
         $resultado = self::$conexaoComOBanco->query($sql);
         return $resultado->fetchAll(PDO::FETCH_CLASS, Cliente::class);

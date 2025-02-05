@@ -76,6 +76,14 @@
 
     <?php endforeach; ?>
 </table>
+<br />
+<?php for($i = 1; $i <= $paginas; $i++): ?>
+    <?php if ($pagina_atual == $i): ?>
+        <a style="font-weight: bold;" href="<?= $_SERVER['BASE_URL'] . 'cliente/' . $i ?>"><?= $i ?></a>
+    <?php else: ?>
+        <a href="<?= $_SERVER['BASE_URL'] . 'cliente/' . $i ?>"><?= $i ?></a>
+    <?php endif; ?>
+<?php endfor; ?>
 
 <script>
     document.getElementById('busca').focus();
