@@ -25,29 +25,90 @@ class FornecedorController extends Controller
         $this->loadView('template_parts/header', $this->dados);
     }
 
-    public function index()
+    public function index(): void
     {
         $fornecedorDao = new FornecedorDAO();
         $fornecedorDao->obter_conexao(new BancoDeDadosMySQL);
 
         $idDaEmpresa = $_SESSION['id_da_empresa'];
 
-        if (! empty($_GET['busca'])) {
-
-            $termo_de_busca = trim(addslashes($_GET['busca']));
-
-            $fornecedores = $fornecedorDao->todos("soft_delete = 0 AND (nome LIKE '%$termo_de_busca%' OR cnpj LIKE '%$termo_de_busca%') AND company_id = $idDaEmpresa");  
-
+        /* Paginação */
+        $limite = 3;
+        $total = $fornecedorDao->obter_total();
+        $this->dados['paginas'] = ceil($total / $limite);
+        $this->dados['pagina_atual'] = 1;
+ 
+        $this->dados['pagina_atual'] = 1;
+        
+        if ((($this->dados['pagina_atual'] * $limite) - $limite) == 0) {
+            $offset = 1;
         } else {
-            $fornecedores = $fornecedorDao->todos("soft_delete = 0 AND company_id = $idDaEmpresa");  
+            $offset = ($this->dados['pagina_atual'] * $limite) - $limite;
         }
-        
 
-        
+        $fornecedores = $fornecedorDao->todos("soft_delete = 0 AND company_id = $idDaEmpresa", $offset, $limite);  
 
         $this->dados['fornecedores'] = $fornecedores;
 
         $this->loadView('fornecedores', $this->dados);
+    }
+
+    public function busca() 
+    {
+        $fornecedorDao = new FornecedorDAO();
+        $fornecedorDao->obter_conexao(new BancoDeDadosMySQL);
+
+        $idDaEmpresa = $_SESSION['id_da_empresa'];
+
+        if (isset($_GET['busca']) && !empty($_GET['busca'])) {
+            $termo_de_busca = trim(addslashes($_GET['busca']));
+
+            $fornecedores = $fornecedorDao->todos("soft_delete = 0 AND (nome LIKE '%$termo_de_busca%' OR cnpj LIKE '%$termo_de_busca%') AND company_id = $idDaEmpresa", 0, 0);  
+
+        } else {
+            header('Location: '.$_SERVER['BASE_URL'].'fornecedor');
+            exit;
+        }
+
+        $this->dados['fornecedores'] = $fornecedores;
+
+        $this->loadView('fornecedores', $this->dados);
+    }
+
+    public function pagina($pagina): void 
+    {
+        if (empty($pagina) || intval($pagina) == 0) {
+            header('Location: '.$_SERVER['BASE_URL'].'fornecedor');
+            exit;
+        }
+
+        $fornecedorDao = new FornecedorDAO();
+        $fornecedorDao->obter_conexao(new BancoDeDadosMySQL);
+
+        $idDaEmpresa = $_SESSION['id_da_empresa'];
+
+        /* Paginação */
+        $limite = 3;
+        $total = $fornecedorDao->obter_total();
+        $this->dados['paginas'] = ceil($total / $limite);
+        $this->dados['pagina_atual'] = $pagina;
+        if (!empty($pagina)) {
+            $this->dados['pagina_atual'] = intval($pagina);
+        }
+
+        if ((($this->dados['pagina_atual'] * $limite) - $limite) == 0) {
+            $offset = 1;
+        } else {
+            $offset = ($this->dados['pagina_atual'] * $limite) - $limite;
+        }
+
+        $fornecedores = $fornecedorDao->todos("soft_delete = 0 AND company_id = $idDaEmpresa", $offset, $limite);  
+
+        $this->dados['fornecedores'] = $fornecedores;
+
+        $this->loadView('fornecedores', $this->dados);
+
+
     }
 
     public function adicionar()

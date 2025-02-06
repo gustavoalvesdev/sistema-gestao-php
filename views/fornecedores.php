@@ -15,7 +15,7 @@
 
 <p style="color:#333"><a href="<?= $_SERVER['BASE_URL'] ?>" style="color:#333">Home</a> / Fornecedores</p>
 
-<form method="GET" class="form-busca">
+<form method="GET" class="form-busca" action="<?= $_SERVER['BASE_URL'] ?>fornecedor/busca/">
     <br /><br />
     <fieldset style="background-color: white">
         <input type="text" id="busca" name="busca" value="<?= ($_GET['busca']) ?? ''; ?>" placeholder="Digite nome ou CNPJ do fornecedor" style="width:100%; height:40px; font-size: 18px" />
@@ -45,7 +45,16 @@
 
     <?php endforeach; ?>
 </table>
-
+<br />
+<?php if (isset($paginas)): ?>
+    <?php for($i = 1; $i <= $paginas; $i++): ?>
+        <?php if ($pagina_atual == $i): ?>
+            <a style="font-weight: bold;" href="<?= $_SERVER['BASE_URL'] . 'fornecedor/pagina/' . $i ?>"><?= $i ?></a>
+        <?php else: ?>
+            <a href="<?= $_SERVER['BASE_URL'] . 'fornecedor/pagina/' . $i ?>"><?= $i ?></a>
+        <?php endif; ?>
+    <?php endfor; ?>
+<?php endif; ?>
 <script>
     document.getElementById('busca').focus();
 </script>

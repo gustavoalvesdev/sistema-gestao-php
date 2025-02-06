@@ -18,6 +18,14 @@ class FornecedorDAO
         self::$conexao_com_o_banco = $interface_de_banco_de_dados::obterInstancia();
     }
 
+    public function obter_total(): int
+    {
+        $sql = "SELECT COUNT(*) AS c FROM fornecedores WHERE soft_delete = 0";
+        $sql = self::$conexao_com_o_banco->query($sql);
+        $sql = $sql->fetch();
+        return intval($sql['c']);
+    }
+
     public function encontrar(int $id): Fornecedor
     {
         $sql = "SELECT * FROM fornecedores WHERE soft_delete = 0 AND id = :id";
@@ -34,12 +42,16 @@ class FornecedorDAO
         return $fornecedor_encontrado;
     }
 
-    public function todos(string $filter = ''): array
+    public function todos(string $filter = '', int $offset = 0, int $limite = 0): array
     {
         $sql = "SELECT * FROM fornecedores";
 
         if ($filter) {
             $sql .= " WHERE $filter";
+        }
+
+        if ($offset != 0 && $limite != 0) {
+            $sql .= " LIMIT $offset, $limite";
         }
 
         $fornecedores = self::$conexao_com_o_banco->query($sql);

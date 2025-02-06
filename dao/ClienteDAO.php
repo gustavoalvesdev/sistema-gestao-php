@@ -45,7 +45,7 @@ class ClienteDAO
         return null;
     }
 
-    public function todos(string $filter = '', $offset, $limite): array
+    public function todos(string $filter = '', int $offset, int $limite): array
     {
         $sql = "SELECT * FROM clientes";
 
