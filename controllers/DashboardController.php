@@ -13,7 +13,7 @@ class DashboardController extends Controller
         parent::__construct();
 
         $usuario_dao = new UsuarioDAO();
-        $usuario_dao::obterConexao(new BancoDeDadosMySQL);
+        $usuario_dao::obter_conexao(new BancoDeDadosMySQL);
 
         if (! $usuario_dao->verificarLogin($this->usuario)) {
             header('Location: '.$_SERVER['BASE_URL'].'login');

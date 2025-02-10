@@ -15,7 +15,7 @@ class FornecedorController extends Controller
         parent::__construct();
 
         $usuario_dao = new UsuarioDAO();
-        $usuario_dao::obterConexao(new BancoDeDadosMySQL);
+        $usuario_dao::obter_conexao(new BancoDeDadosMySQL);
 
         if (! $usuario_dao->verificarLogin($this->usuario)) {
             header('Location: '.$_SERVER['BASE_URL'].'login');
@@ -37,14 +37,9 @@ class FornecedorController extends Controller
         $total = $fornecedorDao->obter_total();
         $this->dados['paginas'] = ceil($total / $limite);
         $this->dados['pagina_atual'] = 1;
- 
-        $this->dados['pagina_atual'] = 1;
         
-        if ((($this->dados['pagina_atual'] * $limite) - $limite) == 0) {
-            $offset = 1;
-        } else {
-            $offset = ($this->dados['pagina_atual'] * $limite) - $limite;
-        }
+
+        $offset = ($this->dados['pagina_atual'] * $limite) - $limite;
 
         $fornecedores = $fornecedorDao->todos("soft_delete = 0 AND company_id = $idDaEmpresa", $offset, $limite);  
 
@@ -63,7 +58,7 @@ class FornecedorController extends Controller
         if (isset($_GET['busca']) && !empty($_GET['busca'])) {
             $termo_de_busca = trim(addslashes($_GET['busca']));
 
-            $fornecedores = $fornecedorDao->todos("soft_delete = 0 AND (nome LIKE '%$termo_de_busca%' OR cnpj LIKE '%$termo_de_busca%') AND company_id = $idDaEmpresa", 0, 0);  
+            $fornecedores = $fornecedorDao->todos("soft_delete = 0 AND (nome LIKE '%$termo_de_busca%' OR cnpj LIKE '%$termo_de_busca%') AND company_id = $idDaEmpresa", null, null);  
 
         } else {
             header('Location: '.$_SERVER['BASE_URL'].'fornecedor');
@@ -95,12 +90,8 @@ class FornecedorController extends Controller
         if (!empty($pagina)) {
             $this->dados['pagina_atual'] = intval($pagina);
         }
-
-        if ((($this->dados['pagina_atual'] * $limite) - $limite) == 0) {
-            $offset = 1;
-        } else {
-            $offset = ($this->dados['pagina_atual'] * $limite) - $limite;
-        }
+     
+        $offset = ($this->dados['pagina_atual'] * $limite) - $limite;
 
         $fornecedores = $fornecedorDao->todos("soft_delete = 0 AND company_id = $idDaEmpresa", $offset, $limite);  
 

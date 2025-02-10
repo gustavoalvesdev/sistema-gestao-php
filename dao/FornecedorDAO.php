@@ -15,7 +15,7 @@ class FornecedorDAO
 
     public static function obter_conexao(InterfaceDeBancoDeDados $interface_de_banco_de_dados): void
     {
-        self::$conexao_com_o_banco = $interface_de_banco_de_dados::obterInstancia();
+        self::$conexao_com_o_banco = $interface_de_banco_de_dados::obter_instancia();
     }
 
     public function obter_total(): int
@@ -42,7 +42,7 @@ class FornecedorDAO
         return $fornecedor_encontrado;
     }
 
-    public function todos(string $filter = '', int $offset = 0, int $limite = 0): array
+    public function todos(string $filter = '', $offset, $limite): array
     {
         $sql = "SELECT * FROM fornecedores";
 
@@ -50,9 +50,10 @@ class FornecedorDAO
             $sql .= " WHERE $filter";
         }
 
-        if ($offset != 0 && $limite != 0) {
+        if ($offset !== null && $limite !== null) {
             $sql .= " LIMIT $offset, $limite";
         }
+        
 
         $fornecedores = self::$conexao_com_o_banco->query($sql);
         $lista_de_fornecedores  = $fornecedores->fetchAll(PDO::FETCH_CLASS, Fornecedor::class);

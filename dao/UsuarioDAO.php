@@ -11,9 +11,9 @@ class UsuarioDAO
 
     private static PDO $conexaoComOBanco;
 
-    public static function obterConexao(InterfaceDeBancoDeDados $interfaceDeBancoDeDados): void
+    public static function obter_conexao(InterfaceDeBancoDeDados $interfaceDeBancoDeDados): void
     {
-        self::$conexaoComOBanco = $interfaceDeBancoDeDados::obterInstancia();
+        self::$conexaoComOBanco = $interfaceDeBancoDeDados::obter_instancia();
     }
 
     public function verificarUsuario(Usuario $usuario): bool

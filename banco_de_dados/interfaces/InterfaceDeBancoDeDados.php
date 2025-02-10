@@ -8,5 +8,5 @@ use PDO;
 
 interface InterfaceDeBancoDeDados
 {
-    public static function obterInstancia(): PDO;
+    public static function obter_instancia(): PDO;
 }

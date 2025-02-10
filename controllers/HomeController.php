@@ -16,7 +16,7 @@ class HomeController extends Controller
 
         $this->usuario = new Usuario();
         $this->usuarioDao = new UsuarioDAO();
-        $this->usuarioDao->obterConexao(new BancoDeDadosMySQL);
+        $this->usuarioDao->obter_conexao(new BancoDeDadosMySQL);
 
         if (! $this->usuarioDao->verificarLogin($this->usuario)) {
             header('Location: '.$_SERVER['BASE_URL'].'login');

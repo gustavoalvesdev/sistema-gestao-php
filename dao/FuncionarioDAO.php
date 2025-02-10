@@ -13,7 +13,7 @@ class FuncionarioDAO
 
     public static function obter_conexao(InterfaceDeBancoDeDados $interface_de_banco_de_dados): void
     {
-        self::$conexao_com_o_banco = $interface_de_banco_de_dados::obterInstancia();
+        self::$conexao_com_o_banco = $interface_de_banco_de_dados::obter_instancia();
     }
     
     public function encontrar(int $id): Funcionario

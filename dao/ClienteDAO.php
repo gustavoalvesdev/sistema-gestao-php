@@ -11,17 +11,17 @@ use PDO;
 class ClienteDAO
 {
 
-    private static PDO $conexaoComOBanco;
+    private static PDO $conexao_com_o_banco;
 
-    public static function obterConexao(InterfaceDeBancoDeDados $interfaceDeBancoDeDados): void
+    public static function obter_conexao(InterfaceDeBancoDeDados $interface_de_banco_de_dados): void
     {
-        self::$conexaoComOBanco = $interfaceDeBancoDeDados::obterInstancia();
+        self::$conexao_com_o_banco = $interface_de_banco_de_dados::obter_instancia();
     }
 
     public function obter_total(): int
     {
         $sql = "SELECT COUNT(*) AS c FROM clientes WHERE soft_delete = 0";
-        $sql = self::$conexaoComOBanco->query($sql);
+        $sql = self::$conexao_com_o_banco->query($sql);
         $sql = $sql->fetch();
         return intval($sql['c']);
     }
@@ -30,7 +30,7 @@ class ClienteDAO
     {
 
         $sql = "SELECT * FROM clientes WHERE soft_delete = 0 AND id = :id AND company_id = :company_id";
-        $sql = self::$conexaoComOBanco->prepare($sql);
+        $sql = self::$conexao_com_o_banco->prepare($sql);
         $sql->bindValue(':id', $id);
         $sql->bindValue(':company_id', $company_id);
         $result = new Cliente;
@@ -45,7 +45,7 @@ class ClienteDAO
         return null;
     }
 
-    public function todos(string $filter = '', int $offset, int $limite): array
+    public function todos(string $filter = '', $offset, $limite)
     {
         $sql = "SELECT * FROM clientes";
 
@@ -53,16 +53,20 @@ class ClienteDAO
             $sql .= " WHERE $filter";
         }
 
-        $sql .= " LIMIT $offset, $limite";
+        if ($offset !== null && $limite !== null) {
+            $sql .= " LIMIT $offset, $limite";
+        }
 
-        $resultado = self::$conexaoComOBanco->query($sql);
-        return $resultado->fetchAll(PDO::FETCH_CLASS, Cliente::class);
+        $clientes = self::$conexao_com_o_banco->query($sql);
+        $lista_de_clientes = $clientes->fetchAll(PDO::FETCH_CLASS, Cliente::class);
+
+        return $lista_de_clientes;
     }
 
     public function excluir(int $id, $company_id): bool
     {
         $sql = "UPDATE clientes SET soft_delete = 1 WHERE id = :id AND company_id = :company_id";
-        $sql = self::$conexaoComOBanco->prepare($sql);
+        $sql = self::$conexao_com_o_banco->prepare($sql);
         $sql->bindValue(':id', $id);
         $sql->bindValue(':company_id', $company_id);
         return $sql->execute();
@@ -73,7 +77,7 @@ class ClienteDAO
         $sql = "INSERT INTO clientes (nome, rg, cpf, email, celular, telefone, cep, endereco, numero, bairro, cidade, estado, complemento, company_id) VALUES (:nome, :rg, :cpf, :email, :celular, :telefone, :cep, :estado, :numero, :bairro, :cidade, :estado, :complemento, :company_id)";
 
         if (empty($cliente->id)) {
-            $sql = self::$conexaoComOBanco->prepare($sql);
+            $sql = self::$conexao_com_o_banco->prepare($sql);
             $sql->bindValue(':nome', $cliente->nome);
             $sql->bindValue(':rg', $cliente->rg);
             $sql->bindValue(':cpf', $cliente->cpf);
@@ -91,7 +95,7 @@ class ClienteDAO
         } else {
             $sql = "UPDATE clientes SET nome = :nome, rg = :rg, cpf = :cpf, email = :email, celular = :celular, telefone = :telefone, cep = :cep, endereco = :endereco, numero = :numero, bairro = :bairro, cidade = :estado, estado = :estado, complemento = :complemento WHERE id = :id";
 
-            $sql = self::$conexaoComOBanco->prepare($sql);
+            $sql = self::$conexao_com_o_banco->prepare($sql);
             $sql->bindValue(':nome', $cliente->nome);
             $sql->bindValue(':rg', $cliente->rg);
             $sql->bindValue(':cpf', $cliente->cpf);

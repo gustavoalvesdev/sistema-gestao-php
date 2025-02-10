@@ -45,7 +45,7 @@
     </form>
 </p>
 
-<form method="GET" class="form-busca">
+<form method="GET" class="form-busca" action="<?= $_SERVER['BASE_URL'] ?>cliente/busca/">
     <br /><br />
     <fieldset style="background-color: white">
         <input type="text" id="busca" name="busca" value="<?= ($_GET['busca']) ?? ''; ?>" placeholder="Digite o CPF ou o nome do cliente" style="width:100%; height:40px; font-size: 18px" />
@@ -77,13 +77,15 @@
     <?php endforeach; ?>
 </table>
 <br />
-<?php for($i = 1; $i <= $paginas; $i++): ?>
-    <?php if ($pagina_atual == $i): ?>
-        <a style="font-weight: bold;" href="<?= $_SERVER['BASE_URL'] . 'cliente/' . $i ?>"><?= $i ?></a>
-    <?php else: ?>
-        <a href="<?= $_SERVER['BASE_URL'] . 'cliente/' . $i ?>"><?= $i ?></a>
-    <?php endif; ?>
-<?php endfor; ?>
+<?php if (isset($paginas)): ?>
+    <?php for($i = 1; $i <= $paginas; $i++): ?>
+        <?php if ($pagina_atual == $i): ?>
+            <a style="font-weight: bold;" href="<?= $_SERVER['BASE_URL'] . 'cliente/pagina/' . $i ?>"><?= $i ?></a>
+        <?php else: ?>
+            <a href="<?= $_SERVER['BASE_URL'] . 'cliente/pagina/' . $i ?>"><?= $i ?></a>
+        <?php endif; ?>
+    <?php endfor; ?>
+<?php endif; ?>
 
 <script>
     document.getElementById('busca').focus();

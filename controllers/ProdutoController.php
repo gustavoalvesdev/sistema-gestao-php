@@ -17,7 +17,7 @@ class ProdutoController extends Controller
         parent::__construct();
 
         $usuarioDao = new UsuarioDAO();
-        $usuarioDao::obterConexao(new BancoDeDadosMySQL);
+        $usuarioDao::obter_conexao(new BancoDeDadosMySQL);
 
         if (! $usuarioDao->verificarLogin($this->usuario)) 
         {

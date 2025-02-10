@@ -15,7 +15,7 @@ class ClienteController extends Controller
         parent::__construct();
 
         $usuario_dao = new UsuarioDAO();
-        $usuario_dao::obterConexao(new BancoDeDadosMySQL);
+        $usuario_dao::obter_conexao(new BancoDeDadosMySQL);
 
         if (! $usuario_dao->verificarLogin($this->usuario)) {
             header('Location: '.$_SERVER['BASE_URL'].'login');
@@ -25,11 +25,64 @@ class ClienteController extends Controller
         $this->loadView('template_parts/header', $this->dados);
     }
 
-    public function index(?int $p): void
+    public function index(): void
     {
 
         $clienteDao = new ClienteDAO();
-        $clienteDao->obterConexao(new BancoDeDadosMySQL);
+        $clienteDao->obter_conexao(new BancoDeDadosMySQL);
+
+        $idDaEmpresa = $_SESSION['id_da_empresa'];
+
+        /* Paginação */
+         /* Paginação */
+        $limite = 3;
+        $total = $clienteDao->obter_total();
+        $this->dados['paginas'] = ceil($total / $limite);
+        $this->dados['pagina_atual'] = 1;
+
+     
+        $offset = ($this->dados['pagina_atual'] * $limite) - $limite;
+        
+
+        $clientes = $clienteDao->todos("soft_delete = 0 AND company_id = $idDaEmpresa", $offset, $limite);  
+
+        $this->dados['clientes'] = $clientes;
+
+
+        $this->loadView('clientes', $this->dados);
+    }
+
+    public function busca() 
+    {
+        $clienteDao = new ClienteDAO();
+        $clienteDao->obter_conexao(new BancoDeDadosMySQL);
+
+        $idDaEmpresa = $_SESSION['id_da_empresa'];
+
+        if (isset($_GET['busca']) && !empty($_GET['busca'])) {
+            $termo_de_busca = trim(addslashes($_GET['busca']));
+
+            $clientes = $clienteDao->todos("soft_delete = 0 AND (nome LIKE '%$termo_de_busca%' OR cpf LIKE '%$termo_de_busca%') AND company_id = $idDaEmpresa", null, null);  
+
+        } else {
+            header('Location: '.$_SERVER['BASE_URL'].'cliente');
+            exit;
+        }
+
+        $this->dados['clientes'] = $clientes;
+
+        $this->loadView('clientes', $this->dados);
+    }
+
+    public function pagina($pagina): void 
+    {
+        if (empty($pagina) || intval($pagina) == 0) {
+            header('Location: '.$_SERVER['BASE_URL'].'cliente');
+            exit;
+        }
+
+        $clienteDao = new ClienteDAO();
+        $clienteDao->obter_conexao(new BancoDeDadosMySQL);
 
         $idDaEmpresa = $_SESSION['id_da_empresa'];
 
@@ -37,25 +90,22 @@ class ClienteController extends Controller
         $limite = 3;
         $total = $clienteDao->obter_total();
         $this->dados['paginas'] = ceil($total / $limite);
-        $this->dados['pagina_atual'] = 1;
-        if (!empty($p)) {
-            $this->dados['pagina_atual'] = intval($p);
+        $this->dados['pagina_atual'] = $pagina;
+        if (!empty($pagina)) {
+            $this->dados['pagina_atual'] = intval($pagina);
         }
+
+   
         $offset = ($this->dados['pagina_atual'] * $limite) - $limite;
+        
 
-        if (! empty($_GET['busca'])) {
-
-            $busca = trim(addslashes($_GET['busca']));
-
-            $clientes = $clienteDao->todos("soft_delete = 0 AND (nome LIKE '%$busca%' OR cpf LIKE '%$busca%')  AND company_id = $idDaEmpresa", $offset, $limite);  
-
-        } else {
-            $clientes = $clienteDao->todos("soft_delete = 0  AND company_id = $idDaEmpresa", $offset, $limite);  
-        }
+        $clientes = $clienteDao->todos("soft_delete = 0 AND company_id = $idDaEmpresa", $offset, $limite);  
 
         $this->dados['clientes'] = $clientes;
 
         $this->loadView('clientes', $this->dados);
+
+
     }
 
     public function adicionar()
@@ -81,7 +131,7 @@ class ClienteController extends Controller
             
             $clienteDao = new ClienteDAO;
 
-            $clienteDao->obterConexao(new BancoDeDadosMySQL);
+            $clienteDao->obter_conexao(new BancoDeDadosMySQL);
 
             $clienteDao->salvar($cliente);
 
@@ -96,7 +146,7 @@ class ClienteController extends Controller
     {
 
         $clienteDao = new ClienteDAO;
-        $clienteDao->obterConexao(new BancoDeDadosMySQL);
+        $clienteDao->obter_conexao(new BancoDeDadosMySQL);
 
         $cliente = $clienteDao->encontrar($id, addslashes($_SESSION['id_da_empresa']));
 
@@ -140,7 +190,7 @@ class ClienteController extends Controller
     public function excluir($id)
     {
         $c = new ClienteDAO();
-        $c->obterConexao(new BancoDeDadosMySQL);
+        $c->obter_conexao(new BancoDeDadosMySQL);
 
         if (! empty($id)) {
             $c->excluir($id, addslashes($_SESSION['id_da_empresa']));
@@ -187,7 +237,7 @@ class ClienteController extends Controller
                             $cliente->company_id = addslashes($_SESSION['id_da_empresa']);
 
                             $clienteDao = new ClienteDAO;
-                            $clienteDao->obterConexao(new BancoDeDadosMySQL);
+                            $clienteDao->obter_conexao(new BancoDeDadosMySQL);
 
                             $deuCerto = $clienteDao->salvar($cliente);
                                 

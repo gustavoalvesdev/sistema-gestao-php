@@ -21,7 +21,7 @@ class LoginController extends Controller
 
             $this->usuario = new Usuario();
             $this->usuarioDao = new UsuarioDAO();
-            $this->usuarioDao->obterConexao(new BancoDeDadosMySQL);
+            $this->usuarioDao->obter_conexao(new BancoDeDadosMySQL);
             $this->usuario->email = $email;
             $this->usuario->senha = $senha;
 
