@@ -84,18 +84,18 @@
             <!-- form-field -->
             <div class="form-field w25">
                 <label for="cidade">Cidade:</label>
-                <input type="text" name="cidade" id="cidade"  value="<?= $cliente->cidade ?>" />
+                <input type="text" name="cidade" id="cidade"  value="<?= mb_strtoupper($cliente->cidade) ?>" />
             </div>
             <!-- form-field -->
             <div class="form-field w25">
                 <label for="complemento">Complemento:</label>
-                <input type="text" name="complemento" id="complemento"  value="<?= $cliente->complemento ?>" />
+                <input type="text" name="complemento" id="complemento"  value="<?= mb_strtoupper($cliente->complemento) ?>" />
             </div>
             <!-- form-field -->
     
             <div class="form-field w25">
                 <label for="estado">Estado:</label>
-                <input type="text" name="estado" id="estado" value="<?= $cliente->estado ?>" />
+                <input type="text" name="estado" id="estado" value="<?= mb_strtoupper($cliente->estado) ?>" />
             </div>
             <!-- form-field -->
         </div>

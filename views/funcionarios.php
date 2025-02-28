@@ -38,7 +38,7 @@
             <td><?= mb_strtoupper($funcionario->nome, "utf8") ?></td>
             <td><?= $funcionario->celular ?></td>
             <td><?= $funcionario->telefone ?></td>
-            <td><?= $funcionario->nivel_de_acesso ?></td>
+            <td><?= mb_strtoupper($funcionario->nivel_de_acesso) ?></td>
             <td>
                 <a class="btn btn-edit" href="<?= $_SERVER['BASE_URL'] ?>funcionario/editar/<?= $funcionario->id ?>"><i class="fas fa-pencil-alt"></i> Editar</a>
 

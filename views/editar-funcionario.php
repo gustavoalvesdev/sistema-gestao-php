@@ -23,7 +23,7 @@
         <div class="form-row">
             <div class="form-field w33">
                 <label for="nome">Nome:</label>
-                <input type="text" name="nome" value="<?= $funcionario->nome ?>" required />
+                <input type="text" name="nome" value="<?= mb_strtoupper($funcionario->nome) ?>" required />
             </div>
             <!-- form-field -->
             <div class="form-field w33">
@@ -66,7 +66,7 @@
             <!-- form-field -->
             <div class="form-field w25">
                 <label for="cargo">Cargo:</label>
-                <input type="text" name="cargo" value="<?= $funcionario->cargo ?>" />
+                <input type="text" name="cargo" value="<?= mb_strtoupper($funcionario->cargo) ?>" />
             </div>
             <!-- form-field -->
 
@@ -89,7 +89,7 @@
             <!-- form-field -->
             <div class="form-field w50">
                 <label for="endereco">Endereço:</label>
-                <input type="text" name="endereco" id="endereco" value="<?= $funcionario->endereco ?>"   />
+                <input type="text" name="endereco" id="endereco" value="<?= mb_strtoupper($funcionario->endereco) ?>"   />
             </div>
             <!-- form-field -->
             <div class="form-field w20" id="row-number">
@@ -103,23 +103,23 @@
         <div class="form-row">
             <div class="form-field w25">
                 <label for="bairro">Bairro:</label>
-                <input type="text" name="bairro" id="bairro" value="<?= $funcionario->bairro ?>" />
+                <input type="text" name="bairro" id="bairro" value="<?= mb_strtoupper($funcionario->bairro) ?>" />
             </div>
             <!-- form-field -->
             <div class="form-field w25">
                 <label for="cidade">Cidade:</label>
-                <input type="text" name="cidade" id="cidade" value="<?= $funcionario->cidade ?>" />
+                <input type="text" name="cidade" id="cidade" value="<?= mb_strtoupper($funcionario->cidade) ?>" />
             </div>
             <!-- form-field -->
             <div class="form-field w25">
                 <label for="complemento">Complemento:</label>
-                <input type="text" name="complemento" id="complemento" value="<?= $funcionario->complemento ?>" />
+                <input type="text" name="complemento" id="complemento" value="<?= mb_strtoupper($funcionario->complemento) ?>" />
             </div>
             <!-- form-field -->
 
             <div class="form-field w25">
                 <label for="estado">Estado:</label>
-                <input type="text" name="estado" id="estado" value="<?= $funcionario->estado ?>" />
+                <input type="text" name="estado" id="estado" value="<?= mb_strtoupper($funcionario->estado) ?>" />
             </div>
             <!-- form-field -->
         </div>

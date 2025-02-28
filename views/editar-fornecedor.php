@@ -84,13 +84,13 @@
         <!-- form-field -->
         <div class="form-field w25">
             <label for="complemento">Complemento:</label>
-            <input type="text" name="complemento" id="complemento" value="<?= $fornecedor->complemento ?>" />
+            <input type="text" name="complemento" id="complemento" value="<?= mb_strtoupper($fornecedor->complemento) ?>" />
         </div>
         <!-- form-field -->
 
         <div class="form-field w25">
             <label for="estado">Estado:</label>
-            <input type="text" name="estado" id="estado" value="<?= $fornecedor->estado ?>" />
+            <input type="text" name="estado" id="estado" value="<?= mb_strtoupper($fornecedor->estado) ?>" />
         </div>
         <!-- form-field -->
     </div>
