@@ -22,8 +22,17 @@
 
 <?php endif; ?>
 
+<?php if(isset($_SESSION['formatoInvalido'])): ?>
+
+<?php 
+    echo $_SESSION['formatoInvalido'];
+    unset($_SESSION['formatoInvalido']);
+?>
+
+<?php endif; ?>
+
 <p>
-    <form method="POST" action="<?= $_SERVER['BASE_URL'] ?>cliente/json" enctype="multipart/form-data">
+    <form method="POST" action="<?= $_SERVER['BASE_URL'] ?>produto/json" enctype="multipart/form-data">
         <label for="jsonFile">Importar Via JSON:</label><br><br>
         <input type="file" name="jsonFile" id="jsonFile" />
         <input type="submit" name="action" value="Enviar" />

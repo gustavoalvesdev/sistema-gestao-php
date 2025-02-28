@@ -210,10 +210,11 @@ class ProdutoController extends Controller
     public function json()
     {
         if (isset($_POST['action'])) {
-            
+
             if (isset($_FILES['jsonFile']) && $_FILES['jsonFile']['name'] != '' && $_FILES['jsonFile']['error'] === UPLOAD_ERR_OK) {
-                
+
                 if ($_FILES['jsonFile']['type'] == 'application/json') {
+
                     
                     $deuCerto = false;
 
@@ -224,6 +225,8 @@ class ProdutoController extends Controller
                     $jsonArray = json_decode($fileContent, true);
 
                     if (\json_last_error() === JSON_ERROR_NONE) {
+
+                        
                         foreach($jsonArray as $produtoArray) {
                             
                             
@@ -231,9 +234,7 @@ class ProdutoController extends Controller
 
                             $produto->codigo = $produtoArray['codigo'];
                             $produto->nome = $produtoArray['nome'];
-                            $preco = str_replace('.', '' , $produtoArray['preco']);
-                            $preco = str_replace(',', '.', $preco);
-                            $produto->preco = floatval($preco);
+                            $produto->preco = floatval($produtoArray['preco']);
                             $quantidade = str_replace('.', '', $produtoArray['quantidade']);
                             $quantidade = str_replace(',', '.', $quantidade);
                             $produto->quantidade = floatval($quantidade);
@@ -252,29 +253,33 @@ class ProdutoController extends Controller
                         }
 
                         if ($deuCerto) {
-                            $_SESSION['uploadJson'] =  "<p style='color:green'>Cliente(s) salvo(s) com sucesso!</p>";
+                            $_SESSION['uploadJson'] =  "<p style='color:green'>Produto(s) salvo(s) com sucesso!</p>";
                         } else {
-                            $_SESSION['uploadJson'] = "<p style='color:red;'>Falha ao salvar cliente(s)!</p>";
+                            $_SESSION['uploadJson'] = "<p style='color:red;'>Falha ao salvar produto(s)!</p>";
                         }
 
-                        header('Location: ' . $_SERVER['BASE_URL'] . 'cliente');
+                        header('Location: ' . $_SERVER['BASE_URL'] . 'produto');
                         exit;
                       
+                    } else {
+                        header('Location: ' . $_SERVER['BASE_URL'] . 'produto');
+                        $_SESSION['formatoInvalido'] = 'Erro ao enviar arquivo JSON';
+                        exit;
                     }
 
                 } else {
-                    header('Location: ' . $_SERVER['BASE_URL'] . 'cliente');
+                    header('Location: ' . $_SERVER['BASE_URL'] . 'produto');
                     $_SESSION['formatoInvalido'] = 'Formato de arquivo inválido, o arquivo fornecido deve estar em formato JSON';
                     exit;
                 }
 
             } else {
-                header('Location: ' . $_SERVER['BASE_URL'] . 'cliente');
+                header('Location: ' . $_SERVER['BASE_URL'] . 'produto');
                 exit;
             }
 
         } else {
-            header('Location: ' . $_SERVER['BASE_URL'] . 'cliente');
+            header('Location: ' . $_SERVER['BASE_URL'] . 'produto');
             exit;
         }
     }
