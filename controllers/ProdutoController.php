@@ -39,16 +39,18 @@ class ProdutoController extends Controller
 
         $idDaEmpresa = $_SESSION['id_da_empresa'];
 
-        if (! empty($_GET['busca'])) {
+        /* Paginação */
+         /* Paginação */
+         $limite = 3;
+         $total = $produto_dao->obter_total();
+         $this->dados['paginas'] = ceil($total / $limite);
+         $this->dados['pagina_atual'] = 1;
 
-            $termo_a_ser_buscado = trim(addslashes($_GET['busca']));
-           
-            $this->dados['produtos'] = $produto_dao->todos("soft_delete = 0 AND (nome LIKE '%$termo_a_ser_buscado%' OR codigo LIKE '%$termo_a_ser_buscado%') AND company_id = $idDaEmpresa");
-        } else {
-            $this->dados['produtos'] = $produto_dao->todos("soft_delete = 0 AND company_id = $idDaEmpresa");
-        }
+         $offset = ($this->dados['pagina_atual'] * $limite) - $limite;
 
-        
+         $produtos = $produto_dao->todos("soft_delete = 0 AND company_id = $idDaEmpresa", $offset, $limite);  
+
+         $this->dados['produtos'] = $produtos;
 
         $this->loadView('produtos', $this->dados);
     }
@@ -59,7 +61,7 @@ class ProdutoController extends Controller
         $fornecedor_dao = new FornecedorDAO();
         $fornecedor_dao::obter_conexao(new BancoDeDadosMySQL);
 
-        $this->dados['fornecedores'] = $fornecedor_dao->todos();
+        $this->dados['fornecedores'] = $fornecedor_dao->todos('', null, null);
 
         if (! empty($_POST['codigo'])) {
 
@@ -104,7 +106,7 @@ class ProdutoController extends Controller
         $fornecedor_dao::obter_conexao(new BancoDeDadosMySQL);
 
         $this->dados['produto'] = $produto;
-        $this->dados['fornecedores'] = $fornecedor_dao->todos();
+        $this->dados['fornecedores'] = $fornecedor_dao->todos('', null, null);
 
         if (isset($_POST['codigo'])) {
             $produto = new Produto();
@@ -147,6 +149,62 @@ class ProdutoController extends Controller
         header('Location: '.$_SERVER['BASE_URL'].'produto');
         exit;
         
+    }
+
+    public function busca() 
+    {
+        $produto_dao = new ProdutoDAO();
+        $produto_dao->obter_conexao(new BancoDeDadosMySQL);
+
+        $idDaEmpresa = $_SESSION['id_da_empresa'];
+
+        if (isset($_GET['busca']) && !empty($_GET['busca'])) {
+            $termo_de_busca = trim(addslashes($_GET['busca']));
+
+            $produtos = $produto_dao->todos("soft_delete = 0 AND (codigo LIKE '%$termo_de_busca%' OR nome LIKE '%$termo_de_busca%') AND company_id = $idDaEmpresa", null, null);  
+
+        } else {
+            header('Location: '.$_SERVER['BASE_URL'].'produto');
+            exit;
+        }
+
+        $this->dados['produtos'] = $produtos;
+
+        $this->loadView('produtos', $this->dados);
+    }
+
+    public function pagina($pagina): void 
+    {
+        if (empty($pagina) || intval($pagina) == 0) {
+            header('Location: '.$_SERVER['BASE_URL'].'produto');
+            exit;
+        }
+
+        $produto_dao = new ProdutoDAO();
+        $produto_dao->obter_conexao(new BancoDeDadosMySQL);
+
+        $idDaEmpresa = $_SESSION['id_da_empresa'];
+
+        /* Paginação */
+        $limite = 3;
+        $total = $produto_dao->obter_total();
+        $this->dados['paginas'] = ceil($total / $limite);
+        $this->dados['pagina_atual'] = $pagina;
+        if (!empty($pagina)) {
+            $this->dados['pagina_atual'] = intval($pagina);
+        }
+
+   
+        $offset = ($this->dados['pagina_atual'] * $limite) - $limite;
+        
+
+        $produtos = $produto_dao->todos("soft_delete = 0 AND company_id = $idDaEmpresa", $offset, $limite);  
+
+        $this->dados['produtos'] = $produtos;
+
+        $this->loadView('produtos', $this->dados);
+
+
     }
 
     public function json()

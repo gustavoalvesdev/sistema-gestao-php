@@ -18,6 +18,14 @@ class ProdutoDAO
         self::$conexao_com_o_banco = $interface_de_banco_de_dados::obter_instancia();
     }
 
+    public function obter_total(): int
+    {
+        $sql = "SELECT COUNT(*) AS c FROM produtos WHERE soft_delete = 0";
+        $sql = self::$conexao_com_o_banco->query($sql);
+        $sql = $sql->fetch();
+        return intval($sql['c']);
+    }
+
     public function encontrar(int $id): Produto
     {
         $sql = "SELECT * FROM produtos WHERE id = :id";
@@ -34,12 +42,16 @@ class ProdutoDAO
         return $produto_encontrado;
     }
 
-    public function todos(string $filtro_de_busca = ''): array
+    public function todos(string $filter = '', $offset, $limite): array
     {
         $sql = "SELECT * FROM produtos";
 
-        if ($filtro_de_busca) {
-            $sql .= " WHERE $filtro_de_busca";
+        if ($filter) {
+            $sql .= " WHERE $filter";
+        }
+
+        if ($offset !== null && $limite !== null) {
+            $sql .= " LIMIT $offset, $limite";
         }
 
         $produtos = self::$conexao_com_o_banco->query($sql);

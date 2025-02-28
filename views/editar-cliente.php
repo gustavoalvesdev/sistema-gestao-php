@@ -22,7 +22,7 @@
         <div class="form-row">
             <div class="form-field w33">
                 <label for="nome">Nome:</label>
-                <input type="text" name="nome" id="nome" value="<?= $cliente->nome ?>" required />
+                <input type="text" name="nome" id="nome" value="<?= mb_strtoupper($cliente->nome) ?>" required />
             </div>
             <!-- form-field -->
             <div class="form-field w33">
@@ -65,7 +65,7 @@
             <!-- form-field -->
             <div class="form-field w50">
                 <label for="endereco">Endereço:</label>
-                <input type="text" name="endereco" id="endereco" value="<?= $cliente->endereco ?>"  />
+                <input type="text" name="endereco" id="endereco" value="<?= mb_strtoupper($cliente->endereco) ?>"  />
             </div>
             <!-- form-field -->
             <div class="form-field w20" id="row-number">
@@ -79,7 +79,7 @@
         <div class="form-row">
             <div class="form-field w25">
                 <label for="bairro">Bairro:</label>
-                <input type="text" name="bairro" id="bairro" value="<?= $cliente->bairro ?>" />
+                <input type="text" name="bairro" id="bairro" value="<?= mb_strtoupper($cliente->bairro) ?>" />
             </div>
             <!-- form-field -->
             <div class="form-field w25">

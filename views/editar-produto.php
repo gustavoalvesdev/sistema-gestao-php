@@ -28,7 +28,7 @@
             <!-- form-field -->
             <div class="form-field w70">
                 <label for="name">Nome do Produto:</label>
-                <input type="text" name="nome" required value="<?= $produto->nome ?>" />
+                <input type="text" name="nome" required value="<?= mb_strtoupper($produto->nome) ?>" />
             </div>
             <!-- form-field -->
         </div>
@@ -57,7 +57,7 @@
                 <label for="id_do_fornecedor">Fornecedor:</label>
                 <select name="id_do_fornecedor" id="id_do_fornecedor">
                     <?php foreach ($fornecedores as $fornecedor): ?>
-                    <option value="<?= $fornecedor->id ?>" <?= ($fornecedor->id == $produto->id_do_fornecedor) ? 'selected' : ''; ?>><?= $fornecedor->nome ?> - <?= $fornecedor->cnpj ?></option>
+                    <option value="<?= $fornecedor->id ?>" <?= ($fornecedor->id == $produto->id_do_fornecedor) ? 'selected' : ''; ?>><?= mb_strtoupper($fornecedor->nome) ?> - <?= $fornecedor->cnpj ?></option>
                     <?php endforeach; ?>
                 </select>
                 <!-- provider_id -->
