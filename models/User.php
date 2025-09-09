@@ -5,11 +5,11 @@ class User extends Model
 
     private $info;
 
-    public function verifyUser($number, $pass)
+    public function verifyUser($email, $pass)
     {
-        $sql = 'SELECT * FROM users WHERE user_number = :unumber AND user_pass = :upass';
+        $sql = 'SELECT * FROM users WHERE user_email = :email AND user_pass = :upass';
         $sql = $this->db->prepare($sql);
-        $sql->bindValue(':unumber', $number);
+        $sql->bindValue(':email', $email);
         $sql->bindValue(':upass', md5($pass));
         $sql->execute();
 
