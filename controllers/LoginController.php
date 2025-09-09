@@ -9,7 +9,7 @@ class LoginController extends Controller
             'msg'=> ''
         );
 
-        if (!empty($_POST['number'])) {
+        if (!empty($_POST['email'])) {
             $email = $_POST['email'];
             $upass = $_POST['password'];
 
