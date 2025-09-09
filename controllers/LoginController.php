@@ -10,14 +10,14 @@ class LoginController extends Controller
         );
 
         if (!empty($_POST['number'])) {
-            $unumber = $_POST['number'];
+            $email = $_POST['email'];
             $upass = $_POST['password'];
 
             $user = new User();
 
-            if ($user->verifyUser($unumber, $upass)) {
+            if ($user->verifyUser($email, $upass)) {
 
-                $token = $user->createToken($unumber);
+                $token = $user->createToken($email);
                 $_SESSION['token'] = $token;
 
                 header('Location: '.BASE_URL);
