@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 09-Abr-2021 às 01:55
--- Versão do servidor: 10.4.17-MariaDB
--- versão do PHP: 7.4.14
+-- Tempo de geração: 09/09/2025 às 19:13
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,16 +24,16 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `categories`
+-- Estrutura para tabela `categories`
 --
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `categories`
+-- Despejando dados para a tabela `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`) VALUES
@@ -45,17 +45,17 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cities`
+-- Estrutura para tabela `cities`
 --
 
 CREATE TABLE `cities` (
   `id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
   `state` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `cities`
+-- Despejando dados para a tabela `cities`
 --
 
 INSERT INTO `cities` (`id`, `name`, `state`) VALUES
@@ -67,7 +67,7 @@ INSERT INTO `cities` (`id`, `name`, `state`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `customers`
+-- Estrutura para tabela `customers`
 --
 
 CREATE TABLE `customers` (
@@ -78,10 +78,10 @@ CREATE TABLE `customers` (
   `customer_zip` varchar(15) NOT NULL,
   `customer_phone` varchar(30) NOT NULL,
   `customer_doc` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `customers`
+-- Despejando dados para a tabela `customers`
 --
 
 INSERT INTO `customers` (`id`, `customer_name`, `customer_addr`, `customer_city`, `customer_zip`, `customer_phone`, `customer_doc`) VALUES
@@ -91,17 +91,17 @@ INSERT INTO `customers` (`id`, `customer_name`, `customer_addr`, `customer_city`
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `manufacturers`
+-- Estrutura para tabela `manufacturers`
 --
 
 CREATE TABLE `manufacturers` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `url` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `manufacturers`
+-- Despejando dados para a tabela `manufacturers`
 --
 
 INSERT INTO `manufacturers` (`id`, `name`, `url`) VALUES
@@ -113,7 +113,7 @@ INSERT INTO `manufacturers` (`id`, `name`, `url`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `products`
+-- Estrutura para tabela `products`
 --
 
 CREATE TABLE `products` (
@@ -123,10 +123,10 @@ CREATE TABLE `products` (
   `price` float NOT NULL,
   `quantity` float NOT NULL,
   `min_quantity` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `products`
+-- Despejando dados para a tabela `products`
 --
 
 INSERT INTO `products` (`id`, `cod`, `name`, `price`, `quantity`, `min_quantity`) VALUES
@@ -142,17 +142,17 @@ INSERT INTO `products` (`id`, `cod`, `name`, `price`, `quantity`, `min_quantity`
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `states`
+-- Estrutura para tabela `states`
 --
 
 CREATE TABLE `states` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `fu` varchar(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `states`
+-- Despejando dados para a tabela `states`
 --
 
 INSERT INTO `states` (`id`, `name`, `fu`) VALUES
@@ -187,17 +187,17 @@ INSERT INTO `states` (`id`, `name`, `fu`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `subcategories`
+-- Estrutura para tabela `subcategories`
 --
 
 CREATE TABLE `subcategories` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `category_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `subcategories`
+-- Despejando dados para a tabela `subcategories`
 --
 
 INSERT INTO `subcategories` (`id`, `name`, `category_id`) VALUES
@@ -207,77 +207,77 @@ INSERT INTO `subcategories` (`id`, `name`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `users`
+-- Estrutura para tabela `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `user_number` int(10) NOT NULL,
+  `user_email` varchar(100) NOT NULL,
   `user_pass` varchar(32) NOT NULL,
   `user_token` varchar(32) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `users`
+-- Despejando dados para a tabela `users`
 --
 
-INSERT INTO `users` (`id`, `user_number`, `user_pass`, `user_token`) VALUES
-(1, 123, '202cb962ac59075b964b07152d234b70', '8d343042948ae069947ee786b1b112b7');
+INSERT INTO `users` (`id`, `user_email`, `user_pass`, `user_token`) VALUES
+(1, 'gustavoalvesdasilva@outlook.com', '202cb962ac59075b964b07152d234b70', '1fa31c5c57839505fe2b70f17f167189');
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `categories`
+-- Índices de tabela `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `cities`
+-- Índices de tabela `cities`
 --
 ALTER TABLE `cities`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `customers`
+-- Índices de tabela `customers`
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `manufacturers`
+-- Índices de tabela `manufacturers`
 --
 ALTER TABLE `manufacturers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `products`
+-- Índices de tabela `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `states`
+-- Índices de tabela `states`
 --
 ALTER TABLE `states`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `subcategories`
+-- Índices de tabela `subcategories`
 --
 ALTER TABLE `subcategories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `users`
+-- Índices de tabela `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
