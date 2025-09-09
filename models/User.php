@@ -20,15 +20,15 @@ class User extends Model
         return false;
     }
 
-    public function createToken($unumber)
+    public function createToken($email)
     {
         $token = md5(time().rand(0,9999).time().rand(0,9999));
 
-        $sql = 'UPDATE users SET user_token = :token WHERE user_number = :unumber';
+        $sql = 'UPDATE users SET user_token = :token WHERE user_email = :email';
         $sql = $this->db->prepare($sql);
 
         $sql->bindValue(':token', $token);
-        $sql->bindValue(':unumber', $unumber);
+        $sql->bindValue(':email', $email);
 
         $sql->execute();
 
